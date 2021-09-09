@@ -22,13 +22,18 @@ html, body
     background-color:var(--red);
 }
 
+.brand-name
+{
+    color:var(--white);
+    font-weight: bold;
+}
 .nav-item
 {
     padding-right: 0.5rem;
 }
 .nav-link
 {
-    font-size:1.02rem;
+    font-size:1.2rem;
     font-weight:520;
 }
 
@@ -40,6 +45,14 @@ html, body
     color: var(--white);
     font-weight: 520;
 }
+
+.sign-up:hover
+{
+    color: var(--white);
+    transform: scale(1.06);
+    transition: all 0.5s;
+}
+
 .sign-in
 {
     background-color:var(--white);
@@ -49,6 +62,12 @@ html, body
     font-weight:520;
 }
 
+.sign-in:hover
+{
+    color:var(--red);
+    transform: scale(1.06);
+    transition: all 0.5s;
+}
 .toggle-btn{
   width: 30px;
   height: 3px;
