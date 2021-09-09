@@ -8,6 +8,7 @@
 {
     box-sizing: border-box;
     font-family:'Raleway', sans-serif;
+    color:var(--black);
 }
 
 html, body
@@ -37,7 +38,7 @@ html, body
     border:0.1rem solid white;
     border-radius: 5rem;
     color: var(--white);
-    font-weight: bold;
+    font-weight: 520;
 }
 .sign-in
 {
@@ -45,6 +46,13 @@ html, body
     border-radius: 5rem;
     padding:0.6rem 2.2rem 0.6rem 2.2rem;
     color:var(--red);
-    font-weight:bold;
+    font-weight:520;
 }
 
+.toggle-btn{
+  width: 30px;
+  height: 3px;
+  background-color: var(--white);
+  margin: 6px 0;
+  border-radius: 2px;
+}
