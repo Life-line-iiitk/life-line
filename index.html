@@ -33,7 +33,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top pl-5">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
         <a class="navbar-brand ml-4" href="#">
             <h3 class="brand-name">Life Line</h3>
         </a>
@@ -64,8 +64,13 @@
                 <a href="#" class="btn sign-in mt-1 ml-2">Sign In</a>
             </ul>
         </div>
-
     </nav>
+    <script>
+        $('.navbar-collapse a').click(function () {
+            $(".navbar-collapse").collapse('hide');
+        });
+    </script>
+
     <div id="carouselExampleControls" class="carousel slide pl-3 pr-3" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -77,11 +82,11 @@
                         <h1 class="display-4 mt-5">Blood Donation</h1>
                         <h4 class="mt-3">"Your droplets of blood may create an ocean of happiness"</h4>
 
-                        <div class="row mt-4">
-                            <div class="col-md-6">
+                        <div class="row mt-4 text-center">
+                            <div class="col-md-6 mt-2">
                                 <a href="#" class="btn link-btn">DONATE BLOOD</a>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-2">
                                 <a href="#" class="btn link-btn">REQUEST BLOOD</a>
                             </div>
                         </div>
@@ -120,7 +125,6 @@
             <i class="fas fa-angle-right" style="font-size:2.5rem"></i>
         </a>
     </div>
-
 </body>
 
 </html>
