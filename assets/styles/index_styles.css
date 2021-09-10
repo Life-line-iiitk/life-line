@@ -5,7 +5,7 @@
 
 .link-btn
 {
-    font-size:1.15rem;
+    font-size:1.1rem;
     font-weight:bold;
     color:var(--red);
     padding:0.6rem 1.5rem 0.6rem 1.5rem;
@@ -63,6 +63,27 @@
     font-weight:520;
 }
 
+img:hover
+{
+    transition: all 0.7s;
+    transform: translateY(-10px);
+}
+
+th
+{
+    color: var(--red);
+    font-weight:bold;
+}
+
+td
+{
+    font-weight: bold;
+}
+
+.learn
+{
+    background-color: var(--light);
+}
 @media screen and (max-width: 768px) {
     .row-odd
     {   
