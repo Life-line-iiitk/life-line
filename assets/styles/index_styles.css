@@ -26,3 +26,47 @@
 {
     margin-top:4.5rem;
 }
+
+.cause
+{
+    color:var(--red);
+    font-weight:510;
+}
+
+.fa-angle-down
+{
+    font-size:2.5rem;
+    color:var(--red);
+    animation: up-down 2s infinite ease-in-out;
+}
+
+@keyframes up-down {
+ 0%
+ {
+    transform: translateY(0);
+ }   
+ 50%
+ {
+    transform: translateY(-20px);
+ }  
+}
+
+.find
+{
+    color: var(--red);
+    font-weight:520
+}
+
+.find i
+{
+    color: var(--red);
+    font-weight:520;
+}
+
+@media screen and (max-width: 768px) {
+    .row-1
+    {   
+        display: flex;
+        flex-flow: column-reverse;
+    }
+}
