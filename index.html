@@ -25,8 +25,9 @@
     <!-- This CSS file consists of all the CSS styles for the website in common. -->
     <link rel="stylesheet" href="./assets/styles/style.css">
 
+    <!-- Styles and JS files exclusive for this page  -->
     <link rel="stylesheet" href="./assets/styles/index_styles.css">
-
+    <script src="./assets/js/index.js"></script>
 
     <title>Life Line | Home</title>
 </head>
@@ -185,7 +186,7 @@
         <div class="row mt-5" id="about">
             <div class="col text-center mt-5">
                 <h2 class="cause">LEARN ABOUT BLOOD DONATION</h2>
-                <p>There is nothing better than saving a life Every blood bonor is a hero.</p>
+                <p>There is nothing better than saving a life,Every blood bonor is a hero.</p>
             </div>
         </div>
         <div class="row mt-4">
@@ -255,6 +256,151 @@
     </div>
 
 
+    <div class="container-fluid mt-5" id="about">
+        <div class="row mt-5">
+            <div class="col text-center mt-5">
+                <h2 class="cause">TYPES OF DONATIONS</h2>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row mt-5">
+                <p>The human body contains five liters of blood, which is made of several useful components i.e.
+                    <span>Whole blood, Platelet, and Plasma.</span>
+                </p>
+                <br>
+                <p>
+                    Each type of component has several medical uses and can be used for different medical treatments.
+                    your blood donation determines the best donation for you to make.
+                </p>
+                <br>
+                <p>
+                    For <span>plasma</span> and <span>platelet</span> donation you must have donated whole blood in past
+                    two
+                    years.
+                </p>
+            </div>
+            <div class="col text-center mt-4">
+                <button class="btn clicked tab-links mr-4 mt-2" onclick="openTab(event,'whole')">Whole Blood</button>
+                <button class="btn tab-links mr-4 mt-2" onclick="openTab(event,'plasma')">Plasma</button>
+                <button class="btn tab-links mr-4 mt-2" onclick="openTab(event,'platelet')">Platelet</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 content" id="whole" style="display: block">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>What is it?</h4>
+                <small>Blood Collected straight from the donor after its donation usually separated into red blood
+                    cells, platelets, and
+                    plasma.</small>
+
+                <h4 class="mt-4">Who can donate?</h4>
+                <small>You need to be 18-65 years old, weigh 45kg or more and be fit and healthy.</small>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Used For?</h4>
+                <small>Stomach disease, kidney disease, childbirth, operations, blood loss, trauma, cancer, blood
+                    diseases, haemophilia,
+                    anemia, heart disease.</small>
+
+                <h4 class="mt-4">Lasts For?</h4>
+                <small>Red cells can be stored for 42 days.</small>
+
+            </div>
+
+            <div class="col-md-4">
+                <h4>How long does it take?</h4>
+                <small>15 minutes to donate.</small>
+                <br><br>
+                <h4 class="mt-5">How often can I donate?</h4>
+                <small>Every 12 weeks.</small>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-5 content" id="plasma">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>What is it?</h4>
+                <small>The straw-coloured liquid in which red blood cells, white blood cells, and platelets float
+                    in.Contains special nutrients
+                    which can be used to create 18 different type of medical products to treat many different medical
+                    conditions.</small>
+
+                <h4 class="mt-4">Who can donate?</h4>
+                <small>
+                    You need to be 18-70 (men) or 20-70 (women) years old, weigh 50kg or more and must have given
+                    successful whole blood
+                    donation in last two years.
+                </small>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Used For?</h4>
+                <small>Immune system conditions, pregnancy (including anti-D injections), bleeding, shock, burns, muscle
+                    and nerve conditions,
+                    haemophilia, immunisations.</small>
+
+                <h4 class="mt-5">Lasts For?</h4>
+                <small>Plasma can last up to one year when frozen.</small>
+
+            </div>
+
+            <div class="col-md-4">
+                <h4>How long does it take?</h4>
+                <small>15 minutes to donate.</small>
+                <br><br><br>
+                <h4 class="mt-5">How often can I donate?</h4>
+                <small>Every 2-3 weeks.</small>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-5 content" id="platelet">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>What is it?</h4>
+                <small>The tiny 'plates' in blood that wedge together to help to clot and reduce bleeding. Always in
+                    high demand, Vital for
+                    people with low platelet count, like malaria and cancer patients.</small>
+
+                <h4 class="mt-4">Who can donate?</h4>
+                <small>
+                    You need to be 18-70 years old (men), weigh 50kg or more and have given a successful plasma donation
+                    in the past 12
+                    months
+                </small>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Used For?</h4>
+                <small>Cancer, blood diseases, haemophilia, anaemia, heart disease, stomach disease, kidney disease,
+                    childbirth, operations,
+                    blood loss, trauma, burns.</small>
+
+                <h4 class='mt-4'>Lasts For?</h4>
+                <small>Just five days..</small>
+
+            </div>
+
+            <div class="col-md-4">
+                <h4>How long does it take?</h4>
+                <small>45 minutes to donate.</small>
+                <br><br>
+                <h4 class="mt-5">How often can I donate?</h4>
+                <small>Every 2 weeks</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col text-center mt-4">
+        <a href="#" class="btn link-btn" style="color:var(--white);background-color:var(--red)">DONATE BLOOD</a>
+    </div>
 </body>
 
 </html>

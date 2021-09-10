@@ -66,7 +66,7 @@
 img:hover
 {
     transition: all 0.7s;
-    transform: translateY(-10px);
+    transform: translateY(-1rem);
 }
 
 th
@@ -84,6 +84,42 @@ td
 {
     background-color: var(--light);
 }
+
+.tab-links
+{
+    cursor:pointer;
+    background-color: var(--white);
+    border:0.15rem solid var(--red);
+    color: var(--red);
+    padding:10px 25px 10px 25px;
+    border-radius:1.3rem;
+    transition: all 0.6s;
+}
+
+.tab-links:hover,.clicked
+{
+    color: var(--white);
+    background-color: var(--red);
+}
+
+.content
+{
+    display:none;
+    animation: fadeEffect 1s;
+}
+
+span
+{
+    color: var(--red);
+    font-weight:bold;
+}
+
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 @media screen and (max-width: 768px) {
     .row-odd
     {   
