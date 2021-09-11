@@ -12,6 +12,11 @@
     color:var(--black);
 }
 
+::selection {
+  background: var(--red);
+  color: white;
+}
+
 html, body
 {
     scroll-behavior: smooth;
