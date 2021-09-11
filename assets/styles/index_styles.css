@@ -122,6 +122,11 @@ td
     color: var(--red);
 }
 
+a:hover
+{
+    text-decoration:none;
+}
+
 span
 {
     color: var(--red);
