@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>organ request form </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
+        <a class="navbar-brand ml-4" href="#">
+            <h3 class="brand-name">Life Line</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+        </button>
+        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active mt-1">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="#">Requests</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="#">Donors</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                <a href="#" class="btn sign-up mt-1 ml-2">Sign Up</a>
+                <a href="#" class="btn sign-in mt-1 ml-2">Sign In</a>
+            </ul>
+        </div>
+    </nav>
+    <script>
+        $('.navbar-collapse a').click(function () {
+            $(".navbar-collapse").collapse('hide');
+        });
+    </script>
+    
+    <div class="container mt-5 ">
+      <div class="row">
+        <div class="col-sm">
+           
+        </div>
+        <div class="col-6 mt-5">
+          <img src="1908.i121.076..isometric human internal organs donor illustration.jpg"  width="75%" height="75%" class="mx-auto d-block"
+          alt="">
+          
+        </div>
+        <div class="col-sm">
+           
+        </div>
+      </div>
+    <form action="/action_page.php" class="was-validated">
+        <div class="form-group">
+          <h1 style="color:rgb(230, 81, 81);" class="text-center"> Organ Request Form </h1>
+          <label for="uname">Username:</label>
+          <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label for="age">age:</label>
+          <input type="password" class="form-control" id="age" placeholder="Enter age" name="age" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+            <label for="loc">location:</label>
+            <input type="text" class="form-control" id="uname" placeholder="Enter location" name="loc" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="remember" required> use present location
+               
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="purpose">purpose</label>
+            <input type="text" class="form-control" id="purpose" placeholder="Enter purpose" name="purpose" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+          <div class="form-group">
+            <label for="organ">Organ Required:</label>
+            <input type="text" class="form-control" id="organ" placeholder="Enter organ needed" name="organ" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+        <div class="form-group form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember" required> I agree on terms and conditions.
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Check this checkbox to continue.</div>
+          </label>
+        </div>
+
+         
+        <button type="submit" class="btn  btn-primary">Submit</button>
+      </form>
+    </div>
+</body>
+</html>
