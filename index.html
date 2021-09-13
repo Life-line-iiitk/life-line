@@ -21,7 +21,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800;900&display=swap"
         rel="stylesheet">
 
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- This CSS file consists of all the CSS styles for the website in common. -->
     <link rel="stylesheet" href="./assets/styles/style.css">
 
@@ -32,7 +33,7 @@
     <title>Life Line | Home</title>
 </head>
 
-<body onload="testing()">
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
         <a class="navbar-brand ml-4" href="#">
@@ -84,10 +85,10 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-6" data-aos="fade-right">
                         <img src="./assets/images/blood-hero.png" class="img-fluid" alt="...">
                     </div>
-                    <div class="col-md-5 mt-5">
+                    <div class="col-md-5 mt-5" data-aos="fade-left">
                         <h1 class="display-4 mt-5">Blood Donation</h1>
                         <h4 class="mt-3">Your droplets of blood may create an ocean of happiness
                             <br><br> "Donte Blood,Save Lives"
@@ -144,14 +145,14 @@
 
     <div class="container-fluid mt-5" id="about">
         <div class="row mt-5">
-            <div class="col text-center mt-5">
+            <div class="col text-center  mt-5" data-aos="fade-up">
                 <h1 class="cause">JOIN THE CAUSE</h1>
-                <p>Join our cause and help us save more lives.</p>
+                <p class="underline">Join our cause and help us save more lives.</p>
             </div>
         </div>
         <div class="container mt-5">
             <div class="row mt-5 row-odd">
-                <div class="col-md-7 mt-5">
+                <div class="col-md-7 mt-5" data-aos="fade-right">
                     <h3 class="mt-5 find"><i class="fas fa-search mr-2"></i>Find
                         Donors
                         in your Area</h3>
@@ -161,15 +162,15 @@
                         donors.You can contact the donors with just a click and as well as the donors can step up to the
                         near by requests.</p>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5" data-aos="fade-left">
                     <img src="./assets/images/location.png" class="img-fluid">
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-md-5">
+                <div class="col-md-5" data-aos="fade-right">
                     <img src="./assets/images/notify.svg" class="img-fluid">
                 </div>
-                <div class="col-md-7 mt-5">
+                <div class="col-md-7 mt-5" data-aos="fade-left">
                     <h3 class="mt-5 find"><i class="fas fa-clock mr-2"></i>Answer to Emergencies</h3>
                     <p>As soon as a new blood request is raised, it is routed among our local volunteer blood donors. We
                         know time matters! So
@@ -178,13 +179,13 @@
                 </div>
             </div>
             <div class="row mt-5 row-odd">
-                <div class="col-md-6 mt-5">
+                <div class="col-md-6 mt-5" data-aos="fade-right">
                     <h3 class="mt-5 find"><i class="fas fa-medal mr-2"></i>You are someone's Hero</h3>
                     <p>In as little as few minutes, you can become someone's unnamed, unknown, but all-important Hero.
                         Donate Blood or donate organs, every form of
                         contribution you make is essential in our shared mission to save lives.</p>
                 </div>
-                <div class="col-md-6 mt-5">
+                <div class="col-md-6 mt-5" data-aos="fade-left">
                     <img src="./assets/images/hero.jpg" class="img-fluid">
                 </div>
             </div>
@@ -192,10 +193,10 @@
     </div>
 
     <div class="container-fluid mt-5 learn">
-        <div class="row mt-5" id="about">
+        <div class="row mt-5" id="about" data-aos="fade-up">
             <div class="col text-center mt-5">
                 <h2 class="cause">LEARN ABOUT BLOOD DONATION</h2>
-                <p>There is nothing better than saving a life,Every blood bonor is a hero.</p>
+                <p class="underline">There is nothing better than saving a life,Every blood bonor is a hero.</p>
             </div>
         </div>
         <div class="row mt-4">
@@ -267,7 +268,7 @@
 
     <div class="container-fluid mt-5" id="about">
         <div class="row mt-5">
-            <div class="col text-center mt-5">
+            <div class="col text-center mt-5 underline" data-aos="fade-up">
                 <h2 class="cause">TYPES OF DONATIONS</h2>
             </div>
         </div>
@@ -420,17 +421,18 @@
 
     <div class="container-fluid mt-5 learn">
         <div class="row mt-5" id="about">
-            <div class="col text-center mt-5">
+            <div class="col text-center mt-5" data-aos="fade-up">
                 <h2 class="cause">LEARN ABOUT ALIVE ORGAN DONATION</h2>
-                <p>You will live on even after you are gone. Take a simple step, donate your organ.</p>
+                <p class="underline">You will live on even after you are gone. Take a simple step, donate your organ.
+                </p>
             </div>
         </div>
 
         <div class="container mt-5">
             <div id="accordion">
                 <div class="card mt-3">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                        aria-controls="collapseOne">
+                    <button data-aos="fade-right" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
                                 Organs That Can Be Donated While Alive
@@ -464,8 +466,8 @@
                     </div>
                 </div>
                 <div class="card mt-3">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="false" aria-controls="collapseTwo">
+                    <button data-aos="fade-left" class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
                                 Tissue That Can Be Donated While Alive
@@ -490,8 +492,8 @@
                 </div>
 
                 <div class="card mt-3">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
-                        aria-expanded="false" aria-controls="collapseThree">
+                    <button data-aos="fade-right" class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         <div class="card-header" id="headingThree">
                             <h5 class="mb-0">
                                 Ability to Donate
@@ -515,8 +517,8 @@
                 </div>
 
                 <div class="card mt-3">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
-                        aria-expanded="false" aria-controls="collapseFour">
+                    <button data-aos="fade-left" class="btn btn-link collapsed" data-toggle="collapse"
+                        data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         <div class="card-header" id="headingFour">
                             <h5 class="mb-0">
                                 Long-Term Effects You Should Expect
@@ -546,29 +548,51 @@
         </div>
     </div>
 
-    <!-- <div id="latest" class="mb-2 ml-2 p-3">
-        <div class="slideshow-container">
+    <div id="latest">
+        <div class="slideshow-container mb-2 ml-2 p-3" id="slideshow-container">
+            <u>
+                <h4>Latest Donations</h4>
+            </u>
             <div class="mySlides fade">
                 <p> <b>Donor:</b> Bhanu</p>
-                <p> <b>Requester:</b> Krishna</p>
                 <p> <b>Blood Group:</b> AB+</p>
             </div>
 
             <div class="mySlides fade">
-                <p> <b>Donor:</b> Nani</p>
-                <p> <b>Requester:</b> Vedavrath</p>
+                <p> <b>Donor:</b> Krishna</p>
                 <p> <b>Blood Group:</b> B+</p>
             </div>
 
             <div class="mySlides fade">
-                <p> <b>Donor:</b> Chandu</p>
-                <p> <b>Requester:</b> Charit</p>
-                <p> <b>Blood Group:</b> AB-</p>
+                <p><b>Donor:</b> Prasad</p>
+                <p><b>Blood Group:</b> AB-</p>
             </div>
 
         </div>
-    </div> -->
+    </div>
+    <script>
+        var slideIndex = 0;
+        showSlides();
 
+        function showSlides() {
+            document.getElementById("slideshow-container").style.display = "block";
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(hideSlides, 3000);
+        }
+
+        function hideSlides() {
+            document.getElementById("slideshow-container").style.display = "none";
+            setTimeout(showSlides, 4000);
+        }
+    </script>
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
 
@@ -666,21 +690,10 @@
         </div>
     </footer>
 </body>
-<!-- <script>
-    var slideIndex = 0;
-    showSlides();
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 }
-
-        slides[slideIndex - 1].style.display = "block"
-        setTimeout(showSlides, 2000);
-    }
-</script> -->
+<script>
+    AOS.init({
+        duration: 1600,
+    });
+</script>
 
 </html>
