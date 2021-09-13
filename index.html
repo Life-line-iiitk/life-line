@@ -32,7 +32,7 @@
     <title>Life Line | Home</title>
 </head>
 
-<body>
+<body onload="testing()">
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
         <a class="navbar-brand ml-4" href="#">
@@ -556,6 +556,29 @@
         </div>
     </div>
 
+    <!-- <div id="latest" class="mb-2 ml-2 p-3">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <p> <b>Donor:</b> Bhanu</p>
+                <p> <b>Requester:</b> Krishna</p>
+                <p> <b>Blood Group:</b> AB+</p>
+            </div>
+
+            <div class="mySlides fade">
+                <p> <b>Donor:</b> Nani</p>
+                <p> <b>Requester:</b> Vedavrath</p>
+                <p> <b>Blood Group:</b> B+</p>
+            </div>
+
+            <div class="mySlides fade">
+                <p> <b>Donor:</b> Chandu</p>
+                <p> <b>Requester:</b> Charit</p>
+                <p> <b>Blood Group:</b> AB-</p>
+            </div>
+
+        </div>
+    </div> -->
+
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
 
@@ -656,5 +679,21 @@
         </div>
     </footer>
 </body>
+<!-- <script>
+    var slideIndex = 0;
+    showSlides();
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+
+        slides[slideIndex - 1].style.display = "block"
+        setTimeout(showSlides, 2000);
+    }
+</script> -->
 
 </html>
