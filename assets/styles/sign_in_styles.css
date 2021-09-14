@@ -59,20 +59,28 @@
     text-align: center;
 }
 
-.login_form .btn button{
+/* .login_form .btn button{
     font-size: 22px;
     padding: 3px;
     color: white;
     background-color: var(--red);
     border: none;
     border-radius: 3px;;
+} */
+
+.btn-lg
+{
+    background-color: var(--red);
+    border-radius: 20px;
+    color: var(--white);
+    font-weight: bold;
+    width: 70%;
 }
 
-.login_form .btn button:hover{
-    font-size: 22px;
-    padding: 3px;
-    color: white;
-    background-color: #ef5777;
+.btn-lg:hover
+{
+    background-color: #e92852;
+    color: var(--white);
 }
 
 .input-icons i {
