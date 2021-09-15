@@ -56,7 +56,7 @@
 
                   <div class="col-md-12 mb-3">
                     <div class="form-outline">
-                      <input type="text" placeholder="Full Name" id="Full Name" required class="form-control" />
+                      <input type="text" placeholder="Full Name" id="fullName" required class="form-control" />
                     </div>
 
                   </div>
@@ -162,7 +162,7 @@
 
     function validate() {
       var age = document.getElementById("birthdayDate").value;
-      var name = document.getElementById("firstName").value;
+      var name = document.getElementById("fullName").value;
       var password = document.getElementById("password").value;
       var repassword = document.getElementById("repassword").value;
       if (age < 18 && age != 0) {
