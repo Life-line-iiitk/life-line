@@ -3,6 +3,8 @@
   --white: #ffffff;
   --black: #2f3542;
   --light:#f7f7f7;
+  --light-red:rgb(248, 237, 237);
+  --light-green:rgb(225, 241, 217);
 }
 
 *
@@ -119,3 +121,4 @@ html, body
 ::-webkit-scrollbar-thumb:hover {
   background: var(--red);; 
 }
+
