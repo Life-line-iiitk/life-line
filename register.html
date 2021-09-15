@@ -1,160 +1,155 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    
-    <body>
-        <style>
-            .gradient-custom {
-  /* fallback for old browsers */
-  background: #f093fb;
 
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
 
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
-}
+<body>
+  <style>
+    body {
 
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
-  font-size: 1rem;
-  line-height: 2.15;
-  padding-left: .75em;
-  padding-right: .75em;
-}
-.card-registration .select-arrow {
-  top: 13px;
-}
-        </style>
-   
-<section class="vh-100 gradient-custom">
-  
-  <div class="container py-5 h-100">
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to bottom right, rgba(245, 87, 108, 1), rgba(245, 87, 108, 1));
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to bottom right, rgba(245, 87, 108, 1), rgba(245, 87, 108, 1))
+    }
+
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+      font-size: 1rem;
+      line-height: 2.15;
+      padding-left: .75em;
+      padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+      top: 13px;
+    }
+  </style>
+
+  <section>
+
+    <div class="container py-5 h-100">
       <div class="row justify-content-center align-items-center h-100">
-        <div class="col-12 col-lg-9 col-xl-7">
+        <div class="col-12">
           <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-            <div class="card-body p-4 p-md-5">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-              <form id="form">
-  
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-  
+            <div class="row">
+              <div class="row justify-content-center align-items-center col-md-6">
+                <img width="110%" height=auto src="./assets/images/Mobile-login.jpg" alt="">
+              </div>
+              <div class="col-md-6">
+                <h4 class="row justify-content-center mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h4>
+                <form id="form">
+
+
+                  <div class="col-md-12 mb-4">
+
                     <div class="form-outline">
-                      <input type="text" id="firstName" required class="form-control form-control-lg"/>
-                      <label class="form-label" for="firstName">First Name</label>
+                      <input type="text" placeholder="First Name" id="firstName" required
+                        class="form-control form-control-lg" />
                     </div>
-  
+
                   </div>
-                  <div class="col-md-6 mb-4">
-  
+                  <div class="col-md-12 mb-4">
+
                     <div class="form-outline">
-                      <input type="text" required id="lastName" class="form-control form-control-lg" />
-                      <label class="form-label" for="lastName">Last Name</label>
+                      <input type="text" placeholder="Last Name" required id="lastName"
+                        class="form-control form-control-lg" />
                     </div>
-  
+
                   </div>
-                </div>
-  
-                <div class="row">
-                  <div class="col-md-6 mb-4 d-flex align-items-center">
-  
+
+
+
+                  <div class="col-md-12 mb-4 d-flex align-items-center">
+
                     <div class="form-outline datepicker w-100">
-                      <input
-                        type="number"
-                        required
-                        class="form-control form-control-lg"
-                        id="birthdayDate"
-                      />
-                      <label for="birthdayDate" class="form-label">Age</label>
+                      <input placeholder="Age" type="number" required class="form-control form-control-lg"
+                        id="birthdayDate" />
                     </div>
-  
+
                   </div>
-                  <div class="col-md-6 mb-4">
-  
+                  <div class="col-md-12 mb-4">
+
                     <h6 class="mb-2 pb-1">Gender: </h6>
-  
+
                     <div class="form-check form-check-inline">
-                      <input
-            
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="femaleGender"
-                        value="option1"
-                        checked
-                      />
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
+                        value="option1" checked />
                       <label class="form-check-label" for="femaleGender">Female</label>
                     </div>
-  
+
                     <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="maleGender"
-                        value="option2"
-                      />
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
+                        value="option2" />
                       <label class="form-check-label" for="maleGender">Male</label>
                     </div>
-  
+
                     <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="otherGender"
-                        value="option3"
-                      />
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
+                        value="option3" />
                       <label class="form-check-label" for="otherGender">Other</label>
                     </div>
-  
+
                   </div>
-                </div>
-  
-                <div class="row">
-                  <div class="col-md-6 mb-4 pb-2">
-  
+
+
+
+                  <div class="col-md-12 mb-4 pb-2">
+
                     <div class="form-outline">
-                      <input type="email" id="emailAddress" required class="form-control form-control-lg" />
-                      <label class="form-label" for="emailAddress">Email</label>
+                      <input placeholder="Email" type="email" id="emailAddress" required
+                        class="form-control form-control-lg" />
                     </div>
-  
+
                   </div>
-                  <div class="col-md-6 mb-4 pb-2">
-  
+                  <div class="col-md-12 mb-4 pb-2">
+
                     <div class="form-outline">
-                      <input type="tel" id="phoneNumber" required class="form-control form-control-lg" />
-                      <label class="form-label" for="phoneNumber">Phone Number</label>
+                      <input placeholder="Mobile number" type="tel" id="phoneNumber" required
+                        class="form-control form-control-lg" />
                     </div>
-  
+
                   </div>
-                </div>
-  
-                <div class="row">
-                    <div class="col-md-6 mb-4 pb-2">
-  
-                        <div class="form-outline">
-                          <input type="password" id="password" class="form-control form-control-lg" required/>
-                          <label class="form-label" for="password" >Password</label>
-                        </div>
-      
-                      </div>
-                      <div class="col-md-6 mb-4 pb-2">
-      
-                        <div class="form-outline">
-                          <input type="password" id="repassword" class="form-control form-control-lg" required/>
-                          <label class="form-label" for="repassword">Confirm Password</label>
-                        </div>
-      
-                      </div>
-                </div>
-  
-                <div class="mt-4 pt-2" style="text-align: center;">
-                  <button type="submit" onclick="validate()" id="submit" name="submit" class="btn btn-danger" style=" border: 0cm; ">Submit</button>
-                </div>
-  
-              </form>
+
+
+                  <div class="col-md-12 mb-4 pb-2">
+
+                    <div class="form-outline">
+                      <input placeholder="Password" type="password" id="password" class="form-control form-control-lg"
+                        required />
+                    </div>
+
+                  </div>
+                  <div class="col-md-12 mb-4 pb-2">
+
+                    <div class="form-outline">
+                      <input placeholder="Confirm Password" type="password" id="repassword"
+                        class="form-control form-control-lg" required />
+                    </div>
+
+                  </div>
+
+
+                  <div class="mt-4 pt-2" style="text-align: center;">
+                    <button type="submit" onclick="validate()" id="submit" name="submit" class="btn btn-danger"
+                      style=" border: 0cm; ">Submit</button>
+                  </div>
+                  <br>
+                  <div class="row justify-content-center align-items-center">
+                    <img src="./assets/images/google.jpg" alt="" width="5%" height="5%">
+
+                  </div>
+                  <p class="row justify-content-center align-items-center">Signup with Google</p>
+
+                  <div class="row justify-content-center align-items-center">
+                    <p>Have an account?</p>
+                    <pre><a href="#"> Login</a></pre>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -162,36 +157,41 @@
     </div>
     <p id="test"></p>
   </section>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
-  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-  crossorigin="anonymous"></script> 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   <script>
-      
-      function validate(){
-        var age =  document.getElementById("birthdayDate").value;
-        var name = document.getElementById("firstName").value;
-        var password =  document.getElementById("password").value;
-        var repassword =  document.getElementById("repassword").value;
-          if(age<18 && age!=0){
-              alert("This website is strictly 18+")
-              
-          }
-          if(age>122){
-              alert("Longest lived human being is 122 src. google")
-              
-          }
-          if(length(password)<=6){
-              alert("Password should be more than 6 letters");
-          }
-          if(password!=repassword){
-              alert("Passwords don't match")
-              
-          }
-          
+
+    function validate() {
+      var age = document.getElementById("birthdayDate").value;
+      var name = document.getElementById("firstName").value;
+      var password = document.getElementById("password").value;
+      var repassword = document.getElementById("repassword").value;
+      if (age < 18 && age != 0) {
+        alert("This website is strictly 18+")
+
       }
-    
-  </script> 
+      if (age > 122) {
+        alert("Longest lived human being is 122 src. google")
+
+      }
+      if (length(password) <= 6) {
+        alert("Password should be more than 6 letters");
+      }
+      if (password != repassword) {
+        alert("Passwords don't match")
+
+      }
+
+    }
+
+  </script>
 </body>
+
 </html>
