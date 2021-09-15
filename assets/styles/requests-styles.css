@@ -1,0 +1,79 @@
+.requests
+{
+    margin-top: 7rem;
+}
+
+.card
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.blood-grp
+{
+    font-size:3.4rem;
+    color:var(--red);
+}
+
+i
+{
+    color:var(--red);
+}
+.info
+{
+    border-radius: 1rem;
+    background-color: var(--light-red);
+}
+.completed
+{
+    border-radius: 1rem;
+    background-color: var(--light-green);
+}
+
+.completed span,.completed i
+{
+    color:rgb(39, 230, 39);
+}
+
+.donate
+{
+    color:var(--white);
+    font-weight:bold;
+    border-radius:4rem;
+    padding:0.8rem 1.7rem 0.8rem 1.7rem;
+    background-color: var(--red);
+    transition: all 0.6s;
+}
+
+.donate:hover
+{
+    color:var(--white);
+    transform: translateY(-8px);
+}
+
+h1
+{
+    color:var(--red);
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.date
+{
+    font-size:1rem;
+    font-weight:500;
+}
+
+#urgent
+{
+    color:var(--red);
+    font-weight: bold;
+    transition: all 0.6s;
+}
+
+#mapid
+{
+    min-height:14rem;
+}
