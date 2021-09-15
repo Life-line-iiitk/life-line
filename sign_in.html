@@ -27,6 +27,7 @@
 
     <!-- Styles and JS files exclusive for this page  -->
     <link rel="stylesheet" href="./assets/styles/sign_in_styles.css">
+    <script src="./assets/js/sign_in.js"></script>
 
     <title>Life Line | Login</title>
 </head>
@@ -51,6 +52,9 @@
                     <div class="input">
                         <i class="fa fa-lock" style="color: var(--red);"></i>
                         <input type="password" name="password" id="password" placeholder="Enter your password">
+                    </div>
+                    <div class="input">
+                        <input type="checkbox" onclick="Toggle()"> <span style="color: var(--red);font-family:'Raleway', sans-serif;font-size: 20px;text-align: left;" >Show Password</span>
                     </div>
                     <div>
                         <button class="btn btn-lg ml-3" type="submit">Sign In</button>
