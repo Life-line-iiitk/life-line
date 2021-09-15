@@ -17,6 +17,13 @@
     color:var(--red);
 }
 
+.oragns
+{
+    font-size:2rem;
+    color:var(--red);
+    font-weight:520;
+}
+
 i
 {
     color:var(--red);
@@ -66,7 +73,7 @@ h1
     font-weight:500;
 }
 
-#urgent
+.urgent
 {
     color:var(--red);
     font-weight: bold;
@@ -76,4 +83,13 @@ h1
 #mapid
 {
     min-height:14rem;
+}
+.btn-danger
+{
+    color:var(--white);
+}
+
+.content
+{
+    display:none;    
 }

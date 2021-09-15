@@ -31,10 +31,8 @@
     <!-- This CSS file consists of all the CSS styles for the website in common. -->
     <link rel="stylesheet" href="./assets/styles/style.css">
 
-
-
-
     <link rel="stylesheet" href="./assets/styles/requests-styles.css">
+    <script src="./assets/js/requests.js"></script>
     <title>Life Line | Requests</title>
 </head>
 
@@ -52,10 +50,10 @@
         </button>
         <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active mt-1">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
                 <li class="nav-item mt-1">
+                    <a class="nav-link" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item active mt-1">
                     <a class="nav-link" href="./requests.html">Requests</a>
                 </li>
                 <li class="nav-item mt-1">
@@ -89,126 +87,267 @@
     </div>
     <div class="container requests">
         <h1 class="mt-5 text-center">LIVE FEED OF REQUESTS</h1>
+        <div class="row">
+            <div class="col text-center">
+                <button onclick='display(event,"blood")' class="btn btn-lg btn-danger tabs mt-2">Blood Requests</button>
+                <button onclick='display(event,"organ")' class="btn btn-lg btn-outline-danger tabs mt-2">Organ
+                    requests</button>
+            </div>
+        </div>
 
-        <div class="row mt-4 p-2">
-            <div class="card p-3" style="width:40rem">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <h4 class="card-title">Mitchell Jhonson</h4>
+        <div class="col content" style="display:block" id="blood">
+            <div class="row mt-4 p-2">
+                <div class="card p-3" style="width:40rem">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h4 class="card-title">Mitchell Jhonson</h4>
+                            </div>
+                            <div class="col-md-5">
+                                <span class="date">Posted on:
+                                    10/09/2021</span>
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                            <span class="date">Posted on:
-                                10/09/2021</span>
+
+                        <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Ahmedabad,Gujarat</h5>
+                        <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
+                            please
+                            contact.
+                        </p>
+                        <div class="container-fluid">
+                            <div id="mapid"></div>
+                        </div>
+
+                        <div class="row info p-2 mt-3">
+                            <span class="urgent" style="position: absolute;">URGENT</span>
+                            <div class="col-xs-1 mt-2">
+
+                                <span class="blood-grp">
+                                    O+
+                                </span>
+                            </div>
+                            <div class="col-xs-3"></div>
+                            <div class=' col-xs-8 ml-4 mt-3'>
+                                <h4>Blood Donors Needed</h4>
+                                <p><i class="fas fa-map mr-3"></i>Ahmedabad , Gujarat</p>
+
+                            </div>
+                        </div>
+                        <a href="#" class="btn mt-3 donate">DONATE</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4 p-2">
+                <div class="card p-3" style="width:40rem">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h4 class="card-title">Santhosh Kumar</h4>
+                            </div>
+                            <div class="col-md-5">
+                                <span class="date">Posted on:
+                                    13/09/2021</span>
+                            </div>
+                        </div>
+
+                        <h5 class="card-subtitle mt-2 text-muted">Looking for AB- in Vishakapatnam,Andhra Pradesh</h5>
+                        <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
+                            please
+                            contact.</p>
+
+                        <div class="row info p-2">
+                            <span class="urgent" style="position: absolute;">URGENT</span>
+                            <div class="col-xs-1 mt-2">
+                                <span class="blood-grp">
+                                    AB-
+                                </span>
+                            </div>
+                            <div class="col-xs-3"></div>
+                            <div class='col-xs-8 ml-4 mt-3'>
+                                <h4>Blood Donors Needed</h4>
+                                <p><i class="fas fa-map mr-3"></i>Vishakapatnam,Andhra Pradesh</p>
+                            </div>
+                        </div>
+                        <a href="#" class="btn mt-3 donate">DONATE</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-4 p-2">
+                <div class="card p-3" style="width:40rem">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h4 class="card-title">Vinay Kumar</h4>
+                            </div>
+                            <div class="col-md-5">
+                                <span class="date">Posted on:
+                                    05/07/2021</span>
+                            </div>
+                        </div>
+
+
+                        <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Lucknow,Utter Pradesh</h5>
+                        <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
+                            please
+                            contact.
+                        </p>
+
+                        <div class="row completed p-2">
+                            <div class="col-xs-1 mt-2">
+                                <span class="blood-grp">
+                                    O+
+                                </span>
+                            </div>
+
+                            <div class='col-xs-8 ml-4 mt-3'>
+                                <h4>Blood Donors Needed</h4>
+                                <p><i class="fas fa-map mr-3"></i>Lucknow,Utter Pradesh</p>
+                            </div>
+                            <div class="col-xs-3 mt-2 ml-4">
+                                <h4>Donor:</h4>
+                                <h4>Ashok Kumar</h4>
+                            </div>
                         </div>
                     </div>
-
-                    <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Ahmedabad,Gujarat</h5>
-                    <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                        please
-                        contact.
-                    </p>
-                    <div class="container-fluid">
-                        <div id="mapid"></div>
-                    </div>
-
-                    <div class="row info p-2 mt-3">
-                        <span id="urgent" style="position: absolute;">URGENT</span>
-                        <div class="col-xs-1 mt-2">
-
-                            <span class="blood-grp">
-                                O+
-                            </span>
-                        </div>
-                        <div class="col-xs-3"></div>
-                        <div class='col-xs-8 ml-4 mt-3'>
-                            <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>Ahmedabad , Gujarat</p>
-
-                        </div>
-                    </div>
-                    <a href="#" class="btn mt-3 donate">DONATE</a>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-4 p-2">
-            <div class="card p-3" style="width:40rem">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <h4 class="card-title">Santhosh Kumar</h4>
-                        </div>
-                        <div class="col-md-5">
-                            <span class="date">Posted on:
-                                13/09/2021</span>
-                        </div>
-                    </div>
-
-                    <h5 class="card-subtitle mt-2 text-muted">Looking for AB- in Vishakapatnam,Andhra Pradesh</h5>
-                    <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                        please
-                        contact.</p>
-
-                    <div class="row info p-2">
-                        <span id="urgent" style="position: absolute;">URGENT</span>
-                        <div class="col-xs-1 mt-2">
-                            <span class="blood-grp">
-                                AB-
-                            </span>
-                        </div>
-                        <div class="col-xs-3"></div>
-                        <div class='col-xs-8 ml-4 mt-3'>
-                            <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>Vishakapatnam,Andhra Pradesh</p>
-                        </div>
-                    </div>
-                    <a href="#" class="btn mt-3 donate">DONATE</a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row mt-4 p-2">
-            <div class="card p-3" style="width:40rem">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <h4 class="card-title">Vinay Kumar</h4>
-                        </div>
-                        <div class="col-md-5">
-                            <span class="date">Posted on:
-                                05/07/2021</span>
-                        </div>
-                    </div>
-
-
-                    <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Lucknow,Utter Pradesh</h5>
-                    <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                        please
-                        contact.
-                    </p>
-
-                    <div class="row completed p-2">
-                        <div class="col-xs-1 mt-2">
-                            <span class="blood-grp">
-                                O+
-                            </span>
+        <div class="col content" id="organ">
+            <div class="row mt-4 p-2">
+                <div class="card p-3" style="width:40rem">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h4 class="card-title">Madam Umbridge</h4>
+                            </div>
+                            <div class="col-md-5">
+                                <span class="date">Posted on:
+                                    02/09/2021</span>
+                            </div>
                         </div>
 
-                        <div class='col-xs-8 ml-4 mt-3'>
-                            <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>Lucknow,Utter Pradesh</p>
+                        <h5 class="card-subtitle mt-2 text-muted">Looking for kidney in Hogwards,Wizarding World</h5>
+                        <p class="card-text mt-4">A kigney is needed for a kidney failuer person,please conact me</p>
+
+                        <div class="row info p-2">
+                            <span class="urgent" style="position: absolute;">URGENT</span>
+                            <div class="col-xs-1 mt-4">
+                                <span class="oragns">
+                                    KIDNEY
+                                </span>
+                            </div>
+                            <div class="col-xs-3"></div>
+                            <div class='col-xs-8 ml-4 mt-3'>
+                                <h4>Organ Donors Needed</h4>
+                                <p><i class="fas fa-map mr-3"></i>Hogwards,Wizarding World</p>
+                            </div>
                         </div>
-                        <div class="col-xs-3 mt-2 ml-4">
-                            <h4>Donor:</h4>
-                            <h4>Ashok Kumar</h4>
-                        </div>
+                        <a href="#" class="btn mt-3 donate">DONATE</a>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+    <footer class="text-center mt-5 text-lg-start bg-light text-muted">
+
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+
+            <div>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </section>
+
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h5 class="text-uppercase fw-bold mb-4" style="color:var(--red);font-weight:bold">
+                            LIFE LINE
+                        </h5>
+                        <p>
+                            Life-Line is non profit organization committed to help
+                            people who are in need of
+                            blood or organs.
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>QUICK LINKS</b>
+                        </h6>
+                        <p>
+                            <a href="./index.html" class="text-reset">Home</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">About Us</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Contact Us</a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>Useful links</b>
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Donate Blood</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Request Blood</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Donate Organs</a>
+                        </p>
+                        <p>
+                            <a href="./organ_request_form.html" class="text-reset">Request Organs</a>
+                        </p>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>Contact</b>
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> IIIT Kottayam</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            lifelinesupport@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i>+91 9347619384</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:Life Line
+        </div>
+    </footer>
 </body>
 <script>
     x = 23.0225;
@@ -242,15 +381,7 @@
 
 </script>
 <script>
-    function toggledata() {
-        var x = document.getElementById("urgent");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-        setTimeout(toggledata, 1300);
-    }
+
 </script>
 
 </html>
