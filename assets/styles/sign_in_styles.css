@@ -73,8 +73,11 @@
     padding: 7px 30px; 
     font-weight: bold; 
     color: var(--red);
-    border-color: var(--red); 
+    /*border-color: var(--red); */
     font-size: 20px;
+    border: 2px solid var(--red);
+    outline: none;
+    border-radius: 5px;
 }
 
 .glg button:hover{
@@ -82,8 +85,9 @@
     padding: 7px 30px; 
     font-weight: bold; 
     color: var(--white);
-    border-color: var(--red); 
+    /*border-color: var(--red);*/
     font-size: 20px;
+    border: 2px solid var(--red);
 }
 
 .glg button i{
