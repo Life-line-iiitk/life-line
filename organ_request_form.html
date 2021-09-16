@@ -28,6 +28,15 @@
         margin: 0;
         padding: 0;
     }
+    .btn{
+        background-color: rgb(230,84,127);
+        outline: none;
+        color: white;
+    }
+    .btn:hover{
+        color:white;
+         
+    }
 </style>
     
 
@@ -133,7 +142,7 @@
         <div class="loc" >
         <div class="form-group">
             <label for="location"> <b> Location </b></label>
-            <input type="text" class="form-control" id="loc" placeholder="Eg: city, state" name="location" required>
+            <input type="text" class="form-control" id="loc" placeholder="Eg: Kottayam, Kerala" name="location" required>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
           </div>
@@ -160,8 +169,10 @@
           </label>
         </div>
 
+        <div class="btn-submit">
+        <button type="submit" class="btn  mb-4 btn-lg" >Submit</button>
+        </div>
          
-        <button type="submit" class="btn  btn-primary mb-4">Submit</button>
       </form>
     </div>
     <!-- jquery -->
