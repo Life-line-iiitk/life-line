@@ -1,3 +1,11 @@
+:root {
+  --red:   #e6547f;
+  --white: #ffffff;
+  --black: #2f3542;
+  --light:#f7f7f7;
+  --light-red:rgb(248, 237, 237);
+  --light-green:rgb(238, 252, 231);
+}
 
 *
 {
@@ -5,12 +13,16 @@
     font-family:'Raleway', sans-serif;
     color:var(--black);
 }
-
+html, body
+{
+    scroll-behavior: smooth;
+    margin: 0;
+    overflow-x: hidden;
+}
 ::selection {
   background: var(--red);
   color: white;
 }
-
 
 
 .navbar
