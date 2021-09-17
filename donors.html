@@ -295,7 +295,12 @@
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiYmhhbnVrMTkiLCJhIjoiY2tzZWJxZW4yMHl1bzJ1b2RzOXMxd3hkMiJ9.DjdM6ILIjgddBCoERDT_QA'
     }).addTo(mymap);
-
+    var greenIcon = L.icon({
+        iconUrl: './assets/images/blood-drop.jpeg',
+        iconSize: [70, 80],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76]
+    });
 
 
     var marker = L.marker([x, y], {
