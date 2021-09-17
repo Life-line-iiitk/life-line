@@ -40,6 +40,27 @@
 </head>
 
 <body>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button btn-danger" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div id="mapid"></div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
         <a class="navbar-brand ml-4" href="#">
             <h3 class="brand-name">Life Line</h3>
@@ -94,34 +115,14 @@
                     Donors</button>
             </div>
         </div>
-        <!-- Button trigger modal -->
-        <button class="btn btn-success mt-2" data-toggle="modal" data-target="#myModal">
-            VIEW ON MAP
-        </button>
+        <div class="col text-center mt-3" id="mapbtn">
+            <button class="btn donate mt-2" data-toggle="modal" data-target="#myModal">
+                VIEW ON MAP
+            </button>
+        </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button btn-danger" class="close" data-dismiss="modal"
-                            aria-hidden="true">&times;</button>
 
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div id="mapid"></div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="col content" style="display:block" id="blood">
             <div class="row mt-4 p-2">
                 <div class="card p-3" style="width:35rem">
@@ -289,13 +290,14 @@
     var mymap = L.map('mapid').setView([x, y], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 8,
+        maxZoom: 18,
         id: 'mapbox/streets-v11',
         tileSize: 510,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiYmhhbnVrMTkiLCJhIjoiY2tzZWJxZW4yMHl1bzJ1b2RzOXMxd3hkMiJ9.DjdM6ILIjgddBCoERDT_QA'
     }).addTo(mymap);
-    var greenIcon = L.icon({
+    // L.setView(center, 1);
+    var redIcon = L.icon({
         iconUrl: './assets/images/blood-drop.jpeg',
         iconSize: [70, 80],
         iconAnchor: [22, 94],
@@ -304,8 +306,11 @@
 
 
     var marker = L.marker([x, y], {
-        icon: greenIcon
+        icon: redIcon
     }).addTo(mymap);
+    L.marker([12.9777, 74.567], { icon: redIcon }).addTo(mymap).bindPopup("A+");
+    L.marker([28.7041, 77.1025], { icon: redIcon }).addTo(mymap).bindPopup("AB+");
+    L.marker([25.2777, 75.5067], { icon: redIcon }).addTo(mymap).bindPopup("B+");
 
     marker.bindPopup("O+").openPopup();
 
