@@ -1,4 +1,10 @@
-
+:root{
+   --red:   #e6547f;
+  --white: #ffffff;
+  --black: #2f3542;
+  --light:#f7f7f7;
+--light-red:rgb(248, 237, 237);
+--light-green:rgb(238, 252, 231);
 *
 {
     box-sizing: border-box;
@@ -64,6 +70,17 @@
     transform: scale(1.06);
     transition: all 0.5s;
 }
+
+
+html, body
+{
+    scroll-behavior: smooth;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+
+
 .toggle-btn{
   width: 30px;
   height: 3px;
