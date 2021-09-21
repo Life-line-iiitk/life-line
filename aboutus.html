@@ -1,11 +1,16 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/styles/stylo.css">
     <link rel="stylesheet" href="./assets/styles/dupe.css">
     <link rel="stylesheet" href="./assets/styles/index_styles.css">
-    
+
     <link rel="stylesheet" href="./assets/styles/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,7 +40,7 @@
         </button>
         <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active mt-1">
+                <li class="nav-item mt-1">
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item mt-1">
@@ -44,7 +49,7 @@
                 <li class="nav-item mt-1">
                     <a class="nav-link" href="./donors.html">Donors</a>
                 </li>
-                <li class="nav-item dropdown mt-1">
+                <li class="nav-item dropdown mt-1 active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Pages
@@ -56,7 +61,7 @@
                         <a class="dropdown-item" href="#">Donate Organs</a>
                         <a class="dropdown-item" href="./organ_request_form.html">Request Organs</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="./about.html">About Us</a>
+                        <a class="dropdown-item active" href="./about.html">About Us</a>
                         <a class="dropdown-item" href="#">Contact Us</a>
                         <a class="dropdown-item" href="#">FAQ</a>
                     </div>
@@ -67,106 +72,129 @@
             </ul>
         </div>
     </nav><br><br><br>
-    <div class="first">About</div>
-      <div class="image-1"><image src="./assets/images/vector-image.jpg" alt="Lights" style="width:100%"></div>
-      <div class="pre-headings">What we do at save life foundation</div><br>
-    <div class="general-headings"> What is this all about?</div>
-    <div class="pre-headings">We solve the problem of blood emergencies by connecting blood donors directly with people
-        in blood need.
-    </div> <br>
-
-    <div class="container">
+    <div class="container-fluid mt-5">
         <div class="row">
-            <div class="col-lg-4 ">
-                
-                     <center><div class="images"><img src="./assets/images/images-1.svg" alt="Lights" style="width:100%"></div></center><br>
-                      <div class="general-headings">
-                        What we do ?
-                    </div>
-                    <div class="general-texts">
-                        <p>We connect blood and organ donors with recipients, without any intermediary such as blood
-                            banks, for an efficient and seamless process.</P>
-                    </div>
-                  
-              </div>
-            <div class="col-lg-4 ">
-                  
-                      <center><div class="images"> <img src="./assets/images/images-4.svg" alt="Lights" style="width:100%"></div></center>
-                    <div class="general-headings">
-                        Get notified
-                    </div>
-                    <div class="general-texts">
-                        <p>Save Life Connect works with network partners to connect nearby blood donars,organ donors and
-                            recipients through an automated SMS service,email service
-                        <p>
-                    </div>
-                
+            <div class="col-md-6 mt-4 mb-4">
+                <img src="./assets/images/about.jpg" class="img-fluid">
             </div>
-            <div class="col-lg-4 ">
-                
-                    <center><div class="images"><img src="./assets/images/images-2.svg" alt="Lights" style="width:100%"></div></center><br>
-                    <div class="general-headings">
-                        Innovative
-                    </div>
-                    <div class="general-texts">
-                        <p>Save Life Connect is an innovative approach to address global health. We provide immediate
-                            access to blood donors and organ donars.</p>
-                    </div>
-                  
-             </div>
-             <div class="col-lg-4 ">
-                 <br>
-                    <center><div class="images"><img src="./assets/images/images-5.svg" alt="Lights" style="width:100%"></div></center>
-                    <div class="general-headings">
-                      Totally Free
-                    </div>
-                    <div class="general-texts">
-                        <p>Save Life Connect's ultimate goal is to provide an easy-to-use, easy-to-access, fast,
-                            efficient, and reliable way to get life-saving blood and organ, totally Free of cost.</p>
-                    </div>
-                
-            </div>
-            <div class="col-lg-4 ">
-                
-                    <center><div class="images"><img src="./assets/images/images-3.svg" alt="Lights" style="width:100%"></div></center><br>
-                    <div class="general-headings">
-                      Network
-                    </div>
-                    <div class="general-texts">
-                        <p>Savelife is one of several community organizations working together as a network that
-                            responds to emergencies in an efficient manner.</p>
-                    </div>
-                
-            </div>
-            <div class="col-lg-4 ">
-                
-                    <center><div class="images"><img src="./assets/images/images-6.svg" alt="Lights" style="width:100%"></div></center>
-                    <div class="general-headings">
-                        Save Life
-                    </div>
-                    <div class="general-texts">
-                        <p>We are a non profit foundation and our main objective is to make sure that everything is done
-                            to protect vulnerable persons. Help us by making a gift !</p>
-                    </div>
-                
+            <div class="col-md-6 p-5" style="margin-top: 6rem;">
+                <h1 class="display-4" style="color:var(--red)">ABOUT US</h1>
+                <h5 class="mt-3" style="color:gray">Life-Line is non profit organization committed to <br>help people
+                    who are in need of
+                    blood or
+                    organs.
+                </h5>
             </div>
         </div>
     </div>
-    <div class="main-button">
-        <button type="button" class="button-2"><a class="button-1-link" href="requests.html"
-                style="text-decoration:none;">Start saving lifes</button></a>
+
+    <div class="container mt-5">
+        <h1 style="text-align:center;color:var(--red);font-weight: bold;">A BRIEF OUT</h1>
+        <div class="row mt-4">
+            <div class="col-lg-4 ">
+
+                <center>
+                    <div class="images"><img src="./assets/images/images-1.svg" alt="Lights" style="width:100%"></div>
+                </center><br>
+                <div class="general-headings">
+                    What we do ?
+                </div>
+                <div class="general-texts">
+                    <p>We connect blood and organ donors with recipients, without any intermediary such as blood
+                        banks, for an efficient and seamless process.</P>
+                </div>
+
+            </div>
+            <div class="col-lg-4 ">
+
+                <center>
+                    <div class="images"> <img src="./assets/images/images-4.svg" alt="Lights" style="width:100%"></div>
+                </center>
+                <div class="general-headings mt-4">
+                    Get notified
+                </div>
+                <div class="general-texts">
+                    <p>Save Life Connect works with network partners to connect nearby blood donars,organ donors and
+                        recipients through an automated SMS service,email service
+                    <p>
+                </div>
+
+            </div>
+            <div class="col-lg-4 ">
+
+                <center>
+                    <div class="images"><img src="./assets/images/images-2.svg" alt="Lights" style="width:100%"></div>
+                </center><br>
+                <div class="general-headings">
+                    Innovative
+                </div>
+                <div class="general-texts">
+                    <p>Save Life Connect is an innovative approach to address global health. We provide immediate
+                        access to blood donors and organ donars.</p>
+                </div>
+
+            </div>
+            <div class="col-lg-4 ">
+                <br>
+                <center>
+                    <div class="images"><img src="./assets/images/images-5.svg" alt="Lights" style="width:100%"></div>
+                </center>
+                <div class="general-headings">
+                    Totally Free
+                </div>
+                <div class="general-texts">
+                    <p>Save Life Connect's ultimate goal is to provide an easy-to-use, easy-to-access, fast,
+                        efficient, and reliable way to get life-saving blood and organ, totally Free of cost.</p>
+                </div>
+
+            </div>
+            <div class="col-lg-4 ">
+
+                <center>
+                    <div class="images"><img src="./assets/images/images-3.svg" alt="Lights" style="width:100%"></div>
+                </center><br>
+                <div class="general-headings">
+                    Network
+                </div>
+                <div class="general-texts">
+                    <p>Savelife is one of several community organizations working together as a network that
+                        responds to emergencies in an efficient manner.</p>
+                </div>
+
+            </div>
+            <div class="col-lg-4 ">
+
+                <center>
+                    <div class="images"><img src="./assets/images/images-6.svg" alt="Lights" style="width:100%"></div>
+                </center>
+                <div class="general-headings">
+                    Save Life
+                </div>
+                <div class="general-texts">
+                    <p>We are a non profit foundation and our main objective is to make sure that everything is done
+                        to protect vulnerable persons. Help us by making a gift !</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="main-button mt-4">
+        <button type="button" class="btn btn-lg" style="background-color:var(--red)"><a style="color:white"
+                href="requests.html" style="text-decoration:none;">Start saving lifes</button></a>
     </div><br>
-    <div class="general-headings">Using Our Service</div>
-    <div class="pre-headings">Using our service is as simple as saying, Hello!</div><br>
-    <div class="pre-headings"> As Follows:</div>
-    <div class="container">
-        <div class="col-md-6">
-           <div class="length">
-            <p>1.<i class='fas fa-sign-in-alt' style='font-size:24px;color:var(--red)'>Register</i></p>
-            <p>2.<i class='fas fa-tint' style='font-size:24px;color:var(--red)'>Post a Blood request</i></p>
-            <p>3.<i class='fas fa-mobile-alt' style='font-size:24px;color:var(--red)'>Get notified</i></p>
-            <p>4.<i class='fas fa-heartbeat' style='font-size:24px;color:var(--red)'>Save a Life</i></p>
-           </div>        
+    <div class="general-headings mt-4">Using our service is as simple as saying, Hello!</div>
+    <div class="pre-headings mt-3"> As Follows:</div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-6">
+                <div class="length">
+                    <p>1.<i class='fas fa-sign-in-alt' style='font-size:24px;color:var(--red)'> Register</i></p>
+                    <p>2.<i class='fas fa-tint' style='font-size:24px;color:var(--red)'> Post a request</i></p>
+                    <p>3.<i class='fas fa-mobile-alt' style='font-size:24px;color:var(--red)'> Get notified</i></p>
+                    <p>4.<i class='fas fa-heartbeat' style='font-size:24px;color:var(--red)'> Save a Life</i></p>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="text-center text-lg-start bg-light text-muted">
