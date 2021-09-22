@@ -59,7 +59,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Donate Blood</a>
-                            <a class="dropdown-item" href="#">Request Blood</a>
+                            <a class="dropdown-item active" href="#">Request Blood</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Donate Organs</a>
                             <a class="dropdown-item" href="./organ_request_form.html">Request Organs</a>
@@ -91,6 +91,14 @@
         </div>
     </div>
 
+    <br>
+    <br>
+    <!--Title-->
+    <div class="text-center title">
+        <h2>Blood Request form</h2>
+    </div>
+    <hr class="line">
+    <br>
     <!--form starts-->
 
     <form class="needs-validation ml-3 mr-3" novalidate>
@@ -108,9 +116,9 @@
                 <label for="validationCustom04" class="form-label"><b>Type<span style="color: red; font-size: 1.rem;">*</span></b></label>
                 <select class="form-control" id="validationCustom04" required>
                     <option selected disabled value="">Choose...</option>
-                    <option value="blood">blood</option>
-                    <option value="plasma" >plasma</option>
-                    <option value="platelets">platelets</option>
+                    <option value="blood">Blood</option>
+                    <option value="plasma" >Plasma</option>
+                    <option value="platelets">Platelets</option>
                 </select>
                 <div class="invalid-feedback">
                     Please fill this field.

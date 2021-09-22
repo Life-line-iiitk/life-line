@@ -7,6 +7,16 @@ label b{
    color: var(--red);
 }
 
+.title h2{
+   color: var(--red);
+}
+
+hr.line{
+   width: 40%;
+   color: var(--red);
+   border: 2px solid var(--red);
+}
+
 @keyframes up-down {
  0%
  {
