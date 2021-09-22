@@ -6,9 +6,11 @@ function display(evt, tabname) {
     }
     if (tabname == "organ") {
         document.getElementById("mapbtn").style.display = "none";
+        document.getElementById("filterbtn").style.display = "none";
     }
     else {
         document.getElementById("mapbtn").style.display = "block";
+        document.getElementById("filterbtn").style.display = "block";
     }
     buttons = document.getElementsByClassName('tabs');
     for (i = 0; i < buttons.length; i++) {

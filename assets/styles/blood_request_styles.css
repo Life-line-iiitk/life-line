@@ -3,6 +3,10 @@ img
     animation: up-down 2s infinite ease-in-out;
 }
 
+label b{
+   color: var(--red);
+}
+
 @keyframes up-down {
  0%
  {
