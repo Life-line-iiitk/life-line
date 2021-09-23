@@ -36,10 +36,12 @@ p{
   background-color: #e6547f;
   color: #f7f7f7;
   border:0px ;
+padding: 0.4rem 1.8rem 0.4rem 1.8rem;
 }
 .btn-send:hover{
   background-color: #f7f7f7;
   color: #e6547f;
+  border:2px solid var(--red)
 }
 
 
