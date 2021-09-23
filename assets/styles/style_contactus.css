@@ -14,17 +14,271 @@
 } 
 
 
-.img-fluid {
+.img-fluid, .b-icons {
   position: relative;
   top: 0;
   transition: top ease 0.5s;
+  cursor:default ;
 }
-.img-fluid:hover {
+.img-fluid:hover ,.b-icons:hover{
   top: -10px;
 }
 p{
   font-family: poppins;
 }
 .add{
+  
   font-family: poppins;
+  color: var(--black);
+  font-weight: 400;
+}
+.btn-send{
+  background-color: #e6547f;
+  color: #f7f7f7;
+  border:0px ;
+}
+.btn-send:hover{
+  background-color: #f7f7f7;
+  color: #e6547f;
+}
+
+
+
+/* index css file */
+.display-4
+{
+    font-weight: 600;
+}
+
+p
+{
+    font-weight: 500;
+}
+small
+{
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.link-btn
+{
+    font-size:1.1rem;
+    font-weight:bold;
+    color:var(--red);
+    padding:0.6rem 1.5rem 0.6rem 1.5rem;
+    border:0.15rem solid var(--red);
+    border-radius:4rem;
+}
+
+.link-btn:hover
+{
+    transition: all 0.6s;
+    color: var(--white);
+    background-color: var(--red);
+    transform: translateY(-8px);
+
+}
+
+.carousel
+{
+    margin-top:4.5rem;
+}
+
+.cause
+{
+    color:var(--red);
+    font-weight:510;
+}
+
+.fa-angle-down
+{
+    font-size:2.5rem;
+    color:var(--red);
+    animation: up-down 2s infinite ease-in-out;
+}
+
+@keyframes up-down {
+ 0%
+ {
+    transform: translateY(0);
+ }   
+ 50%
+ {
+    transform: translateY(-20px);
+ }  
+}
+
+.find
+{
+    color: var(--red);
+    font-weight:520
+}
+
+.find i
+{
+    color: var(--red);
+    font-weight:520;
+}
+
+img:hover
+{
+    transition: all 0.7s;
+    transform: translateY(-1rem);
+}
+
+th
+{
+    color: var(--red);
+    font-weight:bold;
+}
+
+td
+{
+    font-weight: bold;
+}
+
+.learn
+{
+    background-color: var(--light);
+}
+
+.tab-links
+{
+    cursor:pointer;
+    font-weight:bolder;
+    background-color: var(--white);
+    border:0.15rem solid var(--red);
+    color: var(--red);
+    padding:10px 25px 10px 25px;
+    border-radius:1.3rem;
+    transition: all 0.6s;
+}
+
+.tab-links:hover,.clicked
+{
+    color: var(--white);
+    background-color: var(--red);
+}
+
+.content
+{
+    display:none;
+    animation: fadeEffect 1s;
+}
+
+.content h4 {
+    color: var(--red);
+}
+
+a:hover
+{
+    text-decoration:none;
+}
+
+span
+{
+    color: var(--red);
+    font-weight:bold;
+}
+
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.accordion-list li
+{
+    color: var(--red);
+    font-weight:bold;
+}
+
+.btn-link
+{
+    background-color: var(--red);
+    text-decoration: none;
+    transition: all 0.6s;
+}
+.btn-link:hover
+{
+    transform:scale(1.02);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.btn-link h5
+{
+    color: var(--white);
+}
+
+
+
+
+#latest p, #latest h4, #latest b, #latest u
+{
+    color:var(--white);
+}
+
+.mySlides {display: none;}
+
+.slideshow-container {
+ position: fixed; 
+    bottom:0%;
+    width:16rem;
+    height:9rem;
+    background-color:rgba(0,0,0,0.7); 
+    opacity: 1;
+    color:var(--white);
+      -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 3s;
+  animation-name: fade;
+  animation-duration: 3s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+.underline::after
+{
+    position: absolute;
+    content: '';
+    height:3.5px;
+    background-color :var(--red);
+    margin: 0 auto;
+	left: 0;
+    right: 0;
+    width: 12%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .row-odd
+    {   
+        display: flex;
+        flex-flow: column-reverse;
+    }
+
+    #latest
+    {
+        display:none;
+    }
+
+    .underline::after
+    {
+        display:none;
+    }
 }
