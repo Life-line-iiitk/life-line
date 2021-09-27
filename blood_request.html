@@ -159,13 +159,31 @@
             </div>
     
             <br>
-            <div class="form-group form-check" data-aos="fade-righst" data-aos-duration="1500">
+            <div class="form-group form-check" data-aos="fade-righs t" data-aos-duration="1500">
                 <label class="form-check-label">
                   <input class="form-check-input" type="checkbox" name="presentLocation" id="coordinates" 
                    required> <b>Use My Current Coordinates</b>
                 </label>
             </div>
     
+
+            <div class="form-row">
+                <div class="col-md-8" data-aos="fade-left" data-aos-duration="1500">
+                  <label for="purpose"><b>purpose<span style="color: red; font-size: 1.rem;">*</span></b></label>
+                  <input type="text" class="form-control" id="purpose" placeholder="Eg: I met with a road accident" required>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">
+                    Please fill this field.
+                  </div>
+                </div>
+            </div>
+
+            <div class="form-group form-check" data-aos="fade-left" data-aos-duration="1500">
+                <label class="form-check-label pl-10 switch">
+                  <input class="checkbox" type="checkbox" name="urgent" required> Urgent
+                  <span class="slider round"></span>
+                </label>
+            </div>
             <br>
             <div class="form-group form-check" data-aos="fade-left" data-aos-duration="1500">
                 <label class="form-check-label pl-10">
@@ -173,11 +191,11 @@
                   <div class="valid-feedback">Valid.</div>
                   <div class="invalid-feedback">Check this checkbox to continue.</div>
                 </label>
-              </div>
+            </div>
       
-              <div class="">
+            <div class="">
               <button type="submit" class="btn mb-4 btn-lg b" >Submit </button>
-              </div>
+            </div>
     
         </form>    
 

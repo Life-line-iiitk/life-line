@@ -1,17 +1,11 @@
 *{
    margin:0%;
    padding: 0%;
-   box-sizing: border-box;
 }
 
 img
 {
     animation: up-down 2s infinite ease-in-out;
-}
-
-.frm{
-   max-width: 100rem;
-   margin: auto;
 }
 
 label b{
@@ -52,6 +46,7 @@ hr.line{
    color: var(--red);
 }
 
+
 @keyframes up-down {
  0%
  {
@@ -62,3 +57,4 @@ hr.line{
     transform: translateY(-18px);
  }  
 }
+
