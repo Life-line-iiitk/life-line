@@ -1,9 +1,24 @@
+*{
+   margin:0%;
+   padding: 0%;
+   box-sizing: border-box;
+}
+
 img
 {
     animation: up-down 2s infinite ease-in-out;
 }
 
+.frm{
+   max-width: 100rem;
+   margin: auto;
+}
+
 label b{
+   color: var(--red);
+}
+
+input{
    color: var(--red);
 }
 
@@ -15,6 +30,22 @@ hr.line{
    width: 40%;
    color: var(--red);
    border: 2px solid var(--red);
+   text-align: center;
+   margin: auto;
+}
+
+.b{
+   color: var(--red);
+   border: 2px solid var(--red);
+   font-weight: bold;
+   outline: var(--red);
+}
+
+.b:hover{
+   color: var(--white);
+   background-color: var(--red);
+   font-weight: bold;
+   outline: var(--red);
 }
 
 .note h5{
