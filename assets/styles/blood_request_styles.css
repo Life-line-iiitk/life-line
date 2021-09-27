@@ -17,6 +17,10 @@ hr.line{
    border: 2px solid var(--red);
 }
 
+.note h5{
+   color: var(--red);
+}
+
 @keyframes up-down {
  0%
  {

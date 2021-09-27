@@ -98,7 +98,10 @@
         <h2>Blood Request form</h2>
     </div>
     <hr class="line">
-    <br>
+    <div class="text-center note">
+        <h5>Note: <span style="color: var(--red); font-size: 2rem;">*</span> (required field)</h5>
+    </div>
+    
     <!--form starts-->
 
     <form class="needs-validation ml-3 mr-3" novalidate>
@@ -113,8 +116,8 @@
 
         <div class="form-row">
             <div class="col-md-8 m-auto">
-                <label for="validationCustom04" class="form-label"><b>Type<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                <select class="form-control" id="validationCustom04" required>
+                <label for="type" class="form-label"><b>Type<span style="color: red; font-size: 1.rem;">*</span></b></label>
+                <select class="form-control" id="type" required>
                     <option selected disabled value="">Choose...</option>
                     <option value="blood">Blood</option>
                     <option value="plasma" >Plasma</option>
@@ -130,8 +133,8 @@
 
         <div class="form-row">
             <div class="col-md-8 m-auto">
-                <label for="validationCustom04" class="form-label"><b>Blood Group<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                <select class="form-control" id="validationCustom04" required>
+                <label for="blood_group" class="form-label"><b>Blood Group<span style="color: red; font-size: 1.rem;">*</span></b></label>
+                <select class="form-control" id="blood_group" required>
                     <option selected disabled value="">Choose required Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="A-" >A-</option>
@@ -170,7 +173,7 @@
         <br>
         <div class="form-group form-check">
             <label class="form-check-label pl-10">
-              <input class="form-check-input" type="checkbox" name="remember" required> I  agree on <a href="">  terms and conditions.</a>
+              <input class="form-check-input" type="checkbox" name="remember" required> I  agree on <a href="">  terms and conditions.<span style="color: red; font-size: 1.rem;">*</span></a>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Check this checkbox to continue.</div>
             </label>
