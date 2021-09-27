@@ -60,7 +60,7 @@ border-radius:5rem;
 .general-headings{
 color:var(--red);
 text-align:center;
-font-size:30;
+font-size:34;
 font-weight:bold;
 
 }
@@ -108,3 +108,16 @@ position:relative;
 {height:250px;
 width:250px;}
 
+.main-heading{
+text-align:center;
+color:var(--red);
+font-weight:bold;
+font-size:48px;}
+
+.side-headings{
+color:var(--red);
+text-align:left;
+font-size:30;
+font-weight:bold;
+
+}
