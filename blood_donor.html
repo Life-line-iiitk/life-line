@@ -14,10 +14,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <!--Data Aos-->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +26,7 @@
     <link rel="stylesheet" href="./assets/styles/style.css">
 
     <link rel="stylesheet" href="./assets/styles/blood_request_styles.css">
-    <title>Life Line | Blood Request Form</title>
+    <title>Life Line | Blood Donor Form</title>
 </head>
 
 <body>
@@ -89,7 +85,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-5 mt-5">
-                <img src="./assets/images/blood_request.jpg" class="img-fluid">
+                <img src="./assets/images/blood_donor.jpg" class="img-fluid">
             </div>
 
         </div>
@@ -98,93 +94,88 @@
     <br>
     <br>
     <!--Title-->
-    <div class="text-center title" data-aos="zoom-in-up" data-aos-duration="1500">
-        <h2>Blood Request form</h2>
+    <div class="text-center title">
+        <h2>Blood Donor form</h2>
     </div>
     <hr class="line">
-    <div class="text-center note" data-aos="fade-up" data-aos-duration="1500">
-        <h5>Note: <span style="color: var(--red); font-size: 2rem;">*</span> (required field)</h5>
-    </div>
-    
+    <br>
     <!--form starts-->
-    <div class="frm">
-        <form class="needs-validation ml-3 mr-3" novalidate>
 
-            <div class="form-row">
-                <div class="col-md-8" data-aos="fade-left" data-aos-duration="1500">
-                    <label for="type" class="form-label"><b>Type<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                    <select class="form-control" id="type" required>
-                        <option selected disabled value="">Choose Required Type...</option>
-                        <option value="blood">Blood</option>
-                        <option value="plasma" >Plasma</option>
-                        <option value="platelets">Platelets</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Please fill this field.
-                    </div>
-                </div>
-            </div>
+    <form class="needs-validation ml-3 mr-3" novalidate>
     
-            <br>
-    
-            <div class="form-row">
-                <div class="col-md-8" data-aos="fade-right" data-aos-duration="1500">
-                    <label for="blood_group" class="form-label"><b>Blood Group<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                    <select class="form-control" id="blood_group" required>
-                        <option selected disabled value="">Choose required Blood Group...</option>
-                        <option value="A+">A+</option>
-                        <option value="A-" >A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Please fill this field.
-                    </div>
-                </div>
-            </div>
-    
-            <br> 
-            <div class="form-row">
-                <div class="col-md-8" data-aos="fade-left" data-aos-duration="1500">
-                  <label for="validationCustom03"><b>Location<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                  <input type="text" class="form-control" id="validationCustom03" placeholder="Eg: Guntur, AndhraPradesh" required>
-                  <div class="invalid-feedback">
+
+        <div class="form-row">
+            <div class="col-md-8 m-auto">
+                <label for="validationCustom04" class="form-label"><b>Type<span style="color: red; font-size: 1.rem;">*</span></b></label>
+                <select class="form-control" id="validationCustom04" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option value="blood">Blood</option>
+                    <option value="plasma" >Plasma</option>
+                    <option value="platelets">Platelets</option>
+                </select>
+                <div class="invalid-feedback">
                     Please fill this field.
-                  </div>
                 </div>
             </div>
-    
-            <br>
-            <div class="form-group form-check" data-aos="fade-righst" data-aos-duration="1500">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="presentLocation" id="coordinates" 
-                   required> <b>Use My Current Coordinates</b>
-                </label>
+        </div>
+
+        <br>
+
+        <div class="form-row">
+            <div class="col-md-8 m-auto">
+                <label for="validationCustom04" class="form-label"><b>Blood Group<span style="color: red; font-size: 1.rem;">*</span></b></label>
+                <select class="form-control" id="validationCustom04" required>
+                    <option selected disabled value="">Choose donor's Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-" >A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please fill this field.
+                </div>
             </div>
-    
-            <br>
-            <div class="form-group form-check" data-aos="fade-left" data-aos-duration="1500">
-                <label class="form-check-label pl-10">
-                  <input class="form-check-input" type="checkbox" name="remember" required> I  agree on <a href="terms.html" target="_blank">  terms and conditions.</a><span style="color: red; font-size: 1.rem;">*</span>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Check this checkbox to continue.</div>
-                </label>
+        </div>
+
+        <br> 
+        <div class="form-row">
+            <div class="col-md-8 m-auto">
+              <label for="validationCustom03"><b>Location<span style="color: red; font-size: 1.rem;">*</span></b></label>
+              <input type="text" class="form-control" id="validationCustom03" placeholder="Eg: Hyderabad,Telangana" required>
+              <div class="invalid-feedback">
+                Please fill this field.
               </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="getpresentLocation" id="coordinates" 
+               required> <b>Use My Current Coordinates</b>
+            </label>
+        </div>
+
+        <br>
+        <div class="form-group form-check">
+            <label class="form-check-label pl-10">
+              <input class="form-check-input" type="checkbox" name="remember" required> I  agree on <a href="">  terms and conditions.</a>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Check this checkbox to continue.</div>
+            </label>
+          </div>
+  
+          <div class="text-center">
+          <button type="submit" class="btn  mb-4 btn-lg  " style="background-color: crimson; color: white;">Submit </button>
+          </div>
+
+        
       
-              <div class="">
-              <button type="submit" class="btn mb-4 btn-lg b" >Submit </button>
-              </div>
-    
-        </form>    
-
-    </div>
-
-    
-    <script>
+      <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function() {
         'use strict';
@@ -203,7 +194,7 @@
           });
         }, false);
       })();
-    </script>
+      </script>
 
     <!-- Footer -->
     <div class="footer">
@@ -347,9 +338,6 @@
             </ul>
         </div>
     </nav>-->
-    <script>
-        AOS.init();
-      </script>
 </body>
-</html>
 
+</html>
