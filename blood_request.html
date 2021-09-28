@@ -73,7 +73,7 @@
                             <a class="dropdown-item" href="faq.html">FAQ</a>
                         </div>
                     </li>
-    
+
                     <a href="./dashboard.html" class="btn sign-in mt-1 ml-2">Dashboard</a>
                     <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
                 </ul>
@@ -105,127 +105,139 @@
     <div class="text-center note">
         <h5>Note: <span style="color: var(--red); font-size: 2rem;">*</span> (required field)</h5>
     </div>
-    
+
     <!--form starts-->
-    <div class="container frm">
-        <form class="needs-validation ml-3 mr-3" novalidate>
-
-            <div class="form-group">
-                <div class="col-md-8">
-                    <label for="type" class="form-label"><b>Type<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                    <select class="form-control" id="type" required>
-                        <option selected disabled value="">Choose Required Type...</option>
-                        <option value="blood">Blood</option>
-                        <option value="plasma" >Plasma</option>
-                        <option value="platelets">Platelets</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Please fill this field.
-                    </div>
-                </div>
-            </div>
-    
-    
-            <div class="form-group">
-                <div class="col-md-8">
-                    <label for="blood_group" class="form-label"><b>Blood Group<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                    <select class="form-control" id="blood_group" required>
-                        <option selected disabled value="">Choose required Blood Group...</option>
-                        <option value="A+">A+</option>
-                        <option value="A-" >A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Please fill this field.
-                    </div>
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-8">
-                  <label for="validationCustom03"><b>Location<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                  <input type="text" class="form-control" id="validationCustom03" placeholder="Eg: Guntur, AndhraPradesh" required>
-                  <div class="invalid-feedback">
-                    Please fill this field.
-                  </div>
-                </div>
-            </div>
-    
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="presentLocation" id="coordinates" 
-                   required> <b>Use My Current Coordinates</b>
-                </label>
-            </div>
-    
-
-            <div class="form-group">
-                <div class="col-md-8">
-                  <label for="purpose"><b>purpose<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                  <input type="text" class="form-control" id="purpose" placeholder="Eg: I met with a road accident" required>
-                  <div class="invalid-feedback">
-                    Please fill this field.
-                  </div>
-                </div>
-            </div>
-            
-            <div class="tgl container-fluid">
-                <ul>
-                    <li>
-                        <div class="form-group form-check">
-                            <label class="form-check-label pl-10 switch">
-                              <input class="checkbox" type="checkbox" name="urgent" required>
-                              <span class="slider round"></span>
-                            </label>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <form class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="type" class="form-label"><b>Type<span
+                                    style="color: red; font-size: 1.rem;">*</span></b></label>
+                        <select class="form-control" id="type" required>
+                            <option selected disabled value="">Choose Required Type...</option>
+                            <option value="blood">Blood</option>
+                            <option value="plasma">Plasma</option>
+                            <option value="platelets">Platelets</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please fill this field.
                         </div>
-                    </li>
-                    <li>
-                        <b class="ml-2">Urgent</b>
-                    </li>
-                </ul>
-            </div>
+                    </div>
 
-            <div class="form-group form-check">
-                <label class="form-check-label pl-10">
-                  <input class="form-check-input" type="checkbox" name="remember" required><b style="color: var(--red);">I  agree on </b><a href="terms.html" target="_blank"> terms and conditions. </a><span style="color: red; font-size: 1.rem;">*</span>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Check this checkbox to continue.</div>
-                </label>
-            </div>
-      
-            <div class="">
-              <button type="submit" class="btn mb-4 btn-lg b" >Submit </button>
-            </div>
-    
-        </form>    
 
+                    <div class="form-group">
+
+                        <label for="blood_group" class="form-label"><b>Blood Group<span
+                                    style="color: red; font-size: 1.rem;">*</span></b></label>
+                        <select class="form-control" id="blood_group" required>
+                            <option selected disabled value="">Choose required Blood Group...</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please fill this field.
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="validationCustom03"><b>Location<span
+                                    style="color: red; font-size: 1.rem;">*</span></b></label>
+                        <input type="text" class="form-control" id="validationCustom03"
+                            placeholder="Eg: Guntur, AndhraPradesh" required>
+                        <div class="invalid-feedback">
+                            Please fill this field.
+                        </div>
+
+                    </div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="presentLocation" id="coordinates"
+                                required>
+                            <b>Use
+                                My Current Coordinates</b>
+                        </label>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="purpose"><b>purpose<span style="color: red; font-size: 1.rem;">*</span></b></label>
+                        <input type="text" class="form-control" id="purpose"
+                            placeholder="Eg: I met with a road accident" required>
+                        <div class="invalid-feedback">
+                            Please fill this field.
+                        </div>
+
+                    </div>
+
+                    <div class="tgl container-fluid">
+                        <ul>
+                            <li>
+                                <div class="form-group form-check">
+                                    <label class="form-check-label pl-10 switch">
+                                        <input class="checkbox" type="checkbox" name="urgent" required>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <b class="ml-2">URGENT</b>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label pl-10">
+                            <input class="form-check-input" type="checkbox" name="remember" required><b
+                                style="color: var(--red);">I
+                                agree on </b><a href="terms.html" target="_blank"> terms and conditions. </a><span
+                                style="color: red; font-size: 1.rem;">*</span>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Check this checkbox to continue.</div>
+                        </label>
+                    </div>
+
+                    <div class="">
+                        <button type="submit" class="btn mb-4 btn-lg b">Submit </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </div>
 
-    
+
+
     <script>
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-      (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
             }, false);
-          });
-        }, false);
-      })();
+        })();
     </script>
 
     <!-- Footer -->
@@ -326,53 +338,10 @@
             </div>
         </footer>
     </div>
-    <!--<nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
-        <a class="navbar-brand ml-4" href="#">
-            <h3 class="brand-name">Life Line</h3>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="toggle-btn"></div>
-            <div class="toggle-btn"></div>
-            <div class="toggle-btn"></div>
-        </button>
-        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item mt-1">
-                    <a class="nav-link" href="./index.html">Home</a>
-                </li>
-                <li class="nav-item mt-1">
-                    <a class="nav-link" href="./requests.html">Requests</a>
-                </li>
-                <li class="nav-item mt-1">
-                    <a class="nav-link" href="#">Donors</a>
-                </li>
-                <li class="nav-item dropdown mt-1">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pages
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Donate Blood</a>
-                        <a class="dropdown-item" href="#">Request Blood</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Donate Organs</a>
-                        <a class="dropdown-item" href="./organ_request_form.html">Request Organs</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">About Us</a>
-                        <a class="dropdown-item" href="#">Contact Us</a>
-                        <a class="dropdown-item" href="#">FAQ</a>
-                    </div>
-                </li>
 
-                <a href="./dashboard.html" class="btn sign-in mt-1 ml-2">Dashboard</a>
-                <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
-            </ul>
-        </div>
-    </nav>-->
     <script>
         AOS.init();
-      </script>
+    </script>
 </body>
-</html>
 
+</html>
