@@ -39,6 +39,13 @@ hr.line{
    display:block
 }
 
+.ib{
+   border: 2px solid var(--red);
+   border-radius: 1rem;
+   color: var(--black);
+}
+
+
 .b:hover{
    transform: translateY(-0.5rem);
    color:var(--white);

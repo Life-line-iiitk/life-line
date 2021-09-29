@@ -115,9 +115,9 @@
                     <div class="form-group">
                         <label for="type" class="form-label"><b>Type<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
-                        <select class="form-control" id="type" required>
+                        <select class="form-control ib" name="type" id="type" required>
                             <option selected disabled value="">Choose Required Type...</option>
-                            <option value="blood">Blood</option>
+                            <option value="blood" class="opt">Blood</option>
                             <option value="plasma">Plasma</option>
                             <option value="platelets">Platelets</option>
                         </select>
@@ -131,7 +131,7 @@
 
                         <label for="blood_group" class="form-label"><b>Blood Group<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
-                        <select class="form-control" id="blood_group" required>
+                        <select class="form-control ib" name="blood_group" id="blood_group" required>
                             <option selected disabled value="">Choose required Blood Group...</option>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
@@ -150,9 +150,9 @@
 
                     <div class="form-group">
 
-                        <label for="validationCustom03"><b>Location<span
+                        <label for="location"><b>Location<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
-                        <input type="text" class="form-control" id="validationCustom03"
+                        <input type="text" class="form-control ib" name="location" id="location"
                             placeholder="Eg: Guntur, AndhraPradesh" required>
                         <div class="invalid-feedback">
                             Please fill this field.
@@ -162,7 +162,7 @@
 
                     <div class="form-group form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="presentLocation" id="coordinates"
+                            <input class="form-check-input ib" type="checkbox" name="coordinates" id="coordinates"
                                 required>
                             <b>Use
                                 My Current Coordinates</b>
@@ -172,9 +172,9 @@
 
                     <div class="form-group">
 
-                        <label for="purpose"><b>purpose<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                        <input type="text" class="form-control" id="purpose"
-                            placeholder="Eg: I met with a road accident" required>
+                        <label for="purpose"><b>Purpose<span style="color: red; font-size: 1.rem;">*</span></b></label>
+                        <input type="text" class="form-control ib" name="purpose" id="purpose"
+                            placeholder="Eg: My friend met with a road accident" required>
                         <div class="invalid-feedback">
                             Please fill this field.
                         </div>
@@ -186,7 +186,7 @@
                             <li>
                                 <div class="form-group form-check">
                                     <label class="form-check-label pl-10 switch">
-                                        <input class="checkbox" type="checkbox" name="urgent" required>
+                                        <input class="checkbox ib" type="checkbox" name="urgent" id="urgent" required>
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -199,11 +199,11 @@
 
                     <div class="form-group form-check">
                         <label class="form-check-label pl-10">
-                            <input class="form-check-input" type="checkbox" name="remember" required><b
+                            <input class="form-check-input ib" type="checkbox" name="remember" required><b
                                 style="color: var(--red);">I
                                 agree on </b><a href="terms.html" target="_blank"> terms and conditions. </a><span
                                 style="color: red; font-size: 1.rem;">*</span>
-                            <div class="valid-feedback">Valid.</div>
+                            <!-- <div class="valid-feedback">Valid.</div> -->
                             <div class="invalid-feedback">Check this checkbox to continue.</div>
                         </label>
                     </div>
