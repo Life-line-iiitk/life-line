@@ -70,7 +70,7 @@
                 </li>
 
                 <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
-                <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
             </ul>
         </div>
     </nav>

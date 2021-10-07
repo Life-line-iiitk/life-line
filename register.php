@@ -1,3 +1,52 @@
+<?php 
+session_start();
+include('./register_config.php');
+include('./db_conn.php');
+$login_button = '';
+
+
+if(isset($_GET["code"]))
+{
+  $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+
+  if(!isset($token['error']))
+  {
+ 
+    $google_client->setAccessToken($token['access_token']);
+    $_SESSION['access_token'] = $token['access_token'];
+
+
+    $google_service = new Google_Service_Oauth2($google_client);
+    $data = $google_service->userinfo->get();
+
+ 
+    if(!empty($data['given_name']))
+    {
+      $_SESSION['user_first_name'] = $data['given_name'];
+    }
+
+    if(!empty($data['family_name']))
+    {
+      $_SESSION['user_last_name'] = $data['family_name'];
+    }
+
+    if(!empty($data['email']))
+    {
+      $_SESSION['user_email_address'] = $data['email'];
+    }
+ }
+}
+
+
+if(!isset($_SESSION['access_token']))
+{
+$login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-google"><img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign up with Google</a>';
+}
+
+?>
+
+
+
 <html>
 
 <head>
@@ -19,16 +68,22 @@
 <body>
   <style>
     body {
-
-    /* Chrome 10-25, Safari 5.1-6
-      background: -webkit-linear-gradient(to bottom right, rgba(245, 87, 108, 1), rgba(245, 87, 108, 1));
-
-       W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+
-      background: linear-gradient(to bottom right, rgba(245, 87, 108, 1), rgba(245, 87, 108, 1))*/
       background-color: var(--light);
     }
 
+    .btn-google
+    {
+      border:2px solid var(--red);
+      color:var(--red);
+      font-weight:bold;
+    }
 
+    .btn-google:hover
+    {
+      background-color:var(--red);
+      color:var(--white);
+      font-weight:bold;
+    }
     .card-registration .select-input.form-control[readonly]:not([disabled]) {
       font-size: 1rem;
       line-height: 2.15;
@@ -41,9 +96,7 @@
     }
 
     @media screen and (max-width: 768px) {
-      /*.footer{
-        display: none;
-      }*/
+      
       .footer{
         margin: 37rem auto;
       }
@@ -61,7 +114,7 @@
                 <img class="img-fluid mt-5" src="./assets/images/Mobile-login.jpg" alt="">
               </div>
               <div class="col-md-6">
-                <h1 class="row justify-content-center mb-4 mt-4" style="color: var(--red);">
+                <h1 class="row justify-content-center mb-4 mt-4" style="color: var(--red);font-weight:bold">
                   SIGN UP
                 </h1>
                 <form id="form">
@@ -146,11 +199,35 @@
                   <div class="col text-center">
                     <p>Or</p>
                   </div>
-
-                  <div class="col text-center">
-                    <button class="btn btn" type="button">
-                      <img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign up with Google</button>
-                  </div>
+                   <?php
+                      if($login_button == '')
+                      {
+                        $email=$_SESSION['user_email_address'];
+                        $q="SELECT * FROM `users` WHERE email='$email'";
+                        $res = $conn->query($q);
+                        if ($res->num_rows > 0)
+                        {
+                        ?>
+                          <script>
+                            alert("THIS EMAIL ADDRESS ALREADY EXISTS!!!");
+                            location.replace("logout.php");
+                          </script>
+                        <?php
+                        }
+                        else{
+                        ?>
+                        <script>
+                          location.replace("google_signup.php");
+                        </script><?php } 
+                      }
+                      
+                      else
+                      {
+                        echo '<div class="col text-center">'.$login_button . '</div>';
+                      }
+                    
+                    ?>
+                  
                 </form>
               </div>
             </div>

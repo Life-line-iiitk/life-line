@@ -1,3 +1,37 @@
+<?php 
+    session_start();
+    include('db_conn.php');
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email=$_SESSION['user_email_address'];
+        $name=$_SESSION['user_first_name']." ".$_SESSION['user_last_name'];
+        $phno=$_POST['phno'];
+        $age=(int)$_POST['age'];
+        $gender=$_POST['gender'];
+
+        $q="INSERT INTO users(`email`,`phone`,`name`,`age`) VALUES ('$email','$phno','$name','$age')";
+        if ($conn->query($q) === TRUE)
+        {
+            $q2="SELECT * FROM `users` WHERE email='$email'";
+            $res = $conn->query($q2);
+            if ($res->num_rows > 0)
+            {
+                while($row = $res->fetch_assoc())
+                {
+                    $_SESSION['user_id']=$row['id'];
+                }
+            }
+        ?><script>
+            location.replace("dashboard.php");
+            </script>
+        <?php
+        } else {
+            echo "<script>console.log('$conn->error');</script>";
+        }
+        
+        
+    }
+?>
+
 <html lang="en">
 
 <head>
@@ -26,7 +60,7 @@
 
     <link rel="stylesheet" href="./assets/styles/style.css">
 
-    <title>Life Line | Home</title>
+    <title>Life Line | Sign Up</title>
 </head>
 <style>
     label {
@@ -48,15 +82,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">
+                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="form-group">
                             <label for="email">Phone Number</label>
                             <input type="tel" class="form-control" di="email" name="phno"
-                                placeholder="Enter your Phone number">
+                                placeholder="Enter your Phone number" required>
                         </div>
                         <div class="form-group">
                             <label for="age">Age</label>
-                            <input type="number" name="age" class="form-control" id="age" placeholder="Enter your age">
+                            <input type="number" name="age" class="form-control" id="age" placeholder="Enter your age" required>
                         </div>
                         <div class="form-group">
                             <label>Gender</label>

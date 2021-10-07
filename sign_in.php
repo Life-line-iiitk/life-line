@@ -34,42 +34,50 @@
 
 <body class="bg">
     <div class="container-fluid">
-        <div class="sub_container">
-            <div class="login_img">
-                <img src="./assets/images/signin.gif" alt="login image">
-            </div>
-            <div class="login_form">
-                <div class="title">
-                    <h1>Sign In</h1>
+        <div class="container" style="margin-top:5rem;">
+            <div class="row" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;background-color: white;">
+                <div class="col-md-6 mobile">
+                    <img src="./assets/images/signin.gif" class="img-fluid" alt="login image" style="height:100%;">
                 </div>
-                <hr>
-                <br>
-                <form action="" method="post">
-                    <div class="input">
-                        <i class="fa fa-envelope" style="color: var(--red);"></i>
-                        <input type="email" id="email" name="email" placeholder="Enter your Email Id">
-                    </div>
-                    <div class="input">
-                        <i class="fa fa-lock" style="color: var(--red);"></i>
-                        <input type="password" name="password" id="password" placeholder="Enter your password">
-                    </div>
-                    <div class="input">
-                        <input type="checkbox" onclick="Toggle()"> <span style="color: var(--red);font-family:'Raleway', sans-serif;font-size: 17px;text-align: left;" >Show Password</span>
-                    </div>
-
-                    <div>
-                        <button class="btn btn-lg ml-3" type="submit">Sign In</button>
-                    </div>
-                </form>
-                    <hr>
-                    <div class="glg">
-                        <!--<button style="background-color: cornflowerblue;color: white;font-weight: bold;font-size: 15px;border: none; border-radius: 5px ;padding: 10px 10px;">login with <span><img src="./assets/images/google.jpg" alt="" width="5%" height="5%"></span> </button>-->
-                        <button><span><img src="./assets/images/google.jpg" alt="" width="8%" height="10%"></span> Sign In with Google </button>
+                <div class=" col-md-6 right" style="background-color: white;">
+                    <div class="title mt-3">
+                        <h1>Sign In</h1>
                     </div>
                     <hr>
-                    <!--<i class="fab fa-google"></i>-->
-                    <p>Are you a new user? <a href="register.php">signup</a> </p>
 
+                    <form class="mt-5" action="" method="post">
+                        <div class="input">
+                            <i class="fa fa-envelope" style="color: var(--red);"></i>
+                            <input type="email" id="email" name="email" placeholder="Enter your Email Id">
+                        </div>
+                        <div class="input mt-2">
+                            <i class="fa fa-lock" style="color: var(--red);"></i>
+                            <input type="password" name="password" id="password" placeholder="Enter your password">
+                        </div>
+                        <div class="input">
+                            <input type="checkbox" onclick="Toggle()"> <span
+                                style="color: var(--red);font-family:'Raleway', sans-serif;font-size: 18px;text-align: left;">Show
+                                Password</span>
+                        </div>
+
+                        <div class="col text-center">
+                            <button class="btn btn-lg ml-3" type="submit">Sign In</button>
+                        </div>
+                    </form>
+
+                    <div class="glg mt-3 text-center">
+                        <small><b>Or</b></small>
+                        <br>
+                        <button class="mt-2"><span><img src="./assets/images/google.jpg" alt="" width="8%"
+                                    height="10%"></span> Sign
+                            In
+                            with Google </button>
+                    </div>
+
+                    <p class="text-center mt-2" style="font-weight: 510;">Are you a new user? <a
+                            href="register.php">signup</a> </p>
+
+                </div>
             </div>
         </div>
 
