@@ -1,3 +1,10 @@
+<?php 
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+// echo "<script>console.log('$id');</script>";
+?>
+
 <html lang="en">
 
 <head>

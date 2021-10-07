@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $id=$_SESSION['user_id'];
-echo "<script>console.log('$id');</script>";
+
 ?>
 
 <html lang="en">

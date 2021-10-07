@@ -1,3 +1,40 @@
+<?php 
+    session_start();
+    include('./signin_config.php');
+    include('./db_conn.php');
+
+    $login_button="";
+    if(isset($_GET["code"]))
+    {
+        $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+
+        if(!isset($token['error']))
+        {
+            $google_client->setAccessToken($token['access_token']);
+            $_SESSION['access_token'] = $token['access_token'];
+
+            $google_service = new Google_Service_Oauth2($google_client);
+            $data = $google_service->userinfo->get();
+            
+            if(!empty($data['email']))
+            {
+                $_SESSION['user_email_address'] = $data['email'];
+            }
+        }
+    }
+
+
+    if(!isset($_SESSION['access_token']))
+    {
+        $login_button = '<div class="glg mt-3 text-center">
+                        <small><b>Or</b></small>
+                        <br>
+                        <a href="'.$google_client->createAuthUrl().'" class="btn btn-google"><img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign up with Google</a>
+                        </div>';
+    }
+?>
+
+
 <html lang="en">
 
 <head>
@@ -31,7 +68,21 @@
 
     <title>Life Line | Login</title>
 </head>
+<style>
+    .btn-google
+    {
+      border:2px solid var(--red);
+      color:var(--red);
+      font-weight:bold;
+    }
 
+    .btn-google:hover
+    {
+      background-color:var(--red);
+      color:var(--white);
+      font-weight:bold;
+    }
+</style>
 <body class="bg">
     <div class="container-fluid">
         <div class="container" style="margin-top:5rem;">
@@ -65,17 +116,46 @@
                         </div>
                     </form>
 
-                    <div class="glg mt-3 text-center">
-                        <small><b>Or</b></small>
-                        <br>
-                        <button class="mt-2"><span><img src="./assets/images/google.jpg" alt="" width="8%"
-                                    height="10%"></span> Sign
-                            In
-                            with Google </button>
-                    </div>
+                    
+                        <?php
+                        if($login_button == '')
+                        {
+                            $email=$_SESSION['user_email_address'];
+                            $q="SELECT * FROM `users` WHERE email='$email'";
+                            $res = $conn->query($q);
+                            if (!($res->num_rows > 0))
+                            {
+                                $google_client->revokeToken();
 
+                                session_destroy();
+                                ?>
+                                 <script>
+                                alert("THIS EMAIL ADDRESS DOES NOT EXIST!!!");
+                                
+                                location.replace("register.php");
+                                </script>
+                            <?php
+                            }
+                            else
+                            {
+                                $row = $res->fetch_assoc();
+                                $_SESSION['user_id'] = $row['id'];
+                                ?>
+                                <script>
+                                    location.replace("dashboard.php");
+                                </script>
+                            <?php
+                            }
+                        }
+                        else
+                        {
+                            echo $login_button;
+                        }
+                        ?>
                     <p class="text-center mt-2" style="font-weight: 510;">Are you a new user? <a
                             href="register.php">signup</a> </p>
+                    </div>
+
 
                 </div>
             </div>
