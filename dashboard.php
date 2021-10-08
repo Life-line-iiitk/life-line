@@ -7,6 +7,7 @@ if(isset($_POST['blood']))
     $request_id=$_POST['request_id'];
     $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
     $ires1=$conn->query($ins1);
+    echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
 }
 
 if(isset($_POST['organ']))
@@ -14,6 +15,8 @@ if(isset($_POST['organ']))
     $request_id=$_POST['request_id'];
     $ins2="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
     $ires2=$conn->query($ins2);
+    echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+
 }
 ?>
 
