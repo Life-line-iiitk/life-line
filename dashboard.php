@@ -88,10 +88,11 @@ $id=$_SESSION['user_id'];
         $history=0;
         $personal=0;
         $requests=0;
-        $q1="SELECT * FROM `blood_requesters` WHERE requester_id='$id'";
+        $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (b.requester_id='$id' AND u.id='$id')";
         $res1=$conn->query($q1);
         if($res1->num_rows!=0)
         {
+            
             $flag=1;
             $personal=1;
         }
@@ -161,39 +162,49 @@ $id=$_SESSION['user_id'];
         <h1 class="display-4 mt-5 text-center">YOUR REQUESTS</h1>
 
         <div class="row mt-4 p-2">
-            <div class="card p-3" style="width:40rem">
+            <?php 
+                while($row1=$res1->fetch_assoc())
+                {
+                    $name = $row1['name'];
+                    $date=substr($row1['date'],0,10);
+                    $location=$row1['location'];
+                    $msg=$row1['msg'];
+                    $blood_grp=strtoupper($row1['blood_grp']);
+                    // echo "<script>console.log('$name,$date,$location,$msg,$blood_grp');</script>";
+                    echo '<div class="card p-3" style="width:40rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <h4 class="card-title">Ashok Kumar</h4>
+                            <h4 class="card-title">'.$name.'</h4>
                         </div>
                         <div class="col-md-5">
                             <span class="date">Posted on:
-                                13/09/2021</span>
+                                '.$date.'</span>
                         </div>
                     </div>
-                    <h5 class="card-subtitle mt-2 text-muted">Looking for A+ in Lucknow,Utter Pradesh</h5>
-                    <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                        please
-                        contact.
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$blood_grp.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
                     </p>
 
                     <div class="row info p-2">
                         <div class="col-xs-1">
                             <span class="blood-grp">
-                                O+
+                                '.$blood_grp.'
                             </span>
                         </div>
                         <div class="col-xs-3"></div>
-                        <div class='col-xs-8 ml-4 mt-3'>
+                        <div class="col-xs-8 ml-4 mt-3">
                             <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>Lucknow,Utter Pradesh</p>
+                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
 
                         </div>
                     </div>
                     <h4 class="mt-4 text-danger">NO RESPONDENTS YET :(</h4>
                 </div>
-            </div>
+            </div>';
+                }
+            ?>
+            
         </div>
     </div>
     <!-- If there are some requests -->
