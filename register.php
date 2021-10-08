@@ -192,9 +192,9 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
                       style="background-color:var(--red);color:#fff;">Sign Up</button>
                   </div>
                   <br>
-                  <div class="row justify-content-center align-items-center">
+                  <div style="font-weight:bold" class="row justify-content-center align-items-center">
                     <p>Have an account?</p>
-                    <pre><a href="sign_in.php"> SignIn</a></pre>
+                    <pre><a href="sign_in.php"> Sign In</a></pre>
                   </div>
                   <div class="col text-center">
                     <p>Or</p>

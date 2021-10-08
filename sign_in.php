@@ -29,7 +29,7 @@
         $login_button = '<div class="glg mt-3 text-center">
                         <small><b>Or</b></small>
                         <br>
-                        <a href="'.$google_client->createAuthUrl().'" class="btn btn-google"><img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign up with Google</a>
+                        <a href="'.$google_client->createAuthUrl().'" class="btn btn-google"><img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign In with Google</a>
                         </div>';
     }
 ?>

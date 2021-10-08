@@ -18,6 +18,28 @@ if(isset($_POST['organ']))
     echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
 
 }
+
+if(isset($_POST['blood_accept']))
+{
+    $request_id=$_POST['request_id'];
+    $donor_id=$_POST['donor_id'];
+    $ins3="INSERT INTO blood_donated_users(`request_id`,`donor_id`) VALUES('$request_id','$donor_id')";
+    $ires3=$conn->query($ins3);   
+
+    $sql = "DELETE FROM blood_responses WHERE request_id='$request_id'";
+    $conn->query($sql);
+}
+
+if(isset($_POST['organ_accept']))
+{
+    $request_id=$_POST['request_id'];
+    $donor_id=$_POST['donor_id'];
+    $ins4="INSERT INTO organ_donated_users(`request_id`,`donor_id`) VALUES('$request_id','$donor_id')";
+    $ires4=$conn->query($ins4); 
+    
+    $sql = "DELETE FROM organ_responses WHERE request_id='$request_id'";
+    $conn->query($sql);
+}
 ?>
 
 <html lang="en">
@@ -103,16 +125,15 @@ if(isset($_POST['organ']))
         $history=0;
         $personal=0;
         $requests=0;
-        $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (b.requester_id='$id' AND u.id='$id')";
+        $q1="SELECT b.*,u.*,db.* FROM blood_requesters b,users u,blood_donated_users db WHERE (b.requester_id='$id' AND u.id='$id' AND db.request_id <> b.sno)";
         $res1=$conn->query($q1);
         if($res1->num_rows!=0)
         {
-            
             $flag=1;
             $personal=1;
         }
 
-        $q2="SELECT o.*,u.* FROM organ_requesters o,users u WHERE (o.requester_id='$id' AND u.id='$id')";
+        $q2="SELECT o.*,u.*,do.* FROM organ_requesters o,users u,organ_donated_users do WHERE (do.request_id <> o.sno AND o.requester_id='$id' AND u.id='$id')";
         $res2=$conn->query($q2);
         if($res2->num_rows!=0)
         {
@@ -215,9 +236,35 @@ if(isset($_POST['organ']))
 
                         </div>
                     </div>
-                    <h4 class="mt-4 text-danger">NO RESPONDENTS YET :(</h4>
-                </div>
-            </div>';
+                    ';
+                    $request_id=$row1['sno'];
+
+                    $subq="SELECT b.*,u.* FROM blood_responses b,users u WHERE (b.request_id='$request_id' AND u.id=b.user_id AND b.voluntary=1)";
+                    $subres=$conn->query($subq);
+                    if($subres->num_rows==0)
+                    {
+                        echo '<h4 class="mt-4 text-danger">NO RESPONDENTS YET :(</h4>
+                        </div>
+                    </div>';
+                    }
+                    else
+                    {
+                        while($subrow=$subres->fetch_assoc())
+                        {
+                            $name=$subrow['name'];
+                            echo '<h5 class="mt-4 text-danger">'.$name.'</h5>
+                                    <h6>Contact:'.$subrow['phone'].'</h6>
+                                
+                                <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                                    <input type="hidden" name="request_id" value="'.$request_id.'">
+                                    <input type="hidden" name="donor_id" value="'.$subrow['id'].'">
+                                    <button type="submit" name="blood_accept" class="btn mt-3 donate">Accept</button>
+                                </form>
+                            </div>
+                        </div>';
+                            
+                        }
+                    }
                 }
             }
 
@@ -260,9 +307,36 @@ if(isset($_POST['organ']))
 
                         </div>
                     </div>
-                    <h4 class="mt-4 text-danger">NO RESPONDENTS YET :(</h4>
-                </div>
-            </div>';
+                    ';
+                    $request_id=$row2['sno'];
+
+                    $subq="SELECT b.*,u.* FROM organ_responses b,users u WHERE (b.request_id='$request_id' AND u.id=b.user_id AND b.voluntary=1)";
+                    $subres=$conn->query($subq);
+                    if($subres->num_rows==0)
+                    {
+                        echo '<h4 class="mt-4 text-danger">NO RESPONDENTS YET :(</h4>
+                        </div>
+                    </div>';
+                    }
+                    else
+                    {
+                        while($subrow=$subres->fetch_assoc())
+                        {
+                            $name=$subrow['name'];
+                            echo '<h5 class="mt-4 text-danger">'.$name.'</h5>
+                                    <h6>Contact:'.$subrow['phone'].'</h6>
+                                
+                                <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                                    <input type="hidden" name="request_id" value="'.$request_id.'">
+                                    <input type="hidden" name="donor_id" value="'.$subrow['id'].'">
+                                    <button type="submit" name="organ_accept" class="btn mt-3 donate">Accept</button>
+                                </form>
+                            </div>
+                        </div>';
+                            
+                        }
+                    }
+
                 }
             }   
             ?>
@@ -452,12 +526,9 @@ if(isset($_POST['organ']))
                             </span>
                         </div>
 
-                        <div class="col-xs-8 ml-4 mt-3">
-                            <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
-                        </div>
+                        
                         <div class="col-xs-3 mt-4 ml-4">
-                            <h4>You Donated :)</h4>
+                            <h3>You Donated :)</h3>
                         </div>
                     </div>
                 </div>
@@ -505,18 +576,15 @@ if(isset($_POST['organ']))
                     </p>
 
                     <div class="row completed p-2">
-                        <div class="col-xs-1">
-                            <span class="blood-grp">
+                        <div class="col-xs-1 mt-2">
+                            <span class="organs">
                                 '.$organs.'
                             </span>
                         </div>
 
-                        <div class="col-xs-8 ml-4 mt-3">
-                            <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
-                        </div>
+                        
                         <div class="col-xs-3 mt-4 ml-4">
-                            <h4>You Donated :)</h4>
+                            <h3>You Donated :)</h3>
                         </div>
                     </div>
                 </div>
