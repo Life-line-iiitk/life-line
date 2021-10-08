@@ -2,7 +2,19 @@
 session_start();
 include('./db_conn.php');
 $id=$_SESSION['user_id'];
+if(isset($_POST['blood']))
+{
+    $request_id=$_POST['request_id'];
+    $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
+    $ires1=$conn->query($ins1);
+}
 
+if(isset($_POST['organ']))
+{
+    $request_id=$_POST['request_id'];
+    $ins2="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
+    $ires2=$conn->query($ins2);
+}
 ?>
 
 <html lang="en">
@@ -97,7 +109,7 @@ $id=$_SESSION['user_id'];
             $personal=1;
         }
 
-        $q2="SELECT * FROM `organ_requesters` WHERE requester_id='$id'";
+        $q2="SELECT o.*,u.* FROM organ_requesters o,users u WHERE (o.requester_id='$id' AND u.id='$id')";
         $res2=$conn->query($q2);
         if($res2->num_rows!=0)
         {
@@ -136,7 +148,7 @@ $id=$_SESSION['user_id'];
             $flag=1;
             $history=1;
         }
-        echo "<script>console.log('$flag');</script>";
+        
         if($flag==0)
         {
     ?>
@@ -163,6 +175,8 @@ $id=$_SESSION['user_id'];
 
         <div class="row mt-4 p-2">
             <?php 
+            if($res1->num_rows!=0)
+            {
                 while($row1=$res1->fetch_assoc())
                 {
                     $name = $row1['name'];
@@ -170,8 +184,7 @@ $id=$_SESSION['user_id'];
                     $location=$row1['location'];
                     $msg=$row1['msg'];
                     $blood_grp=strtoupper($row1['blood_grp']);
-                    // echo "<script>console.log('$name,$date,$location,$msg,$blood_grp');</script>";
-                    echo '<div class="card p-3" style="width:40rem">
+                    echo '<div class="card p-3 mt-4" style="width:40rem;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
@@ -203,6 +216,52 @@ $id=$_SESSION['user_id'];
                 </div>
             </div>';
                 }
+            }
+
+
+            if($res2->num_rows!=0)
+            {
+                while($row2=$res2->fetch_assoc())
+                {
+                    $name = $row2['name'];
+                    $date=substr($row2['date'],0,10);
+                    $location=$row2['location'];
+                    $organs=$row2['organs'];
+                    $msg=$row2['msg'];
+                    $blood_grp=strtoupper($row2['blood_grp']);
+                    echo '<div class="card p-3 mt-4" style="width:40rem">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4 class="card-title">'.$name.'</h4>
+                        </div>
+                        <div class="col-md-5">
+                            <span class="date">Posted on:
+                                '.$date.'</span>
+                        </div>
+                    </div>
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$organs.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
+                    </p>
+
+                    <div class="row info p-2">
+                        <div class="col-xs-1 mt-2">
+                            <span class="organs">
+                                '.$organs.'
+                            </span>
+                        </div>
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-8 ml-4 mt-3">
+                            <h4>Blood Donors Needed</h4>
+                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
+
+                        </div>
+                    </div>
+                    <h4 class="mt-4 text-danger">NO RESPONDENTS YET :(</h4>
+                </div>
+            </div>';
+                }
+            }   
             ?>
             
         </div>
@@ -212,81 +271,133 @@ $id=$_SESSION['user_id'];
         }
         if($requests==1)
         {
+            
     ?>
     <div class="container requests">
-        <h1 class="display-4 mt-5 text-center">REQUESTS</h1>
+        <h1 class="display-4 mt-1 text-center">REQUESTS</h1>
+        <?php 
+            if($res3->num_rows!=0)
+            {
+                while($row3=$res3->fetch_assoc())
+                {
+                    $request_id=$row3['request_id'];
 
-        <div class="row mt-4 p-2">
-            <div class="card p-3" style="width:40rem">
+                    $sq="SELECT b.*,u.* FROM blood_requesters b,users u WHERE b.sno='$request_id' AND u.id=b.requester_id";
+                    $sres=$conn->query($sq);
+                    if($sres->num_rows>0)
+                    {
+                     while($srow=$sres->fetch_assoc())
+                     {
+                        $name=$srow['name'];
+                        $date=substr($srow['date'],0,10);
+                        $location=$srow['location'];
+                        $msg=$srow['msg'];
+                        $blood_grp=strtoupper($srow['blood_grp']);
+                        echo '<div class="row mt-4 p-2">
+            <div class="card p-3 mt-3" style="width:40rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <h4 class="card-title">Mitchell Jhonson</h4>
+                            <h4 class="card-title">'.$name.'</h4>
                         </div>
                         <div class="col-md-5">
                             <span class="date">Posted on:
-                                10/09/2021</span>
+                                '.$date.'</span>
                         </div>
                     </div>
 
-                    <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Ahmedabad,Gujarat</h5>
-                    <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                        please
-                        contact.
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$blood_grp.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
                     </p>
 
                     <div class="row info p-2">
                         <div class="col-xs-1">
                             <span class="blood-grp">
-                                O+
+                                '.$blood_grp.'
                             </span>
                         </div>
                         <div class="col-xs-3"></div>
-                        <div class='col-xs-8 ml-4 mt-3'>
+                        <div class="col-xs-8 ml-4 mt-3">
                             <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>Ahmedabad , Gujarat</p>
+                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
 
                         </div>
                     </div>
-                    <a href="#" class="btn mt-3 donate">DONATE</a>
+                    <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                        <input type="hidden" name="request_id" value="'.$request_id.'">
+                        <button type="submit" name="blood" class="btn mt-3 donate">DONATE</button>
+                    </form>
                 </div>
             </div>
-        </div>
+        </div>';
+                     }
+                    }
+                }
+            }
 
-        <div class="row mt-4 p-2">
-            <div class="card p-3" style="width:40rem">
+            if($res4->num_rows!=0)
+            {
+                while($row4=$res4->fetch_assoc())
+                {
+                    $request_id=$row4['request_id'];
+
+                    $sq2="SELECT o.*,u.* FROM organ_requesters o,users u WHERE o.sno='$request_id' AND u.id=o.requester_id";
+                    $sres2=$conn->query($sq2);
+                    if($sres2->num_rows>0)
+                    {
+                     while($srow2=$sres2->fetch_assoc())
+                     {
+                        $name=$srow2['name'];
+                        $date=substr($srow2['date'],0,10);
+                        $location=$srow2['location'];
+                        $msg=$srow2['msg'];
+                        $organs=strtoupper($srow2['organs']);
+                        echo '<div class="row mt-4 p-2">
+            <div class="card p-3 mt-3" style="width:40rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <h4 class="card-title">Santhosh Kumar</h4>
+                            <h4 class="card-title">'.$name.'</h4>
                         </div>
                         <div class="col-md-5">
                             <span class="date">Posted on:
-                                13/09/2021</span>
+                                '.$date.'</span>
                         </div>
                     </div>
 
-                    <h5 class="card-subtitle mt-2 text-muted">Looking for AB- in Vishakapatnam,Andhra Pradesh</h5>
-                    <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                        please
-                        contact.</p>
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$organs.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
+                    </p>
 
                     <div class="row info p-2">
                         <div class="col-xs-1">
-                            <span class="blood-grp">
-                                O+
+                            <span class="organs">
+                                '.$organs.'
                             </span>
                         </div>
                         <div class="col-xs-3"></div>
-                        <div class='col-xs-8 ml-4 mt-3'>
+                        <div class="col-xs-8 ml-4 mt-3">
                             <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>Vishakapatnam,Andhra Pradesh</p>
+                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
+
                         </div>
                     </div>
-                    <a href="#" class="btn mt-3 donate">DONATE</a>
+                   <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                        <input type="hidden" name="request_id" value="'.$request_id.'">
+                        <button type="submit" name="organ" class="btn mt-3 donate">DONATE</button>
+                    </form>
                 </div>
             </div>
-        </div>
+        </div>';
+
+                     }
+                    }
+                }
+            }
+        ?>
+        
+
+        
     </div>
 
     <?php }
@@ -295,37 +406,52 @@ $id=$_SESSION['user_id'];
 
     <div class="container requests">
         <h1 class="display-4 mt-5 text-center">HISTORY</h1>
+        <?php 
+        if($res5->num_rows!=0)
+        {
+            while($row5=$res5->fetch_assoc())
+            {
+                $request_id=$row5['request_id'];
 
-        <div class="row mt-4 p-2">
+                $sq="SELECT b.*,u.* FROM blood_requesters b,users u WHERE b.sno='$request_id' AND u.id=b.requester_id";
+                $sres=$conn->query($sq);
+                if($sres->num_rows>0)
+                {
+                 while($srow=$sres->fetch_assoc())
+                 {
+                    $name=$srow['name'];
+                    $date=substr($srow['date'],0,10);
+                    $location=$srow['location'];
+                    $msg=$srow['msg'];
+                    $blood_grp=strtoupper($srow['blood_grp']);
+                    echo '<div class="row mt-4 p-2">
             <div class="card p-3" style="width:40rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <h4 class="card-title">Vinay Kumar</h4>
+                            <h4 class="card-title">'.$name.'</h4>
                         </div>
                         <div class="col-md-5">
                             <span class="date">Posted on:
-                                05/07/2021</span>
+                                '.$date.'</span>
                         </div>
                     </div>
 
 
-                    <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Lucknow,Utter Pradesh</h5>
-                    <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                        please
-                        contact.
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$blood_grp.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
                     </p>
 
                     <div class="row completed p-2">
                         <div class="col-xs-1">
                             <span class="blood-grp">
-                                O+
+                                '.$blood_grp.'
                             </span>
                         </div>
 
-                        <div class='col-xs-8 ml-4 mt-3'>
+                        <div class="col-xs-8 ml-4 mt-3">
                             <h4>Blood Donors Needed</h4>
-                            <p><i class="fas fa-map mr-3"></i>Lucknow,Utter Pradesh</p>
+                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
                         </div>
                         <div class="col-xs-3 mt-4 ml-4">
                             <h4>You Donated :)</h4>
@@ -333,7 +459,72 @@ $id=$_SESSION['user_id'];
                     </div>
                 </div>
             </div>
-        </div>
+        </div>';
+                 }
+                }
+            }
+        }
+
+
+        if($res6->num_rows!=0)
+        {
+            while($row6=$res6->fetch_assoc())
+            {
+                $request_id=$row6['request_id'];
+
+                $sq="SELECT o.*,u.* FROM organ_requesters o,users u WHERE o.sno='$request_id' AND u.id=o.requester_id";
+                $sres=$conn->query($sq);
+                if($sres->num_rows>0)
+                {
+                 while($srow=$sres->fetch_assoc())
+                 {
+                    $name=$srow['name'];
+                    $date=substr($srow['date'],0,10);
+                    $location=$srow['location'];
+                    $msg=$srow['msg'];
+                    $organs=strtoupper($srow['organs']);
+                    echo '<div class="row mt-4 p-2">
+            <div class="card p-3" style="width:40rem">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4 class="card-title">'.$name.'</h4>
+                        </div>
+                        <div class="col-md-5">
+                            <span class="date">Posted on:
+                                '.$date.'</span>
+                        </div>
+                    </div>
+
+
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$organs.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
+                    </p>
+
+                    <div class="row completed p-2">
+                        <div class="col-xs-1">
+                            <span class="blood-grp">
+                                '.$organs.'
+                            </span>
+                        </div>
+
+                        <div class="col-xs-8 ml-4 mt-3">
+                            <h4>Blood Donors Needed</h4>
+                            <p><i class="fas fa-map mr-3"></i>'.$location.'</p>
+                        </div>
+                        <div class="col-xs-3 mt-4 ml-4">
+                            <h4>You Donated :)</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+                 }
+                }
+            }
+        }
+        ?>
+        
     </div>
     <?php }?>
     <!-- Footer -->
