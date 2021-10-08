@@ -2,7 +2,7 @@
 session_start();
 include('./db_conn.php');
 $id=$_SESSION['user_id'];
-// echo "<script>console.log('$id');</script>";
+
 ?>
 
 <html lang="en">
@@ -83,7 +83,62 @@ $id=$_SESSION['user_id'];
     </nav>
 
     <!-- If there are no requests -->
+    <?php
+        $flag=0;
+        $history=0;
+        $personal=0;
+        $requests=0;
+        $q1="SELECT * FROM `blood_requesters` WHERE requester_id='$id'";
+        $res1=$conn->query($q1);
+        if($res1->num_rows!=0)
+        {
+            $flag=1;
+            $personal=1;
+        }
 
+        $q2="SELECT * FROM `organ_requesters` WHERE requester_id='$id'";
+        $res2=$conn->query($q2);
+        if($res2->num_rows!=0)
+        {
+            $flag=1;
+            $personal=1;
+        }
+
+        $q3="SELECT * FROM `blood_responses` WHERE (user_id='$id' AND voluntary=0)";
+        $res3=$conn->query($q3);
+        if($res3->num_rows!=0)
+        {
+            $flag=1;
+            $requests=1;
+        }
+
+        $q4="SELECT * FROM `organ_responses` WHERE (user_id='$id' AND voluntary=0)";
+        $res4=$conn->query($q4);
+        if($res4->num_rows!=0)
+        {
+            $flag=1;
+            $requests=1;
+        }
+
+        $q5="SELECT * FROM `blood_donated_users` WHERE donor_id='$id'";
+        $res5=$conn->query($q5);
+        if($res5->num_rows!=0)
+        {
+            $flag=1;
+            $history=1;
+        }
+
+        $q6="SELECT * FROM `organ_donated_users` WHERE donor_id='$id'";
+        $res6=$conn->query($q6);
+        if($res6->num_rows!=0)
+        {
+            $flag=1;
+            $history=1;
+        }
+        echo "<script>console.log('$flag');</script>";
+        if($flag==0)
+        {
+    ?>
     <div class="container text-center">
         <div class="row">
             <div class="col-md-4"></div>
@@ -98,7 +153,9 @@ $id=$_SESSION['user_id'];
         <a href="#" class="btn btn-lg link-btn mt-4" style="color:var(--white);background-color:var(--red)">DONATE
             NOW</a>
     </div>
-
+    <?php
+    }
+    if($personal==1){?>
     <!-- User Requests -->
     <div class="container requests">
         <h1 class="display-4 mt-5 text-center">YOUR REQUESTS</h1>
@@ -140,7 +197,11 @@ $id=$_SESSION['user_id'];
         </div>
     </div>
     <!-- If there are some requests -->
-
+    <?php
+        }
+        if($requests==1)
+        {
+    ?>
     <div class="container requests">
         <h1 class="display-4 mt-5 text-center">REQUESTS</h1>
 
@@ -217,6 +278,9 @@ $id=$_SESSION['user_id'];
         </div>
     </div>
 
+    <?php }
+    if($history==1){
+    ?>
 
     <div class="container requests">
         <h1 class="display-4 mt-5 text-center">HISTORY</h1>
@@ -260,7 +324,7 @@ $id=$_SESSION['user_id'];
             </div>
         </div>
     </div>
-
+    <?php }?>
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light mt-5 text-muted">
 
