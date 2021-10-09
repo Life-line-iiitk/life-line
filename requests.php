@@ -1,6 +1,39 @@
 <?php 
     session_start();
     include('./db_conn.php');
+    $id=$_SESSION['user_id'];
+    if(isset($_POST['blood']))
+    {
+                
+    $request_id=$_POST['request_id'];
+    if(isset($_SESSION['user_id']))
+    {
+    $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
+    $ires1=$conn->query($ins1);
+    echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+    }
+    else
+    {
+        echo "<script>alert('Please Login before responding!!');</script>";
+    }
+    }
+
+
+    if(isset($_POST['organ']))
+    {
+                
+    $request_id=$_POST['request_id'];
+    if(isset($_SESSION['user_id']))
+    {
+    $ins1="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
+    $ires1=$conn->query($ins1);
+    echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+    }
+    else
+    {
+        echo "<script>alert('Please Login before responding!!');</script>";
+    }
+    }
 ?>
 
 <html lang="en">
@@ -102,8 +135,14 @@
         </div>
 
         <div class="col content" style="display:block" id="blood">
-            <?php 
-                $q1="SELECT b.*,u.*,db.* FROM blood_requesters b,users u,blood_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
+            <?php
+                if(isset($_SESSION['user_id']))
+                {
+                    $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno AND u.id <> '$id')";
+                }
+                else{
+                    $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
+                }
                 $res1=$conn->query($q1);
                 if($res1->num_rows>0)
                 {
@@ -152,7 +191,11 @@
 
                             </div>
                         </div>
-                        <a href="#" class="btn mt-3 donate">DONATE</a>
+                        <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                            <input type="hidden" name="request_id" value="'.$row1['requestid'].'">
+                            <button type="submit" name="blood" class="btn mt-3 donate">DONATE</button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>';
@@ -191,7 +234,7 @@
                 <h1>Fullfilled Requests</h1>
             </div>
             <?php 
-                $q2="SELECT * FROM `blood_donated_users`";
+                $q2="SELECT * FROM `blood_donated_users` ORDER BY date DESC";
                 $res2=$conn->query($q2);
                 if($res2->num_rows>0)
                 {
@@ -265,8 +308,16 @@
 
         <div class="col content" id="organ">
 
-                <?php 
-                $q1="SELECT b.*,u.*,db.* FROM organ_requesters b,users u,organ_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
+                <?php
+                if(isset($_SESSION['user_id']))
+                { 
+                $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM organ_requesters b,users u,organ_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno AND u.id <> '$id')";
+                }
+                else
+                {
+                    $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM organ_requesters b,users u,organ_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
+
+                }
                 $res1=$conn->query($q1);
                 if($res1->num_rows>0)
                 {
@@ -310,7 +361,10 @@
 
                             </div>
                         </div>
-                        <a href="#" class="btn mt-3 donate">DONATE</a>
+                        <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                            <input type="hidden" name="request_id" value="'.$row1['requestid'].'">
+                            <button type="submit" name="organ" class="btn mt-3 donate">DONATE</button>
+                        </form>
                     </div>
                 </div>
             </div>';
@@ -349,7 +403,7 @@
                 <h1>Fullfilled Requests</h1>
             </div>
             <?php 
-                $q2="SELECT * FROM `organ_donated_users`";
+                $q2="SELECT * FROM `organ_donated_users` ORDER BY date DESC";
                 $res2=$conn->query($q2);
                 if($res2->num_rows>0)
                 {

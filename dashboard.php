@@ -125,7 +125,7 @@ if(isset($_POST['organ_accept']))
         $history=0;
         $personal=0;
         $requests=0;
-        $q1="SELECT b.*,u.*,db.* FROM blood_requesters b,users u,blood_donated_users db WHERE (b.requester_id='$id' AND u.id='$id' AND db.request_id <> b.sno)";
+        $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (b.requester_id='$id' AND u.id='$id' AND db.request_id <> b.sno)";
         $res1=$conn->query($q1);
         if($res1->num_rows!=0)
         {
@@ -133,7 +133,7 @@ if(isset($_POST['organ_accept']))
             $personal=1;
         }
 
-        $q2="SELECT o.*,u.*,do.* FROM organ_requesters o,users u,organ_donated_users do WHERE (do.request_id <> o.sno AND o.requester_id='$id' AND u.id='$id')";
+        $q2="SELECT o.*,u.*,do.*,o.sno as requestid FROM organ_requesters o,users u,organ_donated_users do WHERE (do.request_id <> o.sno AND o.requester_id='$id' AND u.id='$id')";
         $res2=$conn->query($q2);
         if($res2->num_rows!=0)
         {
@@ -237,7 +237,8 @@ if(isset($_POST['organ_accept']))
                         </div>
                     </div>
                     ';
-                    $request_id=$row1['sno'];
+                    $request_id=$row1['requestid'];
+                    echo "<script>console.log('$request_id');</script>";
 
                     $subq="SELECT b.*,u.* FROM blood_responses b,users u WHERE (b.request_id='$request_id' AND u.id=b.user_id AND b.voluntary=1)";
                     $subres=$conn->query($subq);
@@ -254,8 +255,7 @@ if(isset($_POST['organ_accept']))
                             $name=$subrow['name'];
                             echo '<h5 class="mt-4 text-danger">'.$name.'</h5>
                                     <h6>Contact:'.$subrow['phone'].'</h6>
-                                
-                                <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                                    <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
                                     <input type="hidden" name="request_id" value="'.$request_id.'">
                                     <input type="hidden" name="donor_id" value="'.$subrow['id'].'">
                                     <button type="submit" name="blood_accept" class="btn mt-3 donate">Accept</button>
@@ -308,7 +308,7 @@ if(isset($_POST['organ_accept']))
                         </div>
                     </div>
                     ';
-                    $request_id=$row2['sno'];
+                    $request_id=$row2['requestid'];
 
                     $subq="SELECT b.*,u.* FROM organ_responses b,users u WHERE (b.request_id='$request_id' AND u.id=b.user_id AND b.voluntary=1)";
                     $subres=$conn->query($subq);
