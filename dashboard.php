@@ -125,7 +125,7 @@ if(isset($_POST['organ_accept']))
         $history=0;
         $personal=0;
         $requests=0;
-        $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (b.requester_id='$id' AND u.id='$id' AND db.request_id <> b.sno)";
+        $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (b.requester_id='$id' AND u.id='$id' AND db.request_id <> requestid)";
         $res1=$conn->query($q1);
         if($res1->num_rows!=0)
         {
@@ -133,7 +133,7 @@ if(isset($_POST['organ_accept']))
             $personal=1;
         }
 
-        $q2="SELECT o.*,u.*,do.*,o.sno as requestid FROM organ_requesters o,users u,organ_donated_users do WHERE (do.request_id <> o.sno AND o.requester_id='$id' AND u.id='$id')";
+        $q2="SELECT o.*,u.*,do.*,o.sno as requestid FROM organ_requesters o,users u,organ_donated_users do WHERE (do.request_id <> requestid AND o.requester_id='$id' AND u.id='$id')";
         $res2=$conn->query($q2);
         if($res2->num_rows!=0)
         {
