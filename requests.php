@@ -15,6 +15,9 @@
     else
     {
         echo "<script>alert('Please Login before responding!!');</script>";
+        echo '<script>
+            location.replace("sign_in.php");
+            </script>';
     }
     }
 
@@ -32,6 +35,11 @@
     else
     {
         echo "<script>alert('Please Login before responding!!');</script>";
+        
+        echo '<script>
+            location.replace("sign_in.php");
+            </script>';
+        
     }
     }
 ?>
