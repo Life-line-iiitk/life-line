@@ -76,10 +76,10 @@
                 <li class="nav-item mt-1">
                     <a class="nav-link" href="./index.php">Home</a>
                 </li>
-                <li class="nav-item active mt-1">
+                <li class="nav-item mt-1">
                     <a class="nav-link" href="./requests.php">Requests</a>
                 </li>
-                <li class="nav-item mt-1">
+                <li class="nav-item active mt-1">
                     <a class="nav-link" href="#">Donors</a>
                 </li>
                 <li class="nav-item dropdown mt-1">

@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+    include('./db_conn.php');
+?>
+
 <html lang="en">
 
 <head>
@@ -97,160 +102,323 @@
         </div>
 
         <div class="col content" style="display:block" id="blood">
-            <div class="row mt-4 p-2" data-aos="fade-up">
+            <?php 
+                $q1="SELECT b.*,u.*,db.* FROM blood_requesters b,users u,blood_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
+                $res1=$conn->query($q1);
+                if($res1->num_rows>0)
+                {
+                    $i=0;
+                    while($row1=$res1->fetch_assoc())
+                    {
+                        echo '<div class="row mt-4 p-2" data-aos="fade-up">
                 <div class="card p-3" style="width:40rem">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-7">
-                                <h4 class="card-title">Mitchell Jhonson</h4>
+                                <h4 class="card-title">'.$row1['name'].'</h4>
                             </div>
                             <div class="col-md-5">
                                 <span class="date">Posted on:
-                                    10/09/2021</span>
+                                    '.substr($row1['date'],0,10).'</span>
                             </div>
                         </div>
 
-                        <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Ahmedabad,Gujarat</h5>
-                        <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                            please
-                            contact.
-                        </p>
-                        <div class="container-fluid">
-                            <div id="mapid"></div>
-                        </div>
+                        <h5 class="card-subtitle mt-2 text-muted">Looking for '.$row1['blood_grp'].' in '.$row1['location'].'</h5>
+                        <p class="card-text mt-4">'.$row1['msg'].'
+                        </p>';
+                        if($row1['lat'])
+                        {
+                        echo '<div class="container-fluid">
+                            <div id="mapid'.$i.'" style="min-height:14rem;"></div>
+                        </div>';
+                        }
 
-                        <div class="row info p-2 mt-3">
-                            <span class="urgent" style="position: absolute;">URGENT</span>
+                        echo '<div class="row info p-2 mt-3">';
+                        
+                        if($row1['urgent']==1){
+                            echo '
+                            <span class="urgent" style="position: absolute;">URGENT</span>';
+                        }
+                        echo '
                             <div class="col-xs-1 mt-2">
-
                                 <span class="blood-grp">
-                                    O+
+                                    '.$row1['blood_grp'].'
                                 </span>
                             </div>
                             <div class="col-xs-3"></div>
-                            <div class=' col-xs-8 ml-4 mt-3'>
+                            <div class=" col-xs-8 ml-4 mt-3">
                                 <h4>Blood Donors Needed</h4>
-                                <p><i class="fas fa-map mr-3"></i>Ahmedabad , Gujarat</p>
+                                <p><i class="fas fa-map mr-3"></i>'.$row1['location'].'</p>
 
                             </div>
                         </div>
                         <a href="#" class="btn mt-3 donate">DONATE</a>
                     </div>
                 </div>
+            </div>';
+                echo "<script>
+                        x = ".$row1['lat'].";
+                        y = ".$row1['lon'].";
+                        var mymap = L.map('mapid".$i."').setView([x, y], 13);
+                        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                            attribution: 'Map data &copy;OpenStreetMa contributors, Imagery © Mapbox',
+                            maxZoom: 100,
+                            id: 'mapbox/streets-v11',
+                            tileSize: 512,
+                            zoomOffset: -1,
+                            accessToken: 'pk.eyJ1IjoiYmhhbnVrMTkiLCJhIjoiY2tzZWJxZW4yMHl1bzJ1b2RzOXMxd3hkMiJ9.DjdM6ILIjgddBCoERDT_QA'
+                        }).addTo(mymap);
+                        
+                        var markerIcon = L.icon({
+                            iconUrl: './assets/images/marker-icon.jpeg',
+                                iconSize: [70, 80], 
+                                iconAnchor: [22, 94], 
+                                popupAnchor: [-3, -76] 
+                            });
+
+                        var marker = L.marker([x, y], {
+                            icon: markerIcon
+                    }).addTo(mymap);
+
+                    marker.bindPopup('<h5>".$row1['blood_grp']."</h5>').openPopup();
+
+                </script>";
+                $i=$i+1;
+                    }
+                }            
+            ?>
+            <div class="col text-center mt-4">
+                <h1>Fullfilled Requests</h1>
             </div>
+            <?php 
+                $q2="SELECT * FROM `blood_donated_users`";
+                $res2=$conn->query($q2);
+                if($res2->num_rows>0)
+                {
+                    while($row2=$res2->fetch_assoc())
+                    {
+                        $request_id=$row2['request_id'];
+                        $donor_id=$row2['donor_id'];
 
-            <div class="row mt-4 p-2" data-aos="fade-up">
-                <div class="card p-3" style="width:40rem">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <h4 class="card-title">Santhosh Kumar</h4>
-                            </div>
-                            <div class="col-md-5">
-                                <span class="date">Posted on:
-                                    13/09/2021</span>
-                            </div>
-                        </div>
+                        $q3="SELECT * FROM users WHERE id='$donor_id'";
+                        $res3=$conn->query($q3);
+                        $donor_name=$res3->fetch_assoc()['name'];
 
-                        <h5 class="card-subtitle mt-2 text-muted">Looking for AB- in Vishakapatnam,Andhra Pradesh</h5>
-                        <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                            please
-                            contact.</p>
-
-                        <div class="row info p-2">
-                            <span class="urgent" style="position: absolute;">URGENT</span>
-                            <div class="col-xs-1 mt-2">
-                                <span class="blood-grp">
-                                    AB-
-                                </span>
+                        $q4="SELECT * FROM blood_requesters WHERE sno='$request_id'";
+                        $res4=$conn->query($q4);
+                        
+                        if($res4->num_rows>0)
+                        {
+                            while($row4=$res4->fetch_assoc())
+                            {
+                                $requester_id=$row4['requester_id'];
+                                $q5="SELECT * FROM users WHERE id='$requester_id'";
+                                $res5=$conn->query($q5);
+                                while($row5=$res5->fetch_assoc())
+                                {
+                                    echo '<div class="row mt-4 p-2" data-aos="fade-up">
+                            <div class="card p-3" style="width:40rem">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h4 class="card-title">'.$row5['name'].'</h4>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <span class="date">Posted on:
+                                                '.substr($row4['date'],0,10).'</span>
+                                        </div>
+                                    </div>
+            
+            
+                                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$row4['blood_grp'].' in '.$row4['location'].'</h5>
+                                    <p class="card-text mt-4">'.$row4['msg'].'
+                                    </p>
+            
+                                    <div class="row completed p-2">
+                                        <div class="col-xs-1 mt-2">
+                                            <span class="blood-grp">
+                                                '.$row4['blood_grp'].'
+                                            </span>
+                                        </div>
+            
+                                        <div class="col-xs-8 ml-4 mt-3">
+                                            <h4>Blood Donors Needed</h4>
+                                            <p><i class="fas fa-map mr-3"></i>'.$row4['location'].'</p>
+                                        </div>
+                                        <div class="col-xs-3 mt-2 ml-4">
+                                            <h4>Donor:</h4>
+                                            <h4>'.$donor_name.'</h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-3"></div>
-                            <div class='col-xs-8 ml-4 mt-3'>
-                                <h4>Blood Donors Needed</h4>
-                                <p><i class="fas fa-map mr-3"></i>Vishakapatnam,Andhra Pradesh</p>
-                            </div>
-                        </div>
-                        <a href="#" class="btn mt-3 donate">DONATE</a>
-                    </div>
-                </div>
-            </div>
+                        </div>';
+                                }
+                            }
 
-
-            <div class="row mt-4 p-2" data-aos="fade-up">
-                <div class="card p-3" style="width:40rem">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <h4 class="card-title">Vinay Kumar</h4>
-                            </div>
-                            <div class="col-md-5">
-                                <span class="date">Posted on:
-                                    05/07/2021</span>
-                            </div>
-                        </div>
-
-
-                        <h5 class="card-subtitle mt-2 text-muted">Looking for O+ in Lucknow,Utter Pradesh</h5>
-                        <p class="card-text mt-4">O+ blood is needed for open heart surgery.If any donor is available be
-                            please
-                            contact.
-                        </p>
-
-                        <div class="row completed p-2">
-                            <div class="col-xs-1 mt-2">
-                                <span class="blood-grp">
-                                    O+
-                                </span>
-                            </div>
-
-                            <div class='col-xs-8 ml-4 mt-3'>
-                                <h4>Blood Donors Needed</h4>
-                                <p><i class="fas fa-map mr-3"></i>Lucknow,Utter Pradesh</p>
-                            </div>
-                            <div class="col-xs-3 mt-2 ml-4">
-                                <h4>Donor:</h4>
-                                <h4>Ashok Kumar</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        }
+                    }
+                }
+            ?>
+       
         </div>
 
         <div class="col content" id="organ">
-            <div class="row mt-4 p-2" data-aos="fade-up">
+
+                <?php 
+                $q1="SELECT b.*,u.*,db.* FROM organ_requesters b,users u,organ_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
+                $res1=$conn->query($q1);
+                if($res1->num_rows>0)
+                {
+                    $i=0;
+                    while($row1=$res1->fetch_assoc())
+                    {
+                        echo '<div class="row mt-4 p-2" data-aos="fade-up">
                 <div class="card p-3" style="width:40rem">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-7">
-                                <h4 class="card-title">Madam Umbridge</h4>
+                                <h4 class="card-title">'.$row1['name'].'</h4>
                             </div>
                             <div class="col-md-5">
                                 <span class="date">Posted on:
-                                    02/09/2021</span>
+                                    '.substr($row1['date'],0,10).'</span>
                             </div>
                         </div>
 
-                        <h5 class="card-subtitle mt-2 text-muted">Looking for kidney in Hogwards,Wizarding World</h5>
-                        <p class="card-text mt-4">A kigney is needed for a kidney failuer person,please conact me</p>
+                        <h5 class="card-subtitle mt-2 text-muted">Looking for '.$row1['organs'].' in '.$row1['location'].'</h5>
+                        <p class="card-text mt-4">'.$row1['msg'].'
+                        </p>
+                        ';
+                        if($row1['lat'])
+                        {
+                        echo '<div class="container-fluid">
+                            <div id="mapid'.$i.'" style="min-height:14rem;"></div>
+                        </div>';
+                        }
 
-                        <div class="row info p-2">
-                            <span class="urgent" style="position: absolute;">URGENT</span>
-                            <div class="col-xs-1 mt-4">
-                                <span class="oragns">
-                                    KIDNEY
+                        echo '<div class="row info p-2 mt-4">
+                            <div class="col-xs-1 mt-3">
+                                <span class="organs">
+                                    '.$row1['organs'].'
                                 </span>
                             </div>
                             <div class="col-xs-3"></div>
-                            <div class='col-xs-8 ml-4 mt-3'>
+                            <div class=" col-xs-8 ml-4 mt-3">
                                 <h4>Organ Donors Needed</h4>
-                                <p><i class="fas fa-map mr-3"></i>Hogwards,Wizarding World</p>
+                                <p><i class="fas fa-map mr-3"></i>'.$row1['location'].'</p>
+
                             </div>
                         </div>
                         <a href="#" class="btn mt-3 donate">DONATE</a>
                     </div>
                 </div>
+            </div>';
+                echo "<script>
+                        x = ".$row1['lat'].";
+                        y = ".$row1['lon'].";
+                        var mymap = L.map('mapid".$i."').setView([x, y], 13);
+                        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                            attribution: 'Map data &copy;OpenStreetMa contributors, Imagery © Mapbox',
+                            maxZoom: 100,
+                            id: 'mapbox/streets-v11',
+                            tileSize: 512,
+                            zoomOffset: -1,
+                            accessToken: 'pk.eyJ1IjoiYmhhbnVrMTkiLCJhIjoiY2tzZWJxZW4yMHl1bzJ1b2RzOXMxd3hkMiJ9.DjdM6ILIjgddBCoERDT_QA'
+                        }).addTo(mymap);
+                        
+                        var markerIcon = L.icon({
+                            iconUrl: './assets/images/marker-icon.jpeg',
+                                iconSize: [70, 80], 
+                                iconAnchor: [22, 94], 
+                                popupAnchor: [-3, -76] 
+                            });
+
+                        var marker = L.marker([x, y], {
+                            icon: markerIcon
+                    }).addTo(mymap);
+
+                    marker.bindPopup('<h5>".$row1['blood_grp']."</h5>').openPopup();
+
+                </script>";
+                $i=$i+1;
+                    }
+                }            
+            ?>
+            <div class="col text-center mt-4">
+                <h1>Fullfilled Requests</h1>
             </div>
+            <?php 
+                $q2="SELECT * FROM `organ_donated_users`";
+                $res2=$conn->query($q2);
+                if($res2->num_rows>0)
+                {
+                    while($row2=$res2->fetch_assoc())
+                    {
+                        $request_id=$row2['request_id'];
+                        $donor_id=$row2['donor_id'];
+
+                        $q3="SELECT * FROM users WHERE id='$donor_id'";
+                        $res3=$conn->query($q3);
+                        $donor_name=$res3->fetch_assoc()['name'];
+
+                        $q4="SELECT * FROM organ_requesters WHERE sno='$request_id'";
+                        $res4=$conn->query($q4);
+                        
+                        if($res4->num_rows>0)
+                        {
+                            while($row4=$res4->fetch_assoc())
+                            {
+                                $requester_id=$row4['requester_id'];
+                                $q5="SELECT * FROM users WHERE id='$requester_id'";
+                                $res5=$conn->query($q5);
+                                while($row5=$res5->fetch_assoc())
+                                {
+                                    echo '<div class="row mt-4 p-2" data-aos="fade-up">
+                            <div class="card p-3" style="width:40rem">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h4 class="card-title">'.$row5['name'].'</h4>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <span class="date">Posted on:
+                                                '.substr($row4['date'],0,10).'</span>
+                                        </div>
+                                    </div>
+            
+            
+                                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$row4['organs'].' in '.$row4['location'].'</h5>
+                                    <p class="card-text mt-4">'.$row4['msg'].'
+                                    </p>
+            
+                                    <div class="row completed p-2">
+                                        <div class="col-xs-1 mt-2">
+                                            <span class="organs">
+                                                '.$row4['organs'].'
+                                            </span>
+                                        </div>
+            
+                                        <div class="col-xs-8 ml-4 mt-3">
+                                            <h4>Organ Donors Needed</h4>
+                                            <p><i class="fas fa-map mr-3"></i>'.$row4['location'].'</p>
+                                        </div>
+                                        <div class="col-xs-3 mt-2 ml-4">
+                                            <h4>Donor:</h4>
+                                            <h4>'.$donor_name.'</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+                                }
+                            }
+
+                        }
+                    }
+                }
+            ?>
+            
 
         </div>
     </div>
@@ -357,37 +525,7 @@
         }
     );
 </script>
-<script>
-    x = 23.0225;
-    y = 72.5714;
-    console.log('x: ' + x + ' y: ' + y);
-    var mymap = L.map('mapid').setView([x, y], 13);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 100,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoiYmhhbnVrMTkiLCJhIjoiY2tzZWJxZW4yMHl1bzJ1b2RzOXMxd3hkMiJ9.DjdM6ILIjgddBCoERDT_QA'
-    }).addTo(mymap);
-    var greenIcon = L.icon({
-        iconUrl: './assets/images/marker-icon.jpeg',
 
-
-        iconSize: [70, 80], // size of the icon
-
-        iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-
-        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
-
-    var marker = L.marker([x, y], {
-        icon: greenIcon
-    }).addTo(mymap);
-
-    marker.bindPopup("O+").openPopup();
-
-</script>
 
 
 </html>
