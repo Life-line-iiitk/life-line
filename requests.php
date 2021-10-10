@@ -126,8 +126,20 @@
                     </div>
                 </li>
 
+                <?php 
+                    if(isset($_SESSION['user_id'])){    
+                ?>
+                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
+                <?php 
+                    }
+                    else{
+                ?>
                 <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
                 <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <?php 
+                    }
+                ?>
             </ul>
         </div>
     </nav>
@@ -146,10 +158,10 @@
             <?php
                 if(isset($_SESSION['user_id']))
                 {
-                    $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (u.id=b.requester_id AND u.id <> '$id')";
+                    $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (u.id=b.requester_id AND u.id <> '$id') ORDER BY b.date DESC";
                 }
                 else{
-                    $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (u.id=b.requester_id)";
+                    $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (u.id=b.requester_id) ORDER BY b.date DESC";
                 }
                 $res1=$conn->query($q1);
                 if($res1->num_rows>0)

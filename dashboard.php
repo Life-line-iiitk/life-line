@@ -215,6 +215,22 @@ if(isset($_POST['organ_accept']))
             $flag=1;
             $history=1;
         }
+
+        $q7="SELECT * FROM blood_requesters WHERE (requester_id='$id' AND sno IN (SELECT request_id FROM blood_donated_users))";
+        $res7=$conn->query($q7);
+        if($res7->num_rows!=0)
+        {
+            $flag=1;
+            $history=1;    
+        }
+
+        $q8="SELECT * FROM organ_requesters WHERE (requester_id='$id' AND sno IN (SELECT request_id FROM organ_donated_users))";
+        $res8=$conn->query($q8);
+        if($res8->num_rows!=0)
+        {
+            $flag=1;
+            $history=1;    
+        }
         
         if($flag==0)
         {
@@ -563,7 +579,7 @@ if(isset($_POST['organ_accept']))
     ?>
 
     <div class="container requests">
-        <h1 class="display-4 mt-5 text-center">HISTORY</h1>
+        <h1 class="display-4 mt-1 text-center">HISTORY</h1>
         <?php 
         if($res5->num_rows!=0)
         {
@@ -672,6 +688,123 @@ if(isset($_POST['organ_accept']))
             </div>
         </div>';
                  }
+                }
+            }
+        }
+
+
+        if($res7->num_rows!=0)
+        {
+            while($row7=$res7->fetch_assoc())
+            {
+                $request_id=$row7['sno'];
+                $sq="SELECT u.*,b.request_id,b.donor_id FROM users u,blood_donated_users b WHERE (u.id=b.donor_id AND b.request_id='$request_id')";
+                $sres=$conn->query($sq);
+                if($sres->num_rows>0)
+                {
+                    while($srow=$sres->fetch_assoc())
+                    {
+                        $name=$srow['name'];
+                        
+                        $date=substr($row7['date'],0,10);
+                        $location=$row7['location'];
+                        $msg=$row7['msg'];
+                        $blood_grp=strtoupper($row7['blood_grp']);
+                        $date=substr($row7['date'],0,10);
+                        echo '<div class="row mt-4 p-2">
+            <div class="card p-3" style="width:40rem">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4 class="card-title">Your Request</h4>
+                        </div>
+                        <div class="col-md-5">
+                            <span class="date">Posted on:
+                                '.$date.'</span>
+                        </div>
+                    </div>
+
+
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$blood_grp.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
+                    </p>
+
+                    <div class="row completed p-2">
+                        <div class="col-md-2">
+                            <span class="blood-grp">
+                                '.$blood_grp.'
+                            </span>
+                        </div>
+
+                        <div class="col-md-10 mt-4">
+                            <h3>'.$name.' Donated :)</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+
+                    }
+
+                }
+            }
+        }
+
+
+
+        if($res8->num_rows!=0)
+        {
+            while($row8=$res8->fetch_assoc())
+            {
+                $request_id=$row8['sno'];
+                $sq="SELECT u.*,b.request_id,b.donor_id FROM users u,organ_donated_users b WHERE (u.id=b.donor_id AND b.request_id='$request_id')";
+                $sres=$conn->query($sq);
+                if($sres->num_rows>0)
+                {
+                    while($srow=$sres->fetch_assoc())
+                    {
+                        $name=$srow['name'];
+                        
+                        $date=substr($row8['date'],0,10);
+                        $location=$row8['location'];
+                        $msg=$row8['msg'];
+                        $organs=strtoupper($row8['organs']);
+                        $date=substr($row8['date'],0,10);
+                        echo '<div class="row mt-4 p-2">
+            <div class="card p-3" style="width:40rem">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4 class="card-title">Your Request</h4>
+                        </div>
+                        <div class="col-md-5">
+                            <span class="date">Posted on:
+                                '.$date.'</span>
+                        </div>
+                    </div>
+
+
+                    <h5 class="card-subtitle mt-2 text-muted">Looking for '.$organs.' in '.$location.'</h5>
+                    <p class="card-text mt-4">'.$msg.'
+                    </p>
+
+                    <div class="row completed p-2">
+                        <div class="col-md-4">
+                            <span class="organs">
+                                '.$organs.'
+                            </span>
+                        </div>
+
+                        <div class="col-md-8 mt-3">
+                            <h3>'.$name.' Donated :)</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+
+                    }
+
                 }
             }
         }
