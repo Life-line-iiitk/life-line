@@ -125,20 +125,63 @@ if(isset($_POST['organ_accept']))
         $history=0;
         $personal=0;
         $requests=0;
-        $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (b.requester_id='$id' AND u.id='$id' AND db.request_id <> requestid)";
+        $q1="SELECT b.*,u.*,b.sno as requestid FROM blood_requesters b,users u WHERE (b.requester_id='$id' AND u.id='$id')";
         $res1=$conn->query($q1);
         if($res1->num_rows!=0)
         {
-            $flag=1;
-            $personal=1;
+            while($row1=$res1->fetch_assoc())
+            {
+                $sq="SELECT request_id FROM blood_donated_users";
+                $sres=$conn->query($sq);
+                if($sres->num_rows!=0)
+                {
+                    $temp=0;
+                    while($srow=$sres->fetch_assoc())
+                    {
+                        if($srow['request_id']==$row1['requestid'])
+                        {
+                            $temp=1;
+                            break;
+                        }
+                       
+                    }
+                    if($temp==0)
+                    {
+                        $flag=1;
+                        $personal=1;
+                    }
+                }
+            }  
         }
 
-        $q2="SELECT o.*,u.*,do.*,o.sno as requestid FROM organ_requesters o,users u,organ_donated_users do WHERE (do.request_id <> requestid AND o.requester_id='$id' AND u.id='$id')";
+        $q2="SELECT o.*,u.*,o.sno as requestid FROM organ_requesters o,users u WHERE (o.requester_id='$id' AND u.id='$id')";
         $res2=$conn->query($q2);
         if($res2->num_rows!=0)
         {
-            $flag=1;
-            $personal=1;
+           while($row2=$res2->fetch_assoc())
+            {
+                $sq="SELECT request_id FROM organ_donated_users";
+                $sres=$conn->query($sq);
+                if($sres->num_rows!=0)
+                {
+                    $temp=0;
+                    while($srow=$sres->fetch_assoc())
+                    {
+                        if($srow['request_id']==$row2['requestid'])
+                        {
+                            $temp=1;
+                            break;
+                        }
+                       
+                    }
+                    if($temp==0)
+                    {
+                        $flag=1;
+                        $personal=1;
+
+                    }
+                }
+            }
         }
 
         $q3="SELECT * FROM `blood_responses` WHERE (user_id='$id' AND voluntary=0)";
@@ -201,9 +244,26 @@ if(isset($_POST['organ_accept']))
             <?php 
             if($res1->num_rows!=0)
             {
+                $res1=$conn->query($q1);
                 while($row1=$res1->fetch_assoc())
                 {
-                    $name = $row1['name'];
+                    $sq="SELECT request_id FROM blood_donated_users";
+                    $sres=$conn->query($sq);
+                    if($sres->num_rows!=0)
+                    {
+                    $temp=0;
+                    while($srow=$sres->fetch_assoc())
+                    {
+                        if($srow['request_id']==$row1['requestid'])
+                        {
+                            $temp=1;
+                            break;
+                        }
+                       
+                    }
+                    if($temp==0)
+                    {
+                        $name = $row1['name'];
                     $date=substr($row1['date'],0,10);
                     $location=$row1['location'];
                     $msg=$row1['msg'];
@@ -265,15 +325,35 @@ if(isset($_POST['organ_accept']))
                             
                         }
                     }
-                }
+                    }
+                    }
+                }  
+                
             }
 
 
             if($res2->num_rows!=0)
             {
+                $res2=$conn->query($q2);
                 while($row2=$res2->fetch_assoc())
+            {
+                $sq="SELECT request_id FROM organ_donated_users";
+                $sres=$conn->query($sq);
+                if($sres->num_rows!=0)
                 {
-                    $name = $row2['name'];
+                    $temp=0;
+                    while($srow=$sres->fetch_assoc())
+                    {
+                        if($srow['request_id']==$row2['requestid'])
+                        {
+                            $temp=1;
+                            break;
+                        }
+                       
+                    }
+                    if($temp==0)
+                    {
+                        $name = $row2['name'];
                     $date=substr($row2['date'],0,10);
                     $location=$row2['location'];
                     $organs=$row2['organs'];
@@ -336,8 +416,9 @@ if(isset($_POST['organ_accept']))
                             
                         }
                     }
-
+                    }
                 }
+            }
             }   
             ?>
             

@@ -146,10 +146,10 @@
             <?php
                 if(isset($_SESSION['user_id']))
                 {
-                    $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno AND u.id <> '$id')";
+                    $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (u.id=b.requester_id AND u.id <> '$id')";
                 }
                 else{
-                    $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM blood_requesters b,users u,blood_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
+                    $q1="SELECT b.*,u.* FROM blood_requesters b,users u WHERE (u.id=b.requester_id)";
                 }
                 $res1=$conn->query($q1);
                 if($res1->num_rows>0)
@@ -157,7 +157,25 @@
                     $i=0;
                     while($row1=$res1->fetch_assoc())
                     {
-                        echo '<div class="row mt-4 p-2" data-aos="fade-up">
+                        $flag=1;
+                        $sq="SELECT * FROM blood_donated_users";
+                        $sres=$conn->query($sq);
+                        if($sres->num_rows>0)
+                        {
+                           
+                           while($srow=$sres->fetch_assoc())
+                           {
+                                if($srow['request_id']==$row1['sno'])
+                                {
+                                    $flag=0;
+                                    break;
+                                }
+                           }
+                        }
+
+                       if($flag==1)
+                       {
+                           echo '<div class="row mt-4 p-2" data-aos="fade-up">
                 <div class="card p-3" style="width:40rem">
                     <div class="card-body">
                         <div class="row">
@@ -169,7 +187,6 @@
                                     '.substr($row1['date'],0,10).'</span>
                             </div>
                         </div>
-
                         <h5 class="card-subtitle mt-2 text-muted">Looking for '.$row1['blood_grp'].' in '.$row1['location'].'</h5>
                         <p class="card-text mt-4">'.$row1['msg'].'
                         </p>';
@@ -196,17 +213,18 @@
                             <div class=" col-xs-8 ml-4 mt-3">
                                 <h4>Blood Donors Needed</h4>
                                 <p><i class="fas fa-map mr-3"></i>'.$row1['location'].'</p>
-
                             </div>
                         </div>
                         <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
-                            <input type="hidden" name="request_id" value="'.$row1['requestid'].'">
+                            <input type="hidden" name="request_id" value="'.$row1['sno'].'">
                             <button type="submit" name="blood" class="btn mt-3 donate">DONATE</button>
                         </form>
                         
                     </div>
                 </div>
             </div>';
+            if($row1['lat'])
+            {
                 echo "<script>
                         x = ".$row1['lat'].";
                         y = ".$row1['lon'].";
@@ -226,15 +244,15 @@
                                 iconAnchor: [22, 94], 
                                 popupAnchor: [-3, -76] 
                             });
-
                         var marker = L.marker([x, y], {
                             icon: markerIcon
                     }).addTo(mymap);
-
                     marker.bindPopup('<h5>".$row1['blood_grp']."</h5>').openPopup();
-
                 </script>";
-                $i=$i+1;
+                
+                       }
+                    }
+                    $i=$i+1;
                     }
                 }            
             ?>
@@ -318,13 +336,11 @@
 
                 <?php
                 if(isset($_SESSION['user_id']))
-                { 
-                $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM organ_requesters b,users u,organ_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno AND u.id <> '$id')";
-                }
-                else
                 {
-                    $q1="SELECT b.*,u.*,db.*,b.sno as requestid FROM organ_requesters b,users u,organ_donated_users db WHERE (u.id=b.requester_id AND db.request_id <> b.sno)";
-
+                    $q1="SELECT b.*,u.* FROM organ_requesters b,users u WHERE (u.id=b.requester_id AND u.id <> '$id')";
+                }
+                else{
+                    $q1="SELECT b.*,u.* FROM organ_requesters b,users u WHERE (u.id=b.requester_id)";
                 }
                 $res1=$conn->query($q1);
                 if($res1->num_rows>0)
@@ -332,6 +348,25 @@
                     $i=0;
                     while($row1=$res1->fetch_assoc())
                     {
+                        $flag=1;
+                        $sq="SELECT * FROM organ_donated_users";
+                        $sres=$conn->query($sq);
+                        if($sres->num_rows>0)
+                        {
+                           
+                           while($srow=$sres->fetch_assoc())
+                           {
+                                if($srow['request_id']==$row1['sno'])
+                                {
+                                    $flag=0;
+                                    break;
+                                }
+                           }
+                        }
+
+                       if($flag==1)
+                       {
+                    
                         echo '<div class="row mt-4 p-2" data-aos="fade-up">
                 <div class="card p-3" style="width:40rem">
                     <div class="card-body">
@@ -370,12 +405,14 @@
                             </div>
                         </div>
                         <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
-                            <input type="hidden" name="request_id" value="'.$row1['requestid'].'">
+                            <input type="hidden" name="request_id" value="'.$row1['sno'].'">
                             <button type="submit" name="organ" class="btn mt-3 donate">DONATE</button>
                         </form>
                     </div>
                 </div>
             </div>';
+            if($row1['lat'])
+            {
                 echo "<script>
                         x = ".$row1['lat'].";
                         y = ".$row1['lon'].";
@@ -403,7 +440,9 @@
                     marker.bindPopup('<h5>".$row1['blood_grp']."</h5>').openPopup();
 
                 </script>";
+                        }
                 $i=$i+1;
+                    }
                     }
                 }            
             ?>
