@@ -209,8 +209,8 @@
         </div>
 
 
-        <form action="#" method="POST" class="mt-4" id="filterbtn">
-            <select class="form-control" id="validationCustom04" required>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST" class="mt-4" id="filterbtn">
+            <select class="form-control" name="filter" id="validationCustom04" required>
                 <option selected disabled value="">Filter by Blood Group</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
@@ -222,9 +222,8 @@
                 <option value="AB-">AB-</option>
             </select>
             <div class="col text-center">
-                <button class="btn mt-2 btn-success">Apply</button>
+                <button name="filter-btn" class="btn mt-2 btn-success">Apply</button>
             </div>
-
         </form>
     </div>
     
@@ -232,7 +231,14 @@
 
     <div class="col content" style="display:block" id="blood">
         <?php 
-            $q="SELECT o.*,u.* FROM blood_donors o,users u WHERE (u.id=o.donor_id)";
+        if(isset($_POST['filter-btn']))
+        {
+            $filter = $_POST['filter'];
+            echo "<script>console.log('$filter');</script>";
+            $q="SELECT o.*,u.* FROM blood_donors o,users u WHERE (u.id=o.donor_id AND blood_grp='$filter')";
+        }
+        else{
+            $q="SELECT o.*,u.* FROM blood_donors o,users u WHERE (u.id=o.donor_id)";}
             $res=$conn->query($q);
             
             if($res->num_rows>0)
@@ -312,6 +318,10 @@
                 
                     }
                 }
+            }
+            else
+            {
+                echo "<h1 class='text-center'>NO DONORS FOUND</h1>";
             }
         ?>
         
