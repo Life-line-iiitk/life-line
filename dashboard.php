@@ -184,7 +184,7 @@ if(isset($_POST['organ_accept']))
             }
         }
 
-        $q3="SELECT * FROM `blood_responses` WHERE (user_id='$id' AND voluntary=0)";
+        $q3="SELECT * FROM `blood_responses` WHERE (user_id='$id' AND voluntary=0) ORDER BY date DESC";
         $res3=$conn->query($q3);
         if($res3->num_rows!=0)
         {
@@ -192,7 +192,7 @@ if(isset($_POST['organ_accept']))
             $requests=1;
         }
 
-        $q4="SELECT * FROM `organ_responses` WHERE (user_id='$id' AND voluntary=0)";
+        $q4="SELECT * FROM `organ_responses` WHERE (user_id='$id' AND voluntary=0) ORDER BY date DESC";
         $res4=$conn->query($q4);
         if($res4->num_rows!=0)
         {
@@ -200,7 +200,7 @@ if(isset($_POST['organ_accept']))
             $requests=1;
         }
 
-        $q5="SELECT * FROM `blood_donated_users` WHERE donor_id='$id'";
+        $q5="SELECT * FROM `blood_donated_users` WHERE donor_id='$id' ORDER BY date DESC";
         $res5=$conn->query($q5);
         if($res5->num_rows!=0)
         {
@@ -208,7 +208,7 @@ if(isset($_POST['organ_accept']))
             $history=1;
         }
 
-        $q6="SELECT * FROM `organ_donated_users` WHERE donor_id='$id'";
+        $q6="SELECT * FROM `organ_donated_users` WHERE donor_id='$id' ORDER BY date DESC";
         $res6=$conn->query($q6);
         if($res6->num_rows!=0)
         {
@@ -587,7 +587,7 @@ if(isset($_POST['organ_accept']))
             {
                 $request_id=$row5['request_id'];
 
-                $sq="SELECT b.*,u.* FROM blood_requesters b,users u WHERE b.sno='$request_id' AND u.id=b.requester_id";
+                $sq="SELECT b.*,u.* FROM blood_requesters b,users u WHERE b.sno='$request_id' AND u.id=b.requester_id ORDER BY b.date DESC";
                 $sres=$conn->query($sq);
                 if($sres->num_rows>0)
                 {
@@ -643,7 +643,7 @@ if(isset($_POST['organ_accept']))
             {
                 $request_id=$row6['request_id'];
 
-                $sq="SELECT o.*,u.* FROM organ_requesters o,users u WHERE o.sno='$request_id' AND u.id=o.requester_id";
+                $sq="SELECT o.*,u.* FROM organ_requesters o,users u WHERE o.sno='$request_id' AND u.id=o.requester_id ORDER BY o.date DESC";
                 $sres=$conn->query($sq);
                 if($sres->num_rows>0)
                 {
@@ -698,7 +698,7 @@ if(isset($_POST['organ_accept']))
             while($row7=$res7->fetch_assoc())
             {
                 $request_id=$row7['sno'];
-                $sq="SELECT u.*,b.request_id,b.donor_id FROM users u,blood_donated_users b WHERE (u.id=b.donor_id AND b.request_id='$request_id')";
+                $sq="SELECT u.*,b.request_id,b.donor_id,b.date FROM users u,blood_donated_users b WHERE (u.id=b.donor_id AND b.request_id='$request_id') ORDER BY b.date DESC";
                 $sres=$conn->query($sq);
                 if($sres->num_rows>0)
                 {
@@ -757,7 +757,7 @@ if(isset($_POST['organ_accept']))
             while($row8=$res8->fetch_assoc())
             {
                 $request_id=$row8['sno'];
-                $sq="SELECT u.*,b.request_id,b.donor_id FROM users u,organ_donated_users b WHERE (u.id=b.donor_id AND b.request_id='$request_id')";
+                $sq="SELECT u.*,b.request_id,b.donor_id FROM users u,organ_donated_users b WHERE (u.id=b.donor_id AND b.request_id='$request_id') ORDER BY b.date DESC";
                 $sres=$conn->query($sq);
                 if($sres->num_rows>0)
                 {
