@@ -1,3 +1,40 @@
+<?php 
+    session_start();
+    include('./db_conn.php');
+
+    if(isset($_POST['organ']))
+    {
+
+    
+    if(isset($_SESSION['user_id']))
+    {
+        $user_id=$_SESSION['user_id'];
+        $q="SELECT * FROM organ_requesters WHERE requester_id='$user_id' ORDER BY date DESC LIMIT 1";
+        $r=$conn->query($q);
+        if($r->num_rows>0)
+        {
+            while($row=$r->fetch_assoc())
+            {
+                $request_id=$row['sno'];
+            }
+            $donor_id=$_POST['donor_id'];
+           
+
+            $ins1="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$donor_id',0)";
+            $ires1=$conn->query($ins1);
+            echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+        }
+
+    }
+    else
+    {
+        echo "<script>alert('Please Login before responding!!');</script>";
+        echo '<script>
+            location.replace("sign_in.php");
+            </script>';
+    }    }
+?>
+
 <html lang="en">
 
 <head>
@@ -203,12 +240,39 @@
     </div>
 
     <div class="col content" id="organ">
-        <div class="row mt-4 p-2">
+        <?php 
+            $q="SELECT o.*,u.* FROM organ_donors o,users u WHERE (u.id=o.donor_id)";
+            $res=$conn->query($q);
+            
+            if($res->num_rows>0)
+            {
+                while($row=$res->fetch_assoc())
+                {
+                   $rr=$row['donor_id'];
+
+                    $sq="SELECT * FROM organ_donated_users";
+                    $sres=$conn->query($sq);
+                    $flag=0;
+                    if($sres->num_rows>0)
+                    {
+                        while($srow=$sres->fetch_assoc())
+                        {
+                            if($srow['donor_id']==$rr)
+                            {
+                                $flag=1;
+                                break;
+                            }
+                        }
+                    }
+
+                    if($flag==0)
+                    {
+                        echo '<div class="row mt-4 p-2">
             <div class="card p-3" style="width:35rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <h4 class="card-title">Madam Umbridge</h4>
+                            <h4 class="card-title">'.$row['name'].'</h4>
                         </div>
 
                     </div>
@@ -217,20 +281,31 @@
 
                         <div class="col-xs-1 mt-3 pl-3">
                             <span class="oragns">
-                                KIDNEY
+                                '.$row['organs'].'
                             </span>
                         </div>
 
-                        <div class='col-xs-8 mt-2 ml-4'>
-                            <p style="font-size:large;font-weight: 500;"><i class="fas fa-map mr-3"></i>Hogwards,Wizards
-                                World</p>
-                            <p style="font-family: Arial;">Phno:9347619384</p>
+                        <div class="col-xs-8 mt-2 ml-4">
+                            <p style="font-size:large;font-weight: 500;"><i class="fas fa-map mr-3"></i>'.$row['location'].'</p>
+                            <p style="font-family: Arial;">Phno:'.$row['phone'].'</p>
                         </div>
                     </div>
-                    <a href="#" class="btn mt-3 donate">REQUEST</a>
+                   
+                    <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                            <input type="hidden" name="donor_id" value="'.$rr.'">
+                            <button type="submit" name="organ" class="btn mt-3 donate">REQUEST</button>
+                    </form>
                 </div>
             </div>
-        </div>
+        </div>';
+
+                    }
+                }
+            }
+                  
+        ?>
+
+        
 
     </div>
     </div>

@@ -449,7 +449,7 @@
                             icon: markerIcon
                     }).addTo(mymap);
 
-                    marker.bindPopup('<h5>".$row1['blood_grp']."</h5>').openPopup();
+                    marker.bindPopup('<h5>".$row1['organs']."</h5>').openPopup();
 
                 </script>";
                         }
