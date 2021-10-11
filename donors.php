@@ -315,6 +315,13 @@
                     </div>
                     </div>';
                     }
+                    else
+                    {
+                        echo '/div>
+                    </div>
+                    </div>
+                    </div>';
+                    }
                 
                     }
                 }
@@ -327,7 +334,7 @@
         
 
     </div>
-
+        
     <div class="col content" id="organ">
         <?php 
             $q="SELECT o.*,u.* FROM organ_donors o,users u WHERE (u.id=o.donor_id)";
@@ -390,6 +397,13 @@
                     </div>
                     </div>';
                     }
+                     else
+                    {
+                        echo '/div>
+                    </div>
+                    </div>
+                    </div>';
+                    }
 
                     }
                 }
@@ -401,8 +415,7 @@
 
     </div>
     </div>
-
-    <footer class="text-center mt-5 text-lg-start bg-light text-muted">
+<footer class="text-center mt-5 text-lg-start bg-light text-muted">
 
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <div class="me-5 d-none d-lg-block">
@@ -452,10 +465,10 @@
                             <a href="./index.php" class="text-reset">Home</a>
                         </p>
                         <p>
-                            <a href="./aboutus.php" class="text-reset">About Us</a>
+                            <a href="aboutus.php" class="text-reset">About Us</a>
                         </p>
                         <p>
-                            <a href="./contactus.php" class="text-reset">Contact Us</a>
+                            <a href="contactus.php" class="text-reset">Contact Us</a>
                         </p>
 
                     </div>
@@ -468,7 +481,7 @@
                             <a href="#!" class="text-reset">Donate Blood</a>
                         </p>
                         <p>
-                            <a href="./blood_request.php" class="text-reset">Request Blood</a>
+                            <a href="blood_request.php" class="text-reset">Request Blood</a>
                         </p>
                         <p>
                             <a href="#!" class="text-reset">Donate Organs</a>
@@ -497,7 +510,9 @@
             © 2021 Copyright:Life Line
         </div>
     </footer>
+    
 </body>
+
 <script>
     var mymap = L.map('mapid').setView([<?php echo $lat[0] ?>, <?php echo $lon[0] ?>], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -526,10 +541,6 @@
         marker.bindPopup("<h4><?php echo $bg ?></h4>").openPopup();
        <?php }
     ?>
-    
-    
-   
-
 </script>
 
 </html>
