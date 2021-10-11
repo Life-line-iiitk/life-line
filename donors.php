@@ -2,6 +2,40 @@
     session_start();
     include('./db_conn.php');
 
+    if(isset($_POST['blood']))
+    {
+    if(isset($_SESSION['user_id']))
+    {
+        $user_id=$_SESSION['user_id'];
+        $q="SELECT * FROM blood_requesters WHERE requester_id='$user_id' ORDER BY date DESC LIMIT 1";
+        $r=$conn->query($q);
+        if($r->num_rows>0)
+        {
+            while($row=$r->fetch_assoc())
+            {
+                $request_id=$row['sno'];
+            }
+            $donor_id=$_POST['donor_id'];
+           
+
+            $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$donor_id',0)";
+            $ires1=$conn->query($ins1);
+            echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+        }
+        else
+        {
+            echo "<script>alert('No request found');</script>";
+        }
+
+    }
+    else
+    {
+        echo "<script>alert('Please Login before responding!!');</script>";
+        echo '<script>
+            location.replace("sign_in.php");
+            </script>';
+    }}
+
     if(isset($_POST['organ']))
     {
 
@@ -24,6 +58,10 @@
             $ires1=$conn->query($ins1);
             echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
         }
+        else
+        {
+            echo "<script>alert('No request found');</script>";
+        }
 
     }
     else
@@ -32,7 +70,7 @@
         echo '<script>
             location.replace("sign_in.php");
             </script>';
-    }    }
+    }}
 ?>
 
 <html lang="en">
@@ -137,8 +175,20 @@
                     </div>
                 </li>
 
+                <?php 
+                    if(isset($_SESSION['user_id'])){    
+                ?>
+                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
+                <?php 
+                    }
+                    else{
+                ?>
                 <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
                 <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <?php 
+                    }
+                ?>
             </ul>
         </div>
     </nav>
@@ -177,17 +227,61 @@
 
         </form>
     </div>
-    </div>
-
-    <!-- Modal -->
+    
+   
 
     <div class="col content" style="display:block" id="blood">
-        <div class="row mt-4 p-2">
+        <?php 
+            $q="SELECT o.*,u.* FROM blood_donors o,users u WHERE (u.id=o.donor_id)";
+            $res=$conn->query($q);
+            
+            if($res->num_rows>0)
+            {
+                while($row=$res->fetch_assoc())
+                {
+                    $rr=$row['donor_id'];
+                    $sq="SELECT * FROM blood_donated_users t WHERE date = (select max(date) from blood_donated_users t1 where t1.donor_id = t.donor_id)";
+                    $sres=$conn->query($sq);
+                    $flag=0;
+                    if($sres->num_rows>0)
+                    {
+                        while($srow=$sres->fetch_assoc())
+                        {
+                            if($srow['donor_id']==$rr)
+                            {
+                                $date1=substr($srow['date'],0,10);
+                                $date2=date("Y-m-d");
+                                $date1_ts = strtotime($date1);
+                                $date2_ts = strtotime($date2);
+                                $diff = $date2_ts - $date1_ts;
+                                $ans=round($diff / 86400);
+                                if($ans<=180)
+                                {
+                                    $flag=1;
+                                    break;
+                                }
+                                
+                            }
+                        }
+                    }
+                    if($flag==0)
+                    {
+                        $lat=array();
+                        $lon=array();
+                        $blood_grp=array();
+                        if($row['lat'])
+                        {
+                            array_push($lat,$row['lat']);
+                            array_push($lon,$row['lon']);
+                            array_push($blood_grp,$row['blood_grp']);
+                        }
+                        
+                        echo '<div class="row mt-4 p-2">
             <div class="card p-3" style="width:35rem">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-7">
-                            <h4 class="card-title">Virat Kohli</h4>
+                            <h4 class="card-title">'.$row['name'].'</h4>
                         </div>
 
                     </div>
@@ -195,47 +289,32 @@
                     <div class="row info mt-3 ">
                         <div class="col-xs-1 mt-1 pl-3">
                             <span class="blood-grp">
-                                O+
+                                '.$row['blood_grp'].'
                             </span>
                         </div>
-                        <div class=' col-xs-8 ml-4 mt-2'>
+                        <div class=" col-xs-8 ml-4 mt-2">
                             <p style="font-size:large;font-weight: 500;"><i
-                                    class="fas fa-map mr-3"></i>Banglore,Karnataka</p>
-                            <p style="font-family: Arial;">Phno:9347619384</p>
+                                    class="fas fa-map mr-3"></i>'.$row['location'].'a</p>
+                            <p style="font-family: Arial;">Phno:'.$row['phone'].'</p>
                         </div>
                     </div>
-                    <a href="#" class="btn mt-3 donate">REQUUEST</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-4 p-2">
-            <div class="card p-3" style="width:35rem">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <h4 class="card-title">Rohit Sharma</h4>
-                        </div>
-
+                    ';
+                    if($_SESSION['user_id']!=$rr)
+                    {
+                        echo '<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                            <input type="hidden" name="donor_id" value="'.$rr.'">
+                            <button type="submit" name="blood" class="btn mt-3 donate">REQUEST</button>
+                            </form>
+                            </div>
                     </div>
-
-                    <div class="row info mt-3 ">
-                        <div class="col-xs-1 mt-1 pl-3">
-                            <span class="blood-grp">
-                                AB-
-                            </span>
-                        </div>
-                        <div class=' col-xs-8 ml-4 mt-2'>
-                            <p style="font-size:large;font-weight: 500;"><i
-                                    class="fas fa-map mr-3"></i>Mumbai,Maharastra</p>
-                            <p style="font-family: Arial;">Phno:9347610084</p>
-                        </div>
-                    </div>
-                    <a href="#" class="btn mt-3 donate">REQUEST</a>
-                </div>
-            </div>
-        </div>
-
+                    </div>';
+                    }
+                
+                    }
+                }
+            }
+        ?>
+        
 
     </div>
 
@@ -289,15 +368,18 @@
                             <p style="font-size:large;font-weight: 500;"><i class="fas fa-map mr-3"></i>'.$row['location'].'</p>
                             <p style="font-family: Arial;">Phno:'.$row['phone'].'</p>
                         </div>
-                    </div>
+                    </div>';
                    
-                    <form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+                    if($_SESSION['user_id']!=$rr)
+                    {
+                        echo '<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
                             <input type="hidden" name="donor_id" value="'.$rr.'">
-                            <button type="submit" name="organ" class="btn mt-3 donate">REQUEST</button>
-                    </form>
-                </div>
-            </div>
-        </div>';
+                            <button type="submit" name="blood" class="btn mt-3 donate">REQUEST</button>
+                            </form>
+                            </div>
+                    </div>
+                    </div>';
+                    }
 
                     }
                 }
@@ -407,9 +489,7 @@
     </footer>
 </body>
 <script>
-    x = 12.9788;
-    y = 77.5996;
-    var mymap = L.map('mapid').setView([x, y], 13);
+    var mymap = L.map('mapid').setView([<?php echo $lat[0] ?>, <?php echo $lon[0] ?>], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -426,19 +506,19 @@
         popupAnchor: [-3, -76]
     });
 
-
-    var marker = L.marker([x, y], {
-        icon: redIcon
-    }).addTo(mymap);
-    L.marker([12.9777, 74.567], { icon: redIcon }).addTo(mymap).bindPopup("A+");
-    L.marker([28.7041, 77.1025], { icon: redIcon }).addTo(mymap).bindPopup("AB+");
-    L.marker([25.2777, 75.5067], { icon: redIcon }).addTo(mymap).bindPopup("B+");
-
-    marker.bindPopup("O+").openPopup();
-
-
-
-
+    <?php
+        for($i = 0; $i < count($lat); $i++) {
+            $x=$lat[$i];
+            $y=$lon[$i];
+            $bg=$blood_grp[$i];
+            ?>
+        var marker=L.marker([<?php echo $x ?>, <?php echo $y ?>], { icon: redIcon }).addTo(mymap);
+        marker.bindPopup("<h4><?php echo $bg ?></h4>").openPopup();
+       <?php }
+    ?>
+    
+    
+   
 
 </script>
 
