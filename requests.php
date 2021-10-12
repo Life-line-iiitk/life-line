@@ -3,44 +3,67 @@
     include('./db_conn.php');
     $id=$_SESSION['user_id'];
     if(isset($_POST['blood']))
-    {
-                
-    $request_id=$_POST['request_id'];
-    if(isset($_SESSION['user_id']))
-    {
-    $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
-    $ires1=$conn->query($ins1);
-    echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
-    }
-    else
-    {
+    {        
+        $request_id=$_POST['request_id'];
+        if(isset($_SESSION['user_id']))
+        {
+            $sq="SELECT * FROM blood_donors WHERE donor_id='$id'";
+            $sres=$conn->query($sq);
+            if($sres->num_rows>0)
+            {
+                $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
+                $ires1=$conn->query($ins1);
+                echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+            }
+            else
+            {
+                echo "<script>alert('You are not a donor!!Please register');</script>";
+                echo '<script>
+                    location.replace("blood_donor.php");
+                </script>';
+            }
+        }
+        else
+        {
         echo "<script>alert('Please Login before responding!!');</script>";
         echo '<script>
             location.replace("sign_in.php");
             </script>';
+        }
+        
     }
-    }
-
-
+    
+    
+    
     if(isset($_POST['organ']))
     {
-                
-    $request_id=$_POST['request_id'];
-    if(isset($_SESSION['user_id']))
-    {
-    $ins1="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
-    $ires1=$conn->query($ins1);
-    echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
-    }
-    else
-    {
-        echo "<script>alert('Please Login before responding!!');</script>";
+        $request_id=$_POST['request_id'];
+        if(isset($_SESSION['user_id']))
+        {
+            $sq="SELECT * FROM blood_donors WHERE donor_id='$id'";
+            $sres=$conn->query($sq);
+            if($sres->num_rows>0)
+            {
+                $ins1="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$id',1)";
+                $ires1=$conn->query($ins1);
+                echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+            }
+            else
+            {
+                echo "<script>alert('You are not a donor!!Please register');</script>";
+                echo '<script>
+                    location.replace("organ_donate.php");
+                </script>';
+            }
+        }
+        else
+        {
+            echo "<script>alert('Please Login before responding!!');</script>";
         
-        echo '<script>
+            echo '<script>
             location.replace("sign_in.php");
             </script>';
-        
-    }
+        }
     }
 ?>
 
