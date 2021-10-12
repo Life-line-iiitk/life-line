@@ -99,7 +99,7 @@
     <br>
     <!--Title-->
     <div class="text-center title" data-aos="zoom-in-up" data-aos-duration="3000">
-        <h2>Blood Request form</h2>
+        <h1 class="display-4" style="color:var(--red)">Blood Request form</h1>
     </div>
     <hr class="line">
     <div class="text-center note">
@@ -162,13 +162,13 @@
 
                     <div class="form-group form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input ib" type="checkbox" name="coordinates" id="coordinates"
-                                required>
+                            <input class="form-check-input ib" onclick="getlocation()" type="checkbox" name="coordinates" id="coordinates">
                             <b>Use
                                 My Current Coordinates</b>
                         </label>
                     </div>
-
+                    <input type="hidden" name="lat" id="lat">
+                    <input type="hidden" name="lon" id="lon">
 
                     <div class="form-group">
 
@@ -341,6 +341,28 @@
 
     <script>
         AOS.init();
+
+        function getlocation()
+        {
+            var checkbox = document.getElementById('coordinates');
+            if (checkbox.checked != false) {
+	            if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } 
+                else
+                { 
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+        }
+
+        function showPosition(position) {
+            var x,y;
+            x=position.coords.latitude ;
+            y=position.coords.longitude;
+            document.getElementById("lat").value=x;
+            document.getElementById("lon").value=y;
+            }
     </script>
 </body>
 

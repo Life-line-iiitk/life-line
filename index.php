@@ -68,7 +68,7 @@ $id=$_SESSION['user_id'];
                         Pages
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Donate Blood</a>
+                        <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
                         <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Donate Organs</a>

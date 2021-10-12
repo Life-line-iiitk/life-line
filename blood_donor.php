@@ -95,7 +95,7 @@
     <br>
     <!--Title-->
     <div class="text-center title">
-        <h2>Blood Donor form</h2>
+        <h1 class="display-4" style="color:var(--red)">Blood Donor form</h1>
     </div>
     <hr class="line">
     <br>
@@ -153,27 +153,31 @@
         </div>
 
         <br>
-        <div class="form-group form-check">
+        <div class="form-row">
+            <div class="col-md-8 m-auto">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="getpresentLocation" id="coordinates"
-               required> <b>Use My Current Coordinates</b>
+              <input class="form-check-input" onclick="getlocation()"  type="checkbox" name="getpresentLocation" id="coordinates"> <b>Use My Current Coordinates</b>
             </label>
+        </div>
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lon" id="lon">
         </div>
 
         <br>
-        <div class="form-group form-check">
+        <div class="form-row">
+            <div class="col-md-8 m-auto">
             <label class="form-check-label pl-10">
               <input class="form-check-input" type="checkbox" name="remember" required> I  agree on <a href="">  terms and conditions.</a>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Check this checkbox to continue.</div>
             </label>
           </div>
-
+        </div>
           <div class="text-center">
           <button type="submit" class="btn  mb-4 btn-lg  " style="background-color: crimson; color: white;">Submit </button>
           </div>
 
-
+    </form>
 
       <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -294,50 +298,30 @@
             </div>
         </footer>
     </div>
-    <!--<nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
-        <a class="navbar-brand ml-4" href="#">
-            <h3 class="brand-name">Life Line</h3>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="toggle-btn"></div>
-            <div class="toggle-btn"></div>
-            <div class="toggle-btn"></div>
-        </button>
-        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item mt-1">
-                    <a class="nav-link" href="./index.php">Home</a>
-                </li>
-                <li class="nav-item mt-1">
-                    <a class="nav-link" href="./requests.php">Requests</a>
-                </li>
-                <li class="nav-item mt-1">
-                    <a class="nav-link" href="#">Donors</a>
-                </li>
-                <li class="nav-item dropdown mt-1">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pages
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Donate Blood</a>
-                        <a class="dropdown-item" href="#">Request Blood</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Donate Organs</a>
-                        <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">About Us</a>
-                        <a class="dropdown-item" href="#">Contact Us</a>
-                        <a class="dropdown-item" href="#">FAQ</a>
-                    </div>
-                </li>
-
-                <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
-                <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
-            </ul>
-        </div>
-    </nav>-->
+    
 </body>
+<script>
+    function getlocation()
+        {
+            var checkbox = document.getElementById('coordinates');
+            if (checkbox.checked != false) {
+	            if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } 
+                else
+                { 
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+        }
 
+        function showPosition(position) {
+            var x,y;
+            x=position.coords.latitude ;
+            y=position.coords.longitude;
+            console.log(x,y);
+            document.getElementById("lat").value=x;
+            document.getElementById("lon").value=y;
+            }
+</script>
 </html>

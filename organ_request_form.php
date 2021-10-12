@@ -149,11 +149,11 @@
         </div>
         <div class="form-group form-check">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="presentLocation" id="coordinates"
-               required> <b>Use My Coordinates</b>
+              <input class="form-check-input" onclick="getlocation()" type="checkbox" name="presentLocation" id="coordinates"> <b>Use My Coordinates</b>
             </label>
         </div>
-
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lon" id="lon">
           <div class="form-group">
             <label for="purpose"><b> Purpose</b></label>
             <input type="text" class="form-control" id="purpose" placeholder="Enter purpose" name="purpose" required>
@@ -284,4 +284,28 @@
       </div>
   </footer>
 </body>
+<script>
+    function getlocation()
+        {
+            var checkbox = document.getElementById('coordinates');
+            if (checkbox.checked != false) {
+	            if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } 
+                else
+                { 
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+        }
+
+        function showPosition(position) {
+            var x,y;
+            x=position.coords.latitude ;
+            y=position.coords.longitude;
+            console.log(x,y);
+            document.getElementById("lat").value=x;
+            document.getElementById("lon").value=y;
+            }
+</script>
 </html>
