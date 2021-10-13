@@ -181,8 +181,56 @@
             </div>
         </div>
 
-        
+        <div class="faq">
+            <div class="question">
+                <h3>Who can be organ donors?</h3>
 
+                <svg width="15" height="10" viewbox="0 0 42 25">
+                    <path d="M3 3L21 21L39 3" stroke-width="7" stroke-linecap="round" />
+                </svg>
+
+            </div>
+
+            <div class="answer">
+                <p class="p-3">
+                    Any person not less than 18 years of age, who voluntarily authorizes the removal of any of his organ and/or tissue, during his or her lifetime, as per prevalent medical practices for therapeutic purposes.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question">
+                <h3>What organs can be donated?</h3>
+
+                <svg width="15" height="10" viewbox="0 0 42 25">
+                    <path d="M3 3L21 21L39 3" stroke-width="7" stroke-linecap="round" />
+                </svg>
+
+            </div>
+
+            <div class="answer">
+                <p class="p-3">
+                    Organs that can be transplanted include the heart, lungs, liver, kidneys, intestine and pancreas.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question">
+                <h3>How does my age and health affect organ donation?</h3>
+
+                <svg width="15" height="10" viewbox="0 0 42 25">
+                    <path d="M3 3L21 21L39 3" stroke-width="7" stroke-linecap="round" />
+                </svg>
+
+            </div>
+
+            <div class="answer">
+                <p class="p-3">
+                    There are no cutoff ages for donating organs. Organs have been successfully transplanted from newborns and people older than 80. It is possible to donate a kidney, heart, liver, lung, pancreas
+                </p>
+            </div>
+        </div>
 
 
     </div>
