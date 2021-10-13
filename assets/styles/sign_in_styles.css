@@ -34,40 +34,6 @@
 }
 
 
-.glg button{
-    width: 80%;
-    background-color: white; 
-    padding: 7px 30px; 
-    font-weight: bold; 
-    color: var(--red);
-    /*border-color: var(--red); */
-    font-size: 20px;
-    border: 2px solid var(--red);
-    outline: none;
-    border-radius: 5px;
-}
-
-.glg button:hover{
-    background-color: var(--red); 
-    padding: 7px 30px; 
-    font-weight: bold; 
-    color: var(--white);
-    /*border-color: var(--red);*/
-    font-size: 20px;
-    border: 2px solid var(--red);
-}
-
-.glg button i{
-    border-radius:0%; 
-    background-color: white; 
-    color: var(--red);
-}
-
-.glg button i:hover{
-    border-radius:0%;  
-    background-color: var(--red);
-    color: var(--white);
-}
 
 .btn-lg
 {

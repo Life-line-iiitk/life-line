@@ -48,6 +48,14 @@ img
 {
     font-size:3.4rem;
     color:var(--red);
+    font-weight:500;
+}
+
+.organs
+{
+    font-size:2.5rem;
+    color:var(--red);
+    font-weight:500;
 }
 
 i
