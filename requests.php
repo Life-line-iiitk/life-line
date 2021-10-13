@@ -40,7 +40,7 @@
         $request_id=$_POST['request_id'];
         if(isset($_SESSION['user_id']))
         {
-            $sq="SELECT * FROM blood_donors WHERE donor_id='$id'";
+            $sq="SELECT * FROM organ_donors WHERE donor_id='$id'";
             $sres=$conn->query($sq);
             if($sres->num_rows>0)
             {

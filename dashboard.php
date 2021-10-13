@@ -314,7 +314,6 @@ if(isset($_POST['organ_accept']))
                     </div>
                     ';
                     $request_id=$row1['requestid'];
-                    echo "<script>console.log('$request_id');</script>";
 
                     $subq="SELECT b.*,u.* FROM blood_responses b,users u WHERE (b.request_id='$request_id' AND u.id=b.user_id AND b.voluntary=1)";
                     $subres=$conn->query($subq);
@@ -336,11 +335,13 @@ if(isset($_POST['organ_accept']))
                                     <input type="hidden" name="donor_id" value="'.$subrow['id'].'">
                                     <button type="submit" name="blood_accept" class="btn mt-3 donate">Accept</button>
                                 </form>
-                            </div>
-                        </div>';
+                            ';
                             
                         }
+                        
                     }
+                    echo '</div>
+                        </div>';
                     }
                     }
                 }  
@@ -427,10 +428,11 @@ if(isset($_POST['organ_accept']))
                                     <input type="hidden" name="donor_id" value="'.$subrow['id'].'">
                                     <button type="submit" name="organ_accept" class="btn mt-3 donate">Accept</button>
                                 </form>
-                            </div>
-                        </div>';
+                            ';
                             
                         }
+                        echo '</div>
+                        </div>';
                     }
                     }
                 }
