@@ -29,7 +29,7 @@
     <!-- Styles files exclusive for this page  -->
     <link rel="stylesheet" href="./assets/styles/faq_style.css">
 
-    <title>FAQs</title>
+    <title>Life Line | FAQs</title>
 </head>
 
 <body>
@@ -62,37 +62,52 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Donate Blood</a>
-                            <a class="dropdown-item active" href="blood_request.html">Request Blood</a>
+                            <a class="dropdown-item" href="blood_request.html">Request Blood</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Donate Organs</a>
                             <a class="dropdown-item" href="./organ_request_form.html">Request Organs</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="aboutus.html">About Us</a>
                             <a class="dropdown-item" href="contactus.html">Contact Us</a>
-                            <a class="dropdown-item" href="faq.html">FAQ</a>
+                            <a class="dropdown-item active" href="faq.html">FAQ</a>
                         </div>
                     </li>
 
-                    <a href="./dashboard.html" class="btn sign-in mt-1 ml-2">Dashboard</a>
-                    <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
+                    <?php 
+                    if(isset($_SESSION['user_id'])){    
+                ?>
+                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
+                <?php 
+                    }
+                    else{
+                ?>
+                <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
+                <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <?php 
+                    }
+                ?>
                 </ul>
             </div>
         </nav>
     </div>
 
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-5 mt-5">
-                <img src="./assets/images/faq_image.jpg" class="img-fluid">
+    <div class="container">
+        <div class="row" style="margin-top:4.5rem">
+            <div class="col-md-6">
+                <img src="./assets/images/faq.png" class="img-fluid">
+            </div>
+            <div class="col-md-6 mt-5">
+                <h1 class="display-1 mt-5 text-center">
+                    FAQs
+                </h1>
+                <h4>Here are some of the frequently asked questions</h4>
             </div>
 
         </div>
     </div>
     
     <div class="container f">
-
-        <h2 class="title" style="padding: 43px;"> <u>FAQs</u> </h2>
         <div class="faq">
             <div class="question">
                 <h3>Who can donate blood ?</h3>

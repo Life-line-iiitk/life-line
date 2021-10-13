@@ -5,9 +5,14 @@
 }
 
 body{
-    font-family: "Quicksand", sans-serif;
-    background: var(--light);
+    background: var(--white);
     color: var(--red);
+}
+.display-1
+{
+    color: var(--red);
+    font-weight: 520;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 img
