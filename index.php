@@ -29,6 +29,7 @@ $id=$_SESSION['user_id'];
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <!-- This CSS file consists of all the CSS styles for the website in common. -->
     <link rel="stylesheet" href="./assets/styles/style.css">
 
