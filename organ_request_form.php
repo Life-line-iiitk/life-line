@@ -112,7 +112,7 @@
 
         </div>
       </div>
-    <form action="/action_page.php"  >
+    <form action="<?php" method="post"  >
         <div class="form-group">
           <h1 style="color:rgb(230, 81, 81);" class="text-center"> Organ Request Form </h1>
         </div>
@@ -124,7 +124,7 @@
         </div>
         <div class="form-group">
             <label for="validationCustom04" class="form-label"><b>Blood Group:</b></label>
-            <select class="form-control" id="validationCustom04" required>
+            <select class="form-control" id="validationCustom04" name="blood" required>
             <option selected disabled value="">Choose...</option>
             <option value="A+">A+</option>
             <option value="A-" >A-</option>
@@ -170,7 +170,7 @@
         </div>
 
         <div class="text-center">
-        <button type="submit" class="btn  mb-4 btn-lg  " >Submit </button>
+        <button type="submit" class="btn  mb-4 btn-lg  "name="submitBtn" >Submit </button>
         </div>
 
       </form>
@@ -308,4 +308,23 @@
             document.getElementById("lon").value=y;
             }
 </script>
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+if(isset($_POST["submitBtn"]) && $_POST["submitBtn"]!=""){ 
+       $organ = $_POST['organ'];
+		$blood = $_POST['blood'];
+		$location = $_POST['location'];
+		$purpose = $_POST['purpose'];
+        if(isset($_POST["lat"]) && isset($_POST["lon"])){
+		$lat = $_POST['lat'];
+        $lon=$_POST['lon'];
+        }
+		
+}
+$sql = "INSERT INTO organ_requesters (requester_id,organs, blood_grp, location ,msg, lat, lon) VALUES ('$id','$organ',
+'$blood','$location','$purpose','$lat','$lon')";
+
+?>
 </html>
