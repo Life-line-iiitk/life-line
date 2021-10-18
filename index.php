@@ -29,6 +29,7 @@ $id=$_SESSION['user_id'];
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <!-- This CSS file consists of all the CSS styles for the website in common. -->
     <link rel="stylesheet" href="./assets/styles/style.css">
 
@@ -71,7 +72,7 @@ $id=$_SESSION['user_id'];
                         <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
                         <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Donate Organs</a>
+                        <a class="dropdown-item" href="./organ_donate.php">Donate Organs</a>
                         <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="./aboutus.php">About Us</a>

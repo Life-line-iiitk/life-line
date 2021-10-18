@@ -1,3 +1,19 @@
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+if(isset($_POST["submitBtn"])){ 
+
+       $organ = $_POST['organ'];
+		$blood = $_POST['blood'];
+        
+		$location = $_POST['location'];
+        
+        $sql = "INSERT INTO organ_donors(`donor_id`,`organs`,`blood_grp`,`location`) VALUES ('$id','$organ','$blood','$location')";
+        $conn->query($sql) ;
+}
+ 
+?>
 <html lang="en">
 
 <head>
@@ -115,7 +131,7 @@
 
             </div>
         </div>
-        <form action="/action_page.php">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
             <div class="form-group">
                 <h1 style="color:rgb(230, 81, 81);font-weight: bold;" class="text-center"> Organ Donor Form </h1>
             </div>
@@ -128,7 +144,7 @@
             </div>
             <div class="form-group">
                 <label for="validationCustom04" class="form-label"><b>Blood Group:</b></label>
-                <select class="form-control" id="validationCustom04" required>
+                <select class="form-control" id="validationCustom04" name="blood" required>
                     <option selected disabled value="">Choose...</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
@@ -164,7 +180,7 @@
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn  mb-4 btn-lg submit ">Submit </button>
+                <button type="submit" class="btn  mb-4 btn-lg submit " name=submitBtn>Submit </button>
             </div>
 
         </form>
