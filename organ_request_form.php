@@ -1,3 +1,30 @@
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+if(isset($_POST["submitBtn"])){ 
+       $organ = $_POST['organ'];
+		$blood = $_POST['blood'];
+		$location = $_POST['location'];
+		$purpose = $_POST['purpose'];
+        if(isset($_POST["lat"]) && isset($_POST["lon"])){
+		$lat = $_POST['lat'];
+        $lon=$_POST['lon'];
+        $sql = "INSERT INTO organ_requesters (requester_id,organs, blood_grp, location ,msg, lat, lon) VALUES ('$id','$organ',
+'$blood','$location','$purpose','$lat','$lon')";
+         $conn->query($sql);
+
+        }
+        else{
+            $sql = "INSERT INTO organ_requesters (requester_id,organs, blood_grp, location ,msg) VALUES ('$id','$organ',
+'$blood','$location','$purpose')";
+$conn->query($sql);
+
+        }
+		
+}
+ 
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -112,7 +139,7 @@
 
         </div>
       </div>
-    <form action="<?php echo htmlspecialchars($_SERVER[‘PHP_SELF’]); ?>" method="post"  >
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"  >
         <div class="form-group">
           <h1 style="color:rgb(230, 81, 81);" class="text-center"> Organ Request Form </h1>
         </div>
@@ -308,31 +335,5 @@
             document.getElementById("lon").value=y;
             }
 </script>
-<?php
-session_start();
-include('./db_conn.php');
-$id=$_SESSION['user_id'];
-if(isset($_POST["submitBtn"])){ 
-       $organ = $_POST['organ'];
-		$blood = $_POST['blood'];
-		$location = $_POST['location'];
-		$purpose = $_POST['purpose'];
-        if(isset($_POST["lat"]) && isset($_POST["lon"])){
-		$lat = $_POST['lat'];
-        $lon=$_POST['lon'];
-        $sql = "INSERT INTO organ_requesters (requester_id,organs, blood_grp, location ,msg, lat, lon) VALUES ('$id','$organ',
-'$blood','$location','$purpose','$lat','$lon')";
-         $conn->query($sql);
-
-        }
-        else{
-            $sql = "INSERT INTO organ_requesters (requester_id,organs, blood_grp, location ,msg, lat, lon) VALUES ('$id','$organ',
-'$blood','$location','$purpose')";
-$conn->query($sql);
-
-        }
-		
-}
  
-?>
 </html>
