@@ -1,3 +1,19 @@
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+if(isset($_POST["submitBtn"])){ 
+
+       $organ = $_POST['organ'];
+		$blood = $_POST['blood'];
+        
+		$location = $_POST['location'];
+        
+        $sql = "INSERT INTO organ_donors(`donor_id`,`organs`,`blood_grp`,`location`) VALUES ('$id','$organ','$blood','$location')";
+        $conn->query($sql) ;
+}
+ 
+?>
 <html lang="en">
 
 <head>
@@ -45,22 +61,6 @@
 </head>
 
 <body>
-<?php
-session_start();
-include('./db_conn.php');
-$id=$_SESSION['user_id'];
-if(isset($_POST["submitBtn"]){ 
-       $organ = $_POST['organ'];
-		$blood = $_POST['blood'];
-		$location = $_POST['location'];
-        $sql = "INSERT INTO organ_donors (donor_id,organs, blood_grp, location ) VALUES ('$id','$organ',
-'$blood','$location')";
-        $conn->query($sql) ;
-         
-		
-}
- 
-?>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
         <a class="navbar-brand ml-4" href="#">
             <h3 class="brand-name">Life Line</h3>
@@ -131,7 +131,7 @@ if(isset($_POST["submitBtn"]){
 
             </div>
         </div>
-        <form action= "<?php echo htmlspecialchars($_SERVER[‘PHP_SELF’]); ?>" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
             <div class="form-group">
                 <h1 style="color:rgb(230, 81, 81);font-weight: bold;" class="text-center"> Organ Donor Form </h1>
             </div>
@@ -144,7 +144,7 @@ if(isset($_POST["submitBtn"]){
             </div>
             <div class="form-group">
                 <label for="validationCustom04" class="form-label"><b>Blood Group:</b></label>
-                <select class="form-control" id="validationCustom04" name=blood required>
+                <select class="form-control" id="validationCustom04" name="blood" required>
                     <option selected disabled value="">Choose...</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
