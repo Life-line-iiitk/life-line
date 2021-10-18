@@ -45,6 +45,22 @@
 </head>
 
 <body>
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+if(isset($_POST["submitBtn"]){ 
+       $organ = $_POST['organ'];
+		$blood = $_POST['blood'];
+		$location = $_POST['location'];
+        $sql = "INSERT INTO organ_donors (requester_id,organs, blood_grp, location ,msg, lat, lon) VALUES ('$id','$organ',
+'$blood','$location')";
+        $conn->query($sql) ;
+         
+		
+}
+ 
+?>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
         <a class="navbar-brand ml-4" href="#">
             <h3 class="brand-name">Life Line</h3>
@@ -115,7 +131,7 @@
 
             </div>
         </div>
-        <form action="/action_page.php">
+        <form action=”<?php echo htmlspecialchars($_SERVER[‘PHP_SELF’]); ?>” method="post">
             <div class="form-group">
                 <h1 style="color:rgb(230, 81, 81);font-weight: bold;" class="text-center"> Organ Donor Form </h1>
             </div>
@@ -128,7 +144,7 @@
             </div>
             <div class="form-group">
                 <label for="validationCustom04" class="form-label"><b>Blood Group:</b></label>
-                <select class="form-control" id="validationCustom04" required>
+                <select class="form-control" id="validationCustom04" name=blood required>
                     <option selected disabled value="">Choose...</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
