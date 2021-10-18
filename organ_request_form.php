@@ -312,7 +312,7 @@
 session_start();
 include('./db_conn.php');
 $id=$_SESSION['user_id'];
-if(isset($_POST["submitBtn"]){ 
+if(isset($_POST["submitBtn"])){ 
        $organ = $_POST['organ'];
 		$blood = $_POST['blood'];
 		$location = $_POST['location'];
