@@ -1,7 +1,7 @@
 <?php 
-session_start();
+//session_start();
 include('./register_config.php');
-include('./db_conn.php');
+//include('./db_conn.php');
 $login_button = '';
 
 
@@ -43,6 +43,43 @@ if(!isset($_SESSION['access_token']))
 $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-google"><img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign up with Google</a>';
 }
 
+?>
+
+<?php
+$insert = false;
+if(isset($_POST['signup']))
+{
+    $server = "localhost";
+    $username = "root";
+    $password = "";
+
+    $con = mysqli_connect($server, $username, $password);
+
+    if(!$con)
+    {
+        die("connection failed due to " . mysqli_connect_error());
+    }
+    /*else{
+        echo "Succesfully connected";
+    }*/
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $phone = $_POST['phone'];
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $sql = "INSERT INTO `lifeline`.`users` (`email`, `password`, `phone`, `name`, `age`) VALUES ('$email', '$password', '$phone', '$name', '$age');";
+
+    if($con->query($sql) == true){
+        $insert = true;
+        header("location:sign_in.php");
+   }
+    else{
+        echo "ERROR: $sql <br> $con->error";
+    }
+
+    $con->close();
+}
 ?>
 
 
@@ -117,19 +154,19 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
                 <h1 class="row justify-content-center mb-4 mt-4" style="color: var(--red);font-weight:bold">
                   SIGN UP
                 </h1>
-                <form id="form">
+                <form id="form" method="post" action="register.php">
 
 
                   <div class="col-md-12 mb-3">
                     <div class="form-outline">
-                      <input type="text" placeholder="Full Name" id="fullName" required class="form-control" />
+                      <input type="text" placeholder="Full Name" id="name" name="name" required class="form-control" />
                     </div>
 
                   </div>
 
                   <div class="col-md-12 mb-3 d-flex align-items-center">
                     <div class="form-outline datepicker w-100">
-                      <input placeholder="Age" type="number" required class="form-control  " id="birthdayDate" />
+                      <input placeholder="Age" type="number" required class="form-control  " id="age" name="age" />
                     </div>
 
                   </div>
@@ -159,14 +196,14 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
 
                   <div class="col-md-12 mb-2 pb-2">
                     <div class="form-outline">
-                      <input placeholder="Email" type="email" id="emailAddress" required class="form-control  " />
+                      <input placeholder="Email" type="email" id="email" name="email" required class="form-control  " />
                     </div>
 
                   </div>
                   <div class="col-md-12 mb-2 pb-2">
 
                     <div class="form-outline">
-                      <input placeholder="Mobile number" type="tel" id="phoneNumber" required class="form-control  " />
+                      <input placeholder="Mobile number" type="tel" id="phone" name="phone" required class="form-control  " />
                     </div>
 
                   </div>
@@ -174,13 +211,13 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
 
                   <div class="col-md-12 mb-2 pb-2">
                     <div class="form-outline">
-                      <input placeholder="Password" type="password" id="password" class="form-control  " required />
+                      <input placeholder="Password" type="password" id="password" name="password" class="form-control  " required />
                     </div>
 
                   </div>
                   <div class="col-md-12 pb-2">
                     <div class="form-outline">
-                      <input placeholder="Confirm Password" type="password" id="repassword" class="form-control  "
+                      <input placeholder="Confirm Password" type="password" id="repassword" name="repassword" class="form-control"
                         required />
                     </div>
 
@@ -188,7 +225,7 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
 
 
                   <div class="mt-3 pt-2 col-md-12" style="text-align: center;">
-                    <button type="submit" onclick="validate()" id="submit" name="submit" class="btn btn-block btn-lg"
+                    <button type="submit" onclick="validate()" id="signup" name="signup" class="btn btn-block btn-lg"
                       style="background-color:var(--red);color:#fff;">Sign Up</button>
                   </div>
                   <br>
