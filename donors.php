@@ -1,7 +1,14 @@
 <?php 
     session_start();
     include('./db_conn.php');
-
+    if(isset($_SESSION['user_id']))
+    {
+        $user_id=$_SESSION['user_id'];
+    }
+    {
+        $user_id=0;
+    }
+    
     if(isset($_POST['blood']))
     {
     if(isset($_SESSION['user_id']))
@@ -305,7 +312,7 @@
                         </div>
                     </div>
                     ';
-                    if($_SESSION['user_id']!=$rr)
+                    if($user_id!=$rr)
                     {
                         echo '<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
                             <input type="hidden" name="donor_id" value="'.$rr.'">

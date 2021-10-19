@@ -1,5 +1,5 @@
 <?php 
-session_start();
+//session_start();
 include('./register_config.php');
 include('./db_conn.php');
 $login_button = '';
@@ -43,6 +43,81 @@ if(!isset($_SESSION['access_token']))
 $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-google"><img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign up with Google</a>';
 }
 
+?>
+
+<?php
+$insert = false;
+if(isset($_POST['signup']))
+{
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+    $repass=$_POST['repassword'];
+    
+    $password = password_hash($pass, PASSWORD_DEFAULT);
+    $phone = $_POST['phone'];
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $flag=1;
+    if ($age < 18 && $age != 0)
+    {
+    $flag=0;      ?>
+    <script>                        
+        alert("You have to be 18+ to be a donor");
+        location.replace("register.php");
+    </script>
+    <?php
+    }
+       
+      if ($age > 122)
+      {$flag=0;?>
+    <script>                        
+        alert("Longest lived human being is 122 src. google");
+        location.replace("register.php");
+    </script>
+    <?php
+    }
+          
+      if (strlen($pass) <= 6) {$flag=0;?>
+    <script>                        
+        alert("Password should be more than 6 letters");
+        location.replace("register.php");
+    </script>
+    <?php
+    }
+      if ($pass != $repass) {$flag=0;?>
+    <script>                        
+        alert("Passwords did not match");
+        location.replace("register.php");
+    </script>
+    <?php
+    }
+  
+    $sql1 = "SELECT * FROM users WHERE email='$email'";
+    $r=$conn->query($sql1);
+
+    
+    if($r->num_rows >0)
+    {?>
+    <script>                        
+        alert("Entered email address already enters");
+        location.replace("register.php");
+    </script>
+    <?php
+    }
+
+    
+    else
+    {
+      $sql = "INSERT INTO `users` (`email`, `password`, `phone`, `name`, `age`) VALUES ('$email', '$password', '$phone', '$name', '$age');";
+    }
+
+    if($flag==1){
+    if($conn->query($sql) == true )
+    {
+        $insert = true;
+        header("location:sign_in.php");
+    }}
+}
 ?>
 
 
@@ -117,19 +192,31 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
                 <h1 class="row justify-content-center mb-4 mt-4" style="color: var(--red);font-weight:bold">
                   SIGN UP
                 </h1>
-                <form id="form">
+
+                <?php
+
+                  if(@$_GET['Email_err']==true)
+                  {
+                ?>
+                <div class="alert-light text-danger text-center py-3" style="font-weight:bold;"><?php echo $_GET['Email_err'] ?></div>
+                <?php
+                  }
+                ?>
+                
+
+                <form id="form" method="post" action="register.php">
 
 
                   <div class="col-md-12 mb-3">
                     <div class="form-outline">
-                      <input type="text" placeholder="Full Name" id="fullName" required class="form-control" />
+                      <input type="text" placeholder="Full Name" id="name" name="name" required class="form-control" />
                     </div>
 
                   </div>
 
                   <div class="col-md-12 mb-3 d-flex align-items-center">
                     <div class="form-outline datepicker w-100">
-                      <input placeholder="Age" type="number" required class="form-control  " id="birthdayDate" />
+                      <input placeholder="Age" type="number" required class="form-control  " id="age" name="age" />
                     </div>
 
                   </div>
@@ -159,14 +246,14 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
 
                   <div class="col-md-12 mb-2 pb-2">
                     <div class="form-outline">
-                      <input placeholder="Email" type="email" id="emailAddress" required class="form-control  " />
+                      <input placeholder="Email" type="email" id="email" name="email" required class="form-control  " />
                     </div>
 
                   </div>
                   <div class="col-md-12 mb-2 pb-2">
 
                     <div class="form-outline">
-                      <input placeholder="Mobile number" type="tel" id="phoneNumber" required class="form-control  " />
+                      <input placeholder="Mobile number" type="tel" id="phone" name="phone" required class="form-control  " />
                     </div>
 
                   </div>
@@ -174,13 +261,13 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
 
                   <div class="col-md-12 mb-2 pb-2">
                     <div class="form-outline">
-                      <input placeholder="Password" type="password" id="password" class="form-control  " required />
+                      <input placeholder="Password" type="password" id="password" name="password" class="form-control  " required />
                     </div>
 
                   </div>
                   <div class="col-md-12 pb-2">
                     <div class="form-outline">
-                      <input placeholder="Confirm Password" type="password" id="repassword" class="form-control  "
+                      <input placeholder="Confirm Password" type="password" id="repassword" name="repassword" class="form-control"
                         required />
                     </div>
 
@@ -188,7 +275,7 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
 
 
                   <div class="mt-3 pt-2 col-md-12" style="text-align: center;">
-                    <button type="submit" onclick="validate()" id="submit" name="submit" class="btn btn-block btn-lg"
+                    <button type="submit" id="signup" name="signup" class="btn btn-block btn-lg"
                       style="background-color:var(--red);color:#fff;">Sign Up</button>
                   </div>
                   <br>
@@ -352,32 +439,6 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  <script>
-
-    function validate() {
-      var age = document.getElementById("birthdayDate").value;
-      var name = document.getElementById("fullName").value;
-      var password = document.getElementById("password").value;
-      var repassword = document.getElementById("repassword").value;
-      if (age < 18 && age != 0) {
-        alert("You have to be 18+ to be a donor")
-
-      }
-      if (age > 122) {
-        alert("Longest lived human being is 122 src. google")
-
-      }
-      if (length(password) <= 6) {
-        alert("Password should be more than 6 letters");
-      }
-      if (password != repassword) {
-        alert("Passwords don't match")
-
-      }
-
-    }
-
-  </script>
 
 </body>
 
