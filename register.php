@@ -1,7 +1,7 @@
 <?php 
 //session_start();
 include('./register_config.php');
-//include('./db_conn.php');
+include('./db_conn.php');
 $login_button = '';
 
 
@@ -49,7 +49,7 @@ $login_button ='<a href="'.$google_client->createAuthUrl().'" class="btn btn-goo
 $insert = false;
 if(isset($_POST['signup']))
 {
-    $server = "localhost";
+    /*$server = "localhost";
     $username = "root";
     $password = "";
 
@@ -64,18 +64,35 @@ if(isset($_POST['signup']))
     }*/
 
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $pass = $_POST['password'];
+    $password = password_hash($pass, PASSWORD_DEFAULT);
     $phone = $_POST['phone'];
     $name = $_POST['name'];
     $age = $_POST['age'];
-    $sql = "INSERT INTO `lifeline`.`users` (`email`, `password`, `phone`, `name`, `age`) VALUES ('$email', '$password', '$phone', '$name', '$age');";
 
-    if($con->query($sql) == true){
+    //checking if email the user entered email already exists
+
+    $sql1 = "SELECT * FROM users WHERE email='$email'";
+    $r=$conn->query($sql1);
+
+    if($r->num_rows >0)
+    {
+      //$email_err = "This email already exists";
+      header("location:register.php?Email_err= This email already exists ");
+
+    }
+    else
+    {
+      $sql = "INSERT INTO `users` (`email`, `password`, `phone`, `name`, `age`) VALUES ('$email', '$password', '$phone', '$name', '$age');";
+    }
+
+    
+    if($conn->query($sql) == true){
         $insert = true;
         header("location:sign_in.php");
    }
     else{
-        echo "ERROR: $sql <br> $con->error";
+        echo "ERROR: $sql <br> $conn->error";
     }
 
     $con->close();
@@ -154,6 +171,18 @@ if(isset($_POST['signup']))
                 <h1 class="row justify-content-center mb-4 mt-4" style="color: var(--red);font-weight:bold">
                   SIGN UP
                 </h1>
+
+                <?php
+
+                  if(@$_GET['Email_err']==true)
+                  {
+                ?>
+                <div class="alert-light text-danger text-center py-3" style="font-weight:bold;"><?php echo $_GET['Email_err'] ?></div>
+                <?php
+                  }
+                ?>
+                
+
                 <form id="form" method="post" action="register.php">
 
 
