@@ -1,5 +1,13 @@
 <?php 
     session_start();
+
+    // check if the user is already logged in
+    if(isset($_SESSION['username']))
+    {
+        header("location: dashboard.php");
+        exit;
+    }
+
     include('./signin_config.php');
     include('./db_conn.php');
 
@@ -31,6 +39,66 @@
                         <br>
                         <a href="'.$google_client->createAuthUrl().'" class="btn btn-google"><img src="./assets/images/google.jpg" style="height:2rem" alt=""> Sign In with Google</a>
                         </div>';
+    }
+
+    $email = $pass = "";
+    $err = "";
+
+    if(isset($_POST['signin']))
+    {
+        if(empty(trim($_POST['email'])) || empty(trim($_POST['password'])))
+        {
+            $err = "email and password should not be blank";
+            header("location:sign_in.php?Blank = email or password should not be blank");
+        }
+        else
+        {
+            $email = $_POST['email'];
+            $pass = $_POST['password'];
+            $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
+        }
+
+        if(empty($err))
+        {
+            $sql = "SELECT email FROM user WHERE email = '$email' ";
+            echo "hii";
+            $p = "SELECT password FROM user WHERE email = '$email' ";
+            $id = "SELECT id FROM user WHERE email = '$email' ";
+            $res = $conn->query($sql);
+
+            if($res->num_row > 0)
+            {
+                if($p == NULL)
+                {
+                    header("location:sign_in.php? Google_signin = Please try using google sign in"); //1
+                }
+                else
+                {
+                    $sql1 = "SELECT email, password FROM user WHERE email = '$email' and password = '$hash_pass'";
+                    $r = $conn->query($sql1);
+                    if($r->num_rows = 1)
+                    {
+                        session_start();
+                        $_SESSION["user"] = $sql;
+                        $_SESSION["id"] = $id;
+                        $_SESSION["loggedin"] = true;
+
+                        header("location:dashboard.php");
+                    }
+                    else
+                    {
+                        header("location:dashboard.php?Credential_err = Email or Password is not correct"); //2
+                    }
+
+                    
+                }
+            }
+            else
+            {
+                header("location:sign_in.php?No_user = You are not a existing user please sign up first.");  //3
+            }
+
+        }
     }
 ?>
 
@@ -96,6 +164,40 @@
                     </div>
                     <hr>
 
+                    <?php
+
+                        if(@$_GET['Google_signin']==true)
+                        {
+                        ?>
+                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Google_signin'] ?></div>                                
+                        <?php
+                        }
+
+                        if(@$_GET['Credential_err']==true)
+                        {
+                        ?>
+                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Credential_err'] ?></div>                                
+                        <?php
+                        }
+
+                        if(@$_GET['No_user']==true)
+                        {
+                        ?>
+                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['No_user'] ?></div>                                
+                        <?php
+                        }
+                    
+                        if(@$_GET['Blank']==true)
+                        {
+                        ?>
+                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Blank'] ?></div>                                
+                        <?php
+                        }
+                    ?>
+
+
+                    
+
                     <form class="mt-5" action="" method="post">
                         <div class="input">
                             <i class="fa fa-envelope" style="color: var(--red);"></i>
@@ -103,7 +205,7 @@
                         </div>
                         <div class="input mt-2">
                             <i class="fa fa-lock" style="color: var(--red);"></i>
-                            <input type="password" name="password" id="password" placeholder="Enter your password">
+                            <input type="password" name="pass" id="pass" placeholder="Enter your password">
                         </div>
                         <div class="input">
                             <input type="checkbox" onclick="Toggle()"> <span
@@ -112,7 +214,7 @@
                         </div>
 
                         <div class="col text-center">
-                            <button class="btn btn-lg ml-3" type="submit">Sign In</button>
+                            <button class="btn btn-lg ml-3" type="submit" id="signin" name="signin" >Sign In</button>
                         </div>
                     </form>
 
