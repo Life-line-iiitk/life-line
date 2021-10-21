@@ -5,47 +5,33 @@ $id=$_SESSION['user_id'];
 
 if(isset($_POST['submit']))
 {
-    $type = $_POST['type'];
-    $blood_group = $_POST['blood_group'];
-    $location = $_POST['location'];
-    $purpose = $_POST['purpose'];
-    //$urgent = $_POST['urgent'];
+    $msg=$_POST['purpose'];
+    $blood_grp=$_POST['blood_group'];
     if(isset($_POST['urgent']))
     {
-        $urgent = '1';
+        $urgent=1;
     }
     else
     {
-        $urgent = 'NULL';
+        $urgent=0;
     }
+    $type=$_POST['type'];
+    $location=$_POST['location'];
+    if($_POST['lat']!="0")
+    {
+        echo "<script>console.log('$id,$msg,$blood_grp,$location,$type');</script>";
 
-    if(isset($_POST["lat"]) && isset($_POST["lon"])){
-		$lat = $_POST['lat'];
+        $lat=$_POST['lat'];
         $lon=$_POST['lon'];
-
-        $sql = "INSERT INTO organ_requesters (requester_id, msg, blood_grp, urgent, type, location , lat, lon) VALUES ('$id','$purpose',
-        '$blood_grp','$urgent','$location','$lat','$lon')";
-        $res = $conn->query($sql);
-    }
-
-    else
-    {
-        $sql = "INSERT INTO organ_requesters (requester_id, msg, blood_grp, urgent, type, location) VALUES ('$id','$purpose',
-        '$blood_grp','$urgent','$location')";
-        $res = $conn->query($sql);
-    }
-
-
-    if($conn->query($sql) == true )
-    {
-        header("location:dashboard.php");
+        $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`,`lat`,`lon`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location','$lat','$lon');";
     }
     else
     {
-        header("location:blood_request.php?Error = Something Went Wrong");
+
+        $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location')";
     }
+    $conn->query($sql);
 }
-
 ?>
 
 
@@ -163,7 +149,7 @@ if(isset($_POST['submit']))
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" novalidate>
+                <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" novalidate>
                     <div class="form-group">
                         <label for="type" class="form-label"><b>Type<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
@@ -219,8 +205,8 @@ if(isset($_POST['submit']))
                                 My Current Coordinates</b>
                         </label>
                     </div>
-                    <input type="hidden" name="lat" id="lat">
-                    <input type="hidden" name="lon" id="lon">
+                    <input type="hidden" value="0" name="lat" id="lat">
+                    <input type="hidden" value="0" name="lon" id="lon">
 
                     <div class="form-group">
 
@@ -261,7 +247,7 @@ if(isset($_POST['submit']))
                     </div>
 
                     <div class="">
-                        <button type="submit" class="btn mb-4 btn-lg b" name = "submit" id="submit">Submit </button>
+                        <button type="submit" class="btn mb-4 btn-lg b" name="submit" id="submit">Submit </button>
                     </div>
 
                 </form>
@@ -271,26 +257,7 @@ if(isset($_POST['submit']))
 
 
 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+    
 
     <!-- Footer -->
     <div class="footer">

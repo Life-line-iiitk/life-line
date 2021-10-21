@@ -7,7 +7,7 @@ if(isset($_POST["submitBtn"])){
 		$blood = $_POST['blood'];
 		$location = $_POST['location'];
 		$purpose = $_POST['purpose'];
-        if(isset($_POST["lat"]) && isset($_POST["lon"])){
+        if($_POST['lat']!="0"){
 		$lat = $_POST['lat'];
         $lon=$_POST['lon'];
         $sql = "INSERT INTO organ_requesters (requester_id,organs, blood_grp, location ,msg, lat, lon) VALUES ('$id','$organ',
@@ -179,8 +179,8 @@ header("location:dashboard.php");
               <input class="form-check-input" onclick="getlocation()" type="checkbox" name="presentLocation" id="coordinates"> <b>Use My Coordinates</b>
             </label>
         </div>
-        <input type="hidden" name="lat" id="lat">
-        <input type="hidden" name="lon" id="lon">
+        <input type="hidden" value="0" name="lat" id="lat">
+        <input type="hidden" value="0" name="lon" id="lon">
           <div class="form-group">
             <label for="purpose"><b> Purpose</b></label>
             <input type="text" class="form-control" id="purpose" placeholder="Enter purpose" name="purpose" required>
