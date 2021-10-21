@@ -159,8 +159,8 @@
               <input class="form-check-input" onclick="getlocation()"  type="checkbox" name="getpresentLocation" id="coordinates"> <b>Use My Current Coordinates</b>
             </label>
         </div>
-        <input type="hidden" name="lat" id="lat">
-        <input type="hidden" name="lon" id="lon">
+        <input type="hidden" value="0" name="lat" id="lat">
+        <input type="hidden" value="0" name="lon" id="lon">
         </div>
 
         <br>
@@ -174,7 +174,7 @@
           </div>
         </div>
           <div class="text-center">
-          <button name="submit-btn" type="submit" class="btn  mb-4 btn-lg  " style="background-color: crimson; color: white;">Submit </button>
+          <button name="submit" type="submit" class="btn  mb-4 btn-lg  " style="background-color: crimson; color: white;">Submit </button>
           </div>
 
     </form>
