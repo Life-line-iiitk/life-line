@@ -1,3 +1,54 @@
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+
+if(isset($_POST['submit']))
+{
+    $type = $_POST['type'];
+    $blood_group = $_POST['blood_group'];
+    $location = $_POST['location'];
+    $purpose = $_POST['purpose'];
+    //$urgent = $_POST['urgent'];
+    if(isset($_POST['urgent']))
+    {
+        $urgent = '1';
+    }
+    else
+    {
+        $urgent = 'NULL';
+    }
+
+    if(isset($_POST["lat"]) && isset($_POST["lon"])){
+		$lat = $_POST['lat'];
+        $lon=$_POST['lon'];
+
+        $sql = "INSERT INTO organ_requesters (requester_id, msg, blood_grp, urgent, type, location , lat, lon) VALUES ('$id','$purpose',
+        '$blood_grp','$urgent','$location','$lat','$lon')";
+        $res = $conn->query($sql);
+    }
+
+    else
+    {
+        $sql = "INSERT INTO organ_requesters (requester_id, msg, blood_grp, urgent, type, location) VALUES ('$id','$purpose',
+        '$blood_grp','$urgent','$location')";
+        $res = $conn->query($sql);
+    }
+
+
+    if($conn->query($sql) == true )
+    {
+        header("location:dashboard.php");
+    }
+    else
+    {
+        header("location:blood_request.php?Error = Something Went Wrong");
+    }
+}
+
+?>
+
+
 <html lang="en">
 
 <head>
@@ -48,13 +99,13 @@
             <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mt-1">
-                        <a class="nav-link" href="./index.html">Home</a>
+                        <a class="nav-link" href="./index.php">Home</a>
                     </li>
                     <li class="nav-item mt-1">
-                        <a class="nav-link" href="./requests.html">Requests</a>
+                        <a class="nav-link" href="./requests.php">Requests</a>
                     </li>
                     <li class="nav-item mt-1">
-                        <a class="nav-link" href="./donors.html">Donors</a>
+                        <a class="nav-link" href="./donors.php">Donors</a>
                     </li>
                     <li class="nav-item dropdown mt-1 active">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -62,19 +113,19 @@
                             Pages
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Donate Blood</a>
-                            <a class="dropdown-item active" href="blood_request.html">Request Blood</a>
+                            <a class="dropdown-item" href="blood_donor.php">Donate Blood</a>
+                            <a class="dropdown-item active" href="#">Request Blood</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Donate Organs</a>
-                            <a class="dropdown-item" href="./organ_request_form.html">Request Organs</a>
+                            <a class="dropdown-item" href="organ_donate.php">Donate Organs</a>
+                            <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="aboutus.html">About Us</a>
-                            <a class="dropdown-item" href="contactus.html">Contact Us</a>
-                            <a class="dropdown-item" href="faq.html">FAQ</a>
+                            <a class="dropdown-item" href="aboutus.php">About Us</a>
+                            <a class="dropdown-item" href="contactus.php">Contact Us</a>
+                            <a class="dropdown-item" href="faq.php">FAQ</a>
                         </div>
                     </li>
 
-                    <a href="./dashboard.html" class="btn sign-in mt-1 ml-2">Dashboard</a>
+                    <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
                     <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
                 </ul>
             </div>
@@ -106,12 +157,13 @@
         <h5>Note: <span style="color: var(--red); font-size: 2rem;">*</span> (required field)</h5>
     </div>
 
+
     <!--form starts-->
     <div class="container">
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" novalidate>
                     <div class="form-group">
                         <label for="type" class="form-label"><b>Type<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
@@ -162,7 +214,7 @@
 
                     <div class="form-group form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input ib" onclick="getlocation()" type="checkbox" name="coordinates" id="coordinates">
+                            <input class="form-check-input ib" onclick="getlocation()" type="checkbox" name="presentLocation" id="coordinates">
                             <b>Use
                                 My Current Coordinates</b>
                         </label>
@@ -201,7 +253,7 @@
                         <label class="form-check-label pl-10">
                             <input class="form-check-input ib" type="checkbox" name="remember" required><b
                                 style="color: var(--red);">I
-                                agree on </b><a href="terms.html" target="_blank"> terms and conditions. </a><span
+                                agree on </b><a href="terms.php" target="_blank"> terms and conditions. </a><span
                                 style="color: red; font-size: 1.rem;">*</span>
                             <!-- <div class="valid-feedback">Valid.</div> -->
                             <div class="invalid-feedback">Check this checkbox to continue.</div>
@@ -209,7 +261,7 @@
                     </div>
 
                     <div class="">
-                        <button type="submit" class="btn mb-4 btn-lg b">Submit </button>
+                        <button type="submit" class="btn mb-4 btn-lg b" name = "submit" id="submit">Submit </button>
                     </div>
 
                 </form>
@@ -289,13 +341,13 @@
                                 <b>QUICK LINKS</b>
                             </h6>
                             <p>
-                                <a href="./index.html" class="text-reset">Home</a>
+                                <a href="./index.php" class="text-reset">Home</a>
                             </p>
                             <p>
-                                <a href="aboutus.html" class="text-reset">About Us</a>
+                                <a href="aboutus.php" class="text-reset">About Us</a>
                             </p>
                             <p>
-                                <a href="contactus.html" class="text-reset">Contact Us</a>
+                                <a href="contactus.php" class="text-reset">Contact Us</a>
                             </p>
 
                         </div>
@@ -308,13 +360,13 @@
                                 <a href="#!" class="text-reset">Donate Blood</a>
                             </p>
                             <p>
-                                <a href="blood_request.html" class="text-reset">Request Blood</a>
+                                <a href="blood_request.php" class="text-reset">Request Blood</a>
                             </p>
                             <p>
                                 <a href="#!" class="text-reset">Donate Organs</a>
                             </p>
                             <p>
-                                <a href="./organ_request_form.html" class="text-reset">Request Organs</a>
+                                <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
                             </p>
                         </div>
 

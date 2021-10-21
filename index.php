@@ -114,7 +114,7 @@ $id=$_SESSION['user_id'];
 
                         <div class="row mt-4 text-center">
                             <div class="col-md-6 mt-2">
-                                <a href="#" class="btn link-btn">DONATE BLOOD</a>
+                                <a href="blood_donor.php" class="btn link-btn">DONATE BLOOD</a>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <a href="blood_request.php" class="btn link-btn">REQUEST BLOOD</a>
@@ -135,7 +135,7 @@ $id=$_SESSION['user_id'];
 
                         <div class="row mt-4 text-center">
                             <div class="col-md-6 mt-2">
-                                <a href="#" class="btn link-btn">DONATE ORGANS</a>
+                                <a href="organ_donate.php " class="btn link-btn">DONATE ORGANS</a>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <a href="./organ_request_form.php" class="btn link-btn">REQUEST ORGANS</a>

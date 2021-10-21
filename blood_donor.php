@@ -61,7 +61,7 @@
                             <a class="dropdown-item" href="#">Donate Blood</a>
                             <a class="dropdown-item active" href="blood_request.php">Request Blood</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Donate Organs</a>
+                            <a class="dropdown-item" href="organ_donate.php">Donate Organs</a>
                             <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="aboutus.php">About Us</a>
