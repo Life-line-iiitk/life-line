@@ -246,8 +246,7 @@ if(isset($_POST['organ_accept']))
 
         <h2>Uh Oh!We no data to show.</h2>
         <h4>You have not made any donation nor you received any request.</h4>
-        <a href="#" class="btn btn-lg link-btn mt-4" style="color:var(--white);background-color:var(--red)">DONATE
-            NOW</a>
+        <a href="./requests.php" class="btn btn-lg link-btn mt-4" style="color:var(--white);background-color:var(--red)">DONATE NOW</a>
     </div>
     <?php
     }

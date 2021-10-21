@@ -19,8 +19,6 @@ if(isset($_POST['submit']))
     $location=$_POST['location'];
     if($_POST['lat']!="0")
     {
-        echo "<script>console.log('$id,$msg,$blood_grp,$location,$type');</script>";
-
         $lat=$_POST['lat'];
         $lon=$_POST['lon'];
         $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`,`lat`,`lon`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location','$lat','$lon');";
