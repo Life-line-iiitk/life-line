@@ -19,8 +19,8 @@ if(isset($_POST["submitBtn"])){
             $sql = "INSERT INTO organ_requesters (requester_id,organs, blood_grp, location ,msg) VALUES ('$id','$organ',
 '$blood','$location','$purpose')";
 $conn->query($sql);
-
-        }
+}
+header("location:dashboard.php");
 		
 }
  
