@@ -2,6 +2,10 @@
 session_start();
 include('./db_conn.php');
 $id=$_SESSION['user_id'];
+<<<<<<< HEAD
+=======
+
+>>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
 if(isset($_POST['submit']))
 {
     $msg=$_POST['purpose'];
@@ -14,18 +18,29 @@ if(isset($_POST['submit']))
     {
         $urgent=0;
     }
+<<<<<<< HEAD
     //$type=$_POST['type'];
     $location=$_POST['location'];
     if($_POST['lat']!="0")
     {
         echo "<script>console.log('$id,$msg,$blood_grp,$location,$type');</script>";
 
+=======
+    $type=$_POST['type'];
+    $location=$_POST['location'];
+    if($_POST['lat']!="0")
+    {
+>>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
         $lat=$_POST['lat'];
         $lon=$_POST['lon'];
         $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`,`lat`,`lon`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location','$lat','$lon');";
     }
     else
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
         $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location')";
     }
     $conn->query($sql);
@@ -33,9 +48,12 @@ if(isset($_POST['submit']))
 ?>
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
 <html lang="en">
 
 <head>
@@ -86,13 +104,13 @@ if(isset($_POST['submit']))
             <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mt-1">
-                        <a class="nav-link" href="./index.html">Home</a>
+                        <a class="nav-link" href="./index.php">Home</a>
                     </li>
                     <li class="nav-item mt-1">
-                        <a class="nav-link" href="./requests.html">Requests</a>
+                        <a class="nav-link" href="./requests.php">Requests</a>
                     </li>
                     <li class="nav-item mt-1">
-                        <a class="nav-link" href="./donors.html">Donors</a>
+                        <a class="nav-link" href="./donors.php">Donors</a>
                     </li>
                     <li class="nav-item dropdown mt-1 active">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -100,19 +118,19 @@ if(isset($_POST['submit']))
                             Pages
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Donate Blood</a>
-                            <a class="dropdown-item active" href="blood_request.html">Request Blood</a>
+                            <a class="dropdown-item" href="blood_donor.php">Donate Blood</a>
+                            <a class="dropdown-item active" href="#">Request Blood</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Donate Organs</a>
-                            <a class="dropdown-item" href="./organ_request_form.html">Request Organs</a>
+                            <a class="dropdown-item" href="organ_donate.php">Donate Organs</a>
+                            <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="aboutus.html">About Us</a>
-                            <a class="dropdown-item" href="contactus.html">Contact Us</a>
-                            <a class="dropdown-item" href="faq.html">FAQ</a>
+                            <a class="dropdown-item" href="aboutus.php">About Us</a>
+                            <a class="dropdown-item" href="contactus.php">Contact Us</a>
+                            <a class="dropdown-item" href="faq.php">FAQ</a>
                         </div>
                     </li>
 
-                    <a href="./dashboard.html" class="btn sign-in mt-1 ml-2">Dashboard</a>
+                    <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
                     <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
                 </ul>
             </div>
@@ -144,12 +162,17 @@ if(isset($_POST['submit']))
         <h5>Note: <span style="color: var(--red); font-size: 2rem;">*</span> (required field)</h5>
     </div>
 
+
     <!--form starts-->
     <div class="container">
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
+<<<<<<< HEAD
                 <form class="needs-validation" method="post" action="blood_request.php" novalidate >
+=======
+                <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" novalidate>
+>>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
                     <div class="form-group">
                         <label for="type" class="form-label" ><b>Type<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
@@ -200,13 +223,13 @@ if(isset($_POST['submit']))
 
                     <div class="form-group form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input ib" onclick="getlocation()" type="checkbox" name="coordinates" id="coordinates">
+                            <input class="form-check-input ib" onclick="getlocation()" type="checkbox" name="presentLocation" id="coordinates">
                             <b>Use
                                 My Current Coordinates</b>
                         </label>
                     </div>
-                    <input type="hidden" name="lat" id="lat">
-                    <input type="hidden" name="lon" id="lon">
+                    <input type="hidden" value="0" name="lat" id="lat">
+                    <input type="hidden" value="0" name="lon" id="lon">
 
                     <div class="form-group">
 
@@ -239,7 +262,7 @@ if(isset($_POST['submit']))
                         <label class="form-check-label pl-10">
                             <input class="form-check-input ib" type="checkbox" name="remember" required><b
                                 style="color: var(--red);">I
-                                agree on </b><a href="terms.html" target="_blank"> terms and conditions. </a><span
+                                agree on </b><a href="terms.php" target="_blank"> terms and conditions. </a><span
                                 style="color: red; font-size: 1.rem;">*</span>
                             <!-- <div class="valid-feedback">Valid.</div> -->
                             <div class="invalid-feedback">Check this checkbox to continue.</div>
@@ -247,7 +270,11 @@ if(isset($_POST['submit']))
                     </div>
 
                     <div class="">
+<<<<<<< HEAD
                         <button type="submit" name="submit" id="submit" class="btn mb-4 btn-lg b">Submit </button>
+=======
+                        <button type="submit" class="btn mb-4 btn-lg b" name="submit" id="submit">Submit </button>
+>>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
                     </div>
 
                 </form>
@@ -257,26 +284,7 @@ if(isset($_POST['submit']))
 
 
 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+    
 
     <!-- Footer -->
     <div class="footer">
@@ -327,13 +335,13 @@ if(isset($_POST['submit']))
                                 <b>QUICK LINKS</b>
                             </h6>
                             <p>
-                                <a href="./index.html" class="text-reset">Home</a>
+                                <a href="./index.php" class="text-reset">Home</a>
                             </p>
                             <p>
-                                <a href="aboutus.html" class="text-reset">About Us</a>
+                                <a href="aboutus.php" class="text-reset">About Us</a>
                             </p>
                             <p>
-                                <a href="contactus.html" class="text-reset">Contact Us</a>
+                                <a href="contactus.php" class="text-reset">Contact Us</a>
                             </p>
 
                         </div>
@@ -346,13 +354,13 @@ if(isset($_POST['submit']))
                                 <a href="#!" class="text-reset">Donate Blood</a>
                             </p>
                             <p>
-                                <a href="blood_request.html" class="text-reset">Request Blood</a>
+                                <a href="blood_request.php" class="text-reset">Request Blood</a>
                             </p>
                             <p>
                                 <a href="#!" class="text-reset">Donate Organs</a>
                             </p>
                             <p>
-                                <a href="./organ_request_form.html" class="text-reset">Request Organs</a>
+                                <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
                             </p>
                         </div>
 

@@ -94,7 +94,7 @@ if(isset($_POST['submit']))
                             <a class="dropdown-item" href="#">Donate Blood</a>
                             <a class="dropdown-item active" href="blood_request.php">Request Blood</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Donate Organs</a>
+                            <a class="dropdown-item" href="organ_donate.php">Donate Organs</a>
                             <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="aboutus.php">About Us</a>
@@ -192,8 +192,8 @@ if(isset($_POST['submit']))
               <input class="form-check-input" onclick="getlocation()"  type="checkbox" name="getpresentLocation" id="coordinates"> <b>Use My Current Coordinates</b>
             </label>
         </div>
-        <input type="hidden" name="lat" id="lat">
-        <input type="hidden" name="lon" id="lon">
+        <input type="hidden" value="0" name="lat" id="lat">
+        <input type="hidden" value="0" name="lon" id="lon">
         </div>
 
         <br>
@@ -207,7 +207,11 @@ if(isset($_POST['submit']))
           </div>
         </div>
           <div class="text-center">
+<<<<<<< HEAD
           <button name="submit-btn" type="submit" class="btn  mb-4 btn-lg  " name="submit" id="submit" style="background-color: crimson; color: white;" >Submit </button>
+=======
+          <button name="submit" type="submit" class="btn  mb-4 btn-lg  " style="background-color: crimson; color: white;">Submit </button>
+>>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
           </div>
 
     </form>
