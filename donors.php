@@ -27,11 +27,13 @@
 
             $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$donor_id',0)";
             $ires1=$conn->query($ins1);
-            echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+            echo "<script>alert('THANK YOU!!Your contact is shared with the donor');</script>";
+
         }
         else
         {
-            echo "<script>alert('No request found');</script>";
+            echo "<script>alert('You don't have a request');</script>";
+
         }
 
     }
@@ -63,7 +65,7 @@
 
             $ins1="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$donor_id',0)";
             $ires1=$conn->query($ins1);
-            echo "<script>alert('THANK YOU!!Your contact is shared with the requester');</script>";
+            echo "<script>alert('THANK YOU!!Your contact is shared with the donor');</script>";
         }
         else
         {
@@ -282,6 +284,7 @@
                         $lat=array();
                         $lon=array();
                         $blood_grp=array();
+                        $phone=$row['phone'];
                         if($row['lat'])
                         {
                             array_push($lat,$row['lat']);
@@ -317,6 +320,7 @@
                         echo '<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
                             <input type="hidden" name="donor_id" value="'.$rr.'">
                             <button type="submit" name="blood" class="btn mt-3 donate">REQUEST</button>
+                            <a target="blank" style="margin-left:auto;margin-right:auto;display:block;width: 35%;border-radius: 4rem;font-weight: bold;" class="btn btn-outline-primary mt-2" href="https://wa.me/+91'.$phone.'">Chat</a>
                             </form>
                             </div>
                     </div>
@@ -367,7 +371,7 @@
                             }
                         }
                     }
-
+                    $phone=$row['phone'];
                     if($flag==0)
                     {
                         echo '<div class="row mt-4 p-2">
@@ -399,6 +403,8 @@
                         echo '<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
                             <input type="hidden" name="donor_id" value="'.$rr.'">
                             <button type="submit" name="blood" class="btn mt-3 donate">REQUEST</button>
+                            <a target="blank" style="margin-left:auto;margin-right:auto;display:block;width: 35%;border-radius: 4rem;font-weight: bold;" class="btn btn-outline-primary mt-2" href="https://wa.me/+91'.$phone.'">Chat</a>
+
                             </form>
                             </div>
                     </div>
