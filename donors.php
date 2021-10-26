@@ -162,7 +162,7 @@
                     <a class="nav-link" href="./requests.php">Requests</a>
                 </li>
                 <li class="nav-item active mt-1">
-                    <a class="nav-link" href="#">Donors</a>
+                    <a class="nav-link" href="./donors.php">Donors</a>
                 </li>
                 <li class="nav-item dropdown mt-1">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -170,18 +170,58 @@
                         Pages
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Donate Blood</a>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Blood</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Blood</a>
+                            <?php
+                        }?>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Donate Organs</a>
+                        <?php
+                        
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_donate.php">Donate Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Organs</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Organs</a>
+                            <?php
+                        }?>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="./aboutus.php">About Us</a>
                         <a class="dropdown-item" href="./contactus.php">Contact Us</a>
                         <a class="dropdown-item" href="./faq.php">FAQ</a>
                     </div>
                 </li>
-
                 <?php 
                     if(isset($_SESSION['user_id'])){    
                 ?>
@@ -199,6 +239,7 @@
             </ul>
         </div>
     </nav>
+
 
     <div class="container requests">
         <h1 class="mt-5 text-center">LIST OF DONORS AVAILABLE</h1>

@@ -70,50 +70,103 @@ if(isset($_POST['submit']))
 
 <body>
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
-            <a class="navbar-brand ml-4" href="#">
-                <h3 class="brand-name">Life Line</h3>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="toggle-btn"></div>
-                <div class="toggle-btn"></div>
-                <div class="toggle-btn"></div>
-            </button>
-            <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./index.php">Home</a>
-                    </li>
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./requests.php">Requests</a>
-                    </li>
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./donors.php">Donors</a>
-                    </li>
-                    <li class="nav-item dropdown mt-1 active">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pages
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="blood_donor.php">Donate Blood</a>
-                            <a class="dropdown-item active" href="#">Request Blood</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="organ_donate.php">Donate Organs</a>
-                            <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="aboutus.php">About Us</a>
-                            <a class="dropdown-item" href="contactus.php">Contact Us</a>
-                            <a class="dropdown-item" href="faq.php">FAQ</a>
-                        </div>
-                    </li>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
+        <a class="navbar-brand ml-4" href="#">
+            <h3 class="brand-name">Life Line</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+        </button>
+        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./index.php">Home</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./requests.php">Requests</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./donors.php">Donors</a>
+                </li>
+                <li class="nav-item dropdown active mt-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Blood</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Blood</a>
+                            <?php
+                        }?>
+                        <div class="dropdown-divider"></div>
+                        <?php
+                        
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_donate.php">Donate Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Organs</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Organs</a>
+                            <?php
+                        }?>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="./aboutus.php">About Us</a>
+                        <a class="dropdown-item" href="./contactus.php">Contact Us</a>
+                        <a class="dropdown-item" href="./faq.php">FAQ</a>
+                    </div>
+                </li>
+                <?php 
+                    if(isset($_SESSION['user_id'])){    
+                ?>
+                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
+                <?php 
+                    }
+                    else{
+                ?>
+                <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
+                <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <?php 
+                    }
+                ?>
+            </ul>
+        </div>
+    </nav>
 
-                    <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
-                    <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
-                </ul>
-            </div>
-        </nav>
     </div>
     <br>
     <br>
