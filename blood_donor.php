@@ -21,6 +21,7 @@ if(isset($_POST['submit-btn']))
         $sql = "INSERT INTO blood_donors (`donor_id`,`blood_grp`,`location`) VALUES ('$id','$blood_grp','$location')";
     }
     $conn->query($sql);
+    header("Location: donors.php");
 }
 ?>
 
@@ -132,7 +133,7 @@ if(isset($_POST['submit-btn']))
     <br>
     <!--form starts-->
 
-    <form class="ml-3 mr-3" method="post" action="blood_donor.php" novalidate >
+    <form class="ml-3 mr-3" method="post" action="blood_donor.php" >
 
 
         <div class="form-row">
@@ -316,7 +317,8 @@ if(isset($_POST['submit-btn']))
     function getlocation()
         {
             var checkbox = document.getElementById('coordinates');
-            if (checkbox.checked != false) {
+            if (checkbox.checked != false)
+            {
 	            if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
                 }
@@ -324,6 +326,11 @@ if(isset($_POST['submit-btn']))
                 {
                     alert("Geolocation is not supported by this browser.");
                 }
+            }
+            else
+            {
+                document.getElementById('lat').value = 0;
+                document.getElementById('lon').value = 0;
             }
         }
 

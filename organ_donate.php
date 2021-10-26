@@ -12,7 +12,6 @@ if(isset($_POST["submitBtn"])){
         $sql = "INSERT INTO organ_donors(`donor_id`,`organs`,`blood_grp`,`location`) VALUES ('$id','$organ','$blood','$location')";
         $conn->query($sql) ;
         header("location:donors.php");
-
 }
  
 ?>

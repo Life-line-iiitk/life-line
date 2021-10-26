@@ -14,12 +14,10 @@ if(isset($_POST['submit']))
     {
         $urgent=0;
     }
-    //$type=$_POST['type'];
+    $type=$_POST['type'];
     $location=$_POST['location'];
     if($_POST['lat']!="0")
     {
-        echo "<script>console.log('$id,$msg,$blood_grp,$location,$type');</script>";
-
         $lat=$_POST['lat'];
         $lon=$_POST['lon'];
         $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`,`lat`,`lon`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location','$lat','$lon');";
@@ -29,6 +27,7 @@ if(isset($_POST['submit']))
         $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location')";
     }
     $conn->query($sql);
+    header("Location: dashboard.php");
 }
 ?>
 
@@ -148,11 +147,7 @@ if(isset($_POST['submit']))
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-<<<<<<< HEAD
-                <form class="needs-validation" method="post" action="blood_request.php" novalidate >
-=======
-                <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" novalidate>
->>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
+                <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <div class="form-group">
                         <label for="type" class="form-label" ><b>Type<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
@@ -227,7 +222,7 @@ if(isset($_POST['submit']))
                             <li>
                                 <div class="form-group form-check">
                                     <label class="form-check-label pl-10 switch">
-                                        <input class="checkbox ib" type="checkbox" name="urgent" id="urgent" required>
+                                        <input class="checkbox ib" type="checkbox" name="urgent" id="urgent">
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -375,6 +370,11 @@ if(isset($_POST['submit']))
                 {
                     alert("Geolocation is not supported by this browser.");
                 }
+            }
+            else
+            {
+                document.getElementById('lat').value = 0;
+                document.getElementById('lon').value = 0;
             }
         }
 

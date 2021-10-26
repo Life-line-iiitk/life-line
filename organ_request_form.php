@@ -324,6 +324,12 @@ header("location:dashboard.php");
                     alert("Geolocation is not supported by this browser.");
                 }
             }
+            else
+            {
+                document.getElementById("lat").value = "0";
+                document.getElementById("lon").value = "0";
+            
+            }
         }
 
         function showPosition(position) {
