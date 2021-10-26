@@ -2,10 +2,6 @@
 session_start();
 include('./db_conn.php');
 $id=$_SESSION['user_id'];
-<<<<<<< HEAD
-=======
-
->>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
 if(isset($_POST['submit']))
 {
     $msg=$_POST['purpose'];
@@ -18,29 +14,18 @@ if(isset($_POST['submit']))
     {
         $urgent=0;
     }
-<<<<<<< HEAD
     //$type=$_POST['type'];
     $location=$_POST['location'];
     if($_POST['lat']!="0")
     {
         echo "<script>console.log('$id,$msg,$blood_grp,$location,$type');</script>";
 
-=======
-    $type=$_POST['type'];
-    $location=$_POST['location'];
-    if($_POST['lat']!="0")
-    {
->>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
         $lat=$_POST['lat'];
         $lon=$_POST['lon'];
         $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`,`lat`,`lon`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location','$lat','$lon');";
     }
     else
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
         $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location')";
     }
     $conn->query($sql);
@@ -48,12 +33,7 @@ if(isset($_POST['submit']))
 ?>
 
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
 <html lang="en">
 
 <head>
@@ -270,11 +250,7 @@ if(isset($_POST['submit']))
                     </div>
 
                     <div class="">
-<<<<<<< HEAD
                         <button type="submit" name="submit" id="submit" class="btn mb-4 btn-lg b">Submit </button>
-=======
-                        <button type="submit" class="btn mb-4 btn-lg b" name="submit" id="submit">Submit </button>
->>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
                     </div>
 
                 </form>
