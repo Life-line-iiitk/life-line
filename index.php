@@ -155,10 +155,33 @@ $id=$_SESSION['user_id'];
 
                         <div class="row mt-4 text-center">
                             <div class="col-md-6 mt-2">
-                                <a href="blood_donor.php" class="btn link-btn">DONATE BLOOD</a>
+                            <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                       <a href="blood_donor.php" class="btn link-btn">DONATE BLOOD</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a href="./sign_in.php" class="btn link-btn">DONATE BLOOD</a>
+                            <?php
+                        }?>
+                                
                             </div>
                             <div class="col-md-6 mt-2">
-                                <a href="blood_request.php" class="btn link-btn">REQUEST BLOOD</a>
+                            <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                       <a href="blood_request.php" class="btn link-btn">REQUEST BLOOD</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a href="./sign_in.php" class="btn link-btn">REQUEST BLOOD</a>
+                            
+                            <?php
+                        }?>
+                                
                             </div>
                         </div>
 
@@ -176,10 +199,35 @@ $id=$_SESSION['user_id'];
 
                         <div class="row mt-4 text-center">
                             <div class="col-md-6 mt-2">
-                                <a href="organ_donate.php " class="btn link-btn">DONATE ORGANS</a>
+                            <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a href="organ_donate.php " class="btn link-btn">DONATE ORGANS</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                             <a href="./sign_in.php" class="btn link-btn">DONATE ORGANS</a>
+                            
+                            <?php
+                        }?>
+                               
                             </div>
                             <div class="col-md-6 mt-2">
-                                <a href="./organ_request_form.php" class="btn link-btn">REQUEST ORGANS</a>
+                            <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a href="./organ_request_form.php" class="btn link-btn">REQUEST ORGANS</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a href="./sign_in.php" class="btn link-btn">REQUEST ORGANS</a>
+                            
+                            
+                            <?php
+                        }?>
+                                
                             </div>
                         </div>
 

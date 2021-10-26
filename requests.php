@@ -598,7 +598,8 @@
 
         </div>
     </div>
-    <footer class="text-center mt-5 text-lg-start bg-light text-muted">
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
 
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <div class="me-5 d-none d-lg-block">
@@ -644,14 +645,15 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             <b>QUICK LINKS</b>
                         </h6>
+                        
                         <p>
                             <a href="./index.php" class="text-reset">Home</a>
                         </p>
                         <p>
-                            <a href="aboutus.php" class="text-reset">About Us</a>
+                            <a href="./aboutus.php" class="text-reset">About Us</a>
                         </p>
                         <p>
-                            <a href="contactus.php" class="text-reset">Contact Us</a>
+                            <a href="./contactus.php" class="text-reset">Contact Us</a>
                         </p>
 
                     </div>
@@ -660,18 +662,68 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             <b>Useful links</b>
                         </h6>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
-                            <a href="#!" class="text-reset">Donate Blood</a>
+                            <a href="./blood_donor.php" class="text-reset">Donate Blood</a>
                         </p>
-                        <p>
-                            <a href="blood_request.php" class="text-reset">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Blood</a>
                         </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
-                            <a href="#!" class="text-reset">Donate Organs</a>
+                            <a href="./blood_request.php" class="text-reset">Request Blood</a>
                         </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Blood</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
+                            <a href="./organ_donate.php" class="text-reset">Donate Organs</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                       <p>
                             <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
                         </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        
+                        
                     </div>
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
