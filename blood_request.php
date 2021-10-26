@@ -1,3 +1,41 @@
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+if(isset($_POST['submit']))
+{
+    $msg=$_POST['purpose'];
+    $blood_grp=$_POST['blood_group'];
+    if(isset($_POST['urgent']))
+    {
+        $urgent=1;
+    }
+    else
+    {
+        $urgent=0;
+    }
+    //$type=$_POST['type'];
+    $location=$_POST['location'];
+    if($_POST['lat']!="0")
+    {
+        echo "<script>console.log('$id,$msg,$blood_grp,$location,$type');</script>";
+
+        $lat=$_POST['lat'];
+        $lon=$_POST['lon'];
+        $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`,`lat`,`lon`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location','$lat','$lon');";
+    }
+    else
+    {
+        $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location')";
+    }
+    $conn->query($sql);
+}
+?>
+
+
+
+
+
 <html lang="en">
 
 <head>
@@ -111,9 +149,9 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" method="post" action="blood_request.php" novalidate >
                     <div class="form-group">
-                        <label for="type" class="form-label"><b>Type<span
+                        <label for="type" class="form-label" ><b>Type<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
                         <select class="form-control ib" name="type" id="type" required>
                             <option selected disabled value="">Choose Required Type...</option>
@@ -209,7 +247,7 @@
                     </div>
 
                     <div class="">
-                        <button type="submit" class="btn mb-4 btn-lg b">Submit </button>
+                        <button type="submit" name="submit" id="submit" class="btn mb-4 btn-lg b">Submit </button>
                     </div>
 
                 </form>
@@ -348,9 +386,9 @@
             if (checkbox.checked != false) {
 	            if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
-                } 
+                }
                 else
-                { 
+                {
                     alert("Geolocation is not supported by this browser.");
                 }
             }

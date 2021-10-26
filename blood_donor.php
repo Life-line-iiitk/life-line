@@ -1,3 +1,36 @@
+<?php
+session_start();
+include('./db_conn.php');
+$id=$_SESSION['user_id'];
+if(isset($_POST['submit']))
+{
+  $blood_grp=$_POST['blood_group'];
+  $type=$_POST['type'];
+  $location=$_POST['location'];
+  
+
+
+    if($_POST['lat']!="0")
+    {
+        echo "<script>console.log('$id,$blood_grp,$location,$type');</script>";
+
+        $lat=$_POST['lat'];
+        $lon=$_POST['lon'];
+        $sql = "INSERT INTO `blood_donors` (`donar_id`,`blood_grp`,`location`,`lat`,`lon`) VALUES ('$id','$blood_grp','$location','$lat','$lon');";
+    }
+    else
+    {
+        $sql = "INSERT INTO `blood_donors` (`donar_id`,`blood_grp`,`location`) VALUES ('$id','$blood_grp','$location')";
+    }
+    $conn->query($sql);
+}
+?>
+
+
+
+
+
+
 <html lang="en">
 
 <head>
@@ -101,13 +134,13 @@
     <br>
     <!--form starts-->
 
-    <form class="needs-validation ml-3 mr-3" novalidate>
+    <form class="needs-validation ml-3 mr-3" method="post" action="blood_donor.php" novalidate >
 
 
         <div class="form-row">
             <div class="col-md-8 m-auto">
                 <label for="validationCustom04" class="form-label"><b>Type<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                <select class="form-control" id="validationCustom04" required name="type">
+                <select class="form-control" id="validationCustom04" required name="type" id="type">
                     <option selected disabled value="">Choose...</option>
                     <option value="blood">Blood</option>
                     <option value="plasma" >Plasma</option>
@@ -124,7 +157,7 @@
         <div class="form-row">
             <div class="col-md-8 m-auto">
                 <label for="validationCustom04" class="form-label"><b>Blood Group<span style="color: red; font-size: 1.rem;">*</span></b></label>
-                <select class="form-control" id="validationCustom04" required name="bloodgroup">
+                <select class="form-control" id="validationCustom04" required name="blood_group" id="blood_group">
                     <option selected disabled value="">Choose donor's Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="A-" >A-</option>
@@ -145,7 +178,7 @@
         <div class="form-row">
             <div class="col-md-8 m-auto">
               <label for="validationCustom03"><b>Location<span style="color: red; font-size: 1.rem;">*</span></b></label>
-              <input type="text" class="form-control" id="validationCustom03" placeholder="Eg: Hyderabad,Telangana" required name="location">
+              <input type="text" class="form-control" id="validationCustom03" placeholder="Eg: Hyderabad,Telangana" required name="location" id="location">
               <div class="invalid-feedback">
                 Please fill this field.
               </div>
@@ -174,7 +207,7 @@
           </div>
         </div>
           <div class="text-center">
-          <button name="submit-btn" type="submit" class="btn  mb-4 btn-lg  " style="background-color: crimson; color: white;">Submit </button>
+          <button name="submit-btn" type="submit" class="btn  mb-4 btn-lg  " name="submit" id="submit" style="background-color: crimson; color: white;" >Submit </button>
           </div>
 
     </form>
@@ -298,7 +331,7 @@
             </div>
         </footer>
     </div>
-    
+
 </body>
 <script>
     function getlocation()
@@ -307,9 +340,9 @@
             if (checkbox.checked != false) {
 	            if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
-                } 
+                }
                 else
-                { 
+                {
                     alert("Geolocation is not supported by this browser.");
                 }
             }
