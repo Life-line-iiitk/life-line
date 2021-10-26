@@ -13,6 +13,8 @@
     {
     if(isset($_SESSION['user_id']))
     {
+        echo "<script>console.log('Uf');</script>";
+
         $user_id=$_SESSION['user_id'];
         $q="SELECT * FROM blood_requesters WHERE requester_id='$user_id' ORDER BY date DESC LIMIT 1";
         $r=$conn->query($q);
@@ -22,18 +24,22 @@
             {
                 $request_id=$row['sno'];
             }
+            $sq="SELECT * FROM `blood_donated_users` WHERE request_id='$request_id'";
+            $sr1=$conn->query($sq);
+            if($sr1->num_rows>0)
+            {    
+                echo "<script>alert('Your request is already fullfilled!!');</script>";
+            }
+            else{
             $donor_id=$_POST['donor_id'];
-           
-
             $ins1="INSERT INTO blood_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$donor_id',0)";
             $ires1=$conn->query($ins1);
             echo "<script>alert('THANK YOU!!Your contact is shared with the donor');</script>";
-
+            }
         }
         else
         {
-            echo "<script>alert('You don't have a request');</script>";
-
+            echo "<script>alert('No request found');</script>";
         }
 
     }
@@ -46,9 +52,7 @@
     }}
 
     if(isset($_POST['organ']))
-    {
-
-    
+    {    
     if(isset($_SESSION['user_id']))
     {
         $user_id=$_SESSION['user_id'];
@@ -60,12 +64,18 @@
             {
                 $request_id=$row['sno'];
             }
+            $sq="SELECT * FROM `organ_donated_users` WHERE request_id='$request_id'";
+            $sr1=$conn->query($sq);
+            if($sr1->num_rows>0)
+            {    
+                echo "<script>alert('Your request is already fullfilled!!');</script>";
+            }
+            else{
             $donor_id=$_POST['donor_id'];
-           
-
             $ins1="INSERT INTO organ_responses(`request_id`,`user_id`,`voluntary`) VALUES('$request_id','$donor_id',0)";
             $ires1=$conn->query($ins1);
             echo "<script>alert('THANK YOU!!Your contact is shared with the donor');</script>";
+            }
         }
         else
         {
