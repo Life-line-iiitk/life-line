@@ -522,7 +522,20 @@ $id=$_SESSION['user_id'];
     </div>
 
     <div class="col text-center mt-4">
-        <a href="#" class="btn link-btn" style="color:var(--white);background-color:var(--red)">DONATE BLOOD</a>
+    <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                            <a href="./blood_donor.php" class="btn link-btn" style="color:var(--white);background-color:var(--red)">DONATE BLOOD</a>
+                       
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a href="./sign_in.php" class="btn link-btn" style="color:var(--white);background-color:var(--red)">DONATE BLOOD</a>
+                            
+                            <?php
+                        }?>
+        
     </div>
 
 
@@ -651,7 +664,20 @@ $id=$_SESSION['user_id'];
             </div>
         </div>
         <div class="col text-center mt-5 mb-5">
-            <a href="#" class="btn link-btn" style="color:var(--white);background-color:var(--red)">DONATE ORGANS</a>
+        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                            <a href="./organ_donor.php" class="btn link-btn" style="color:var(--white);background-color:var(--red)">DONATE ORGANS</a>
+                       
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a href="./sign_in.php" class="btn link-btn" style="color:var(--white);background-color:var(--red)">DONATE ORGANS</a>
+                            
+                            <?php
+                        }?>
+        
         </div>
     </div>
 
