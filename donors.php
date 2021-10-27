@@ -39,7 +39,10 @@
         }
         else
         {
-            echo "<script>alert('No request found');</script>";
+            echo "<script>alert('No request found!!Please register');</script>";
+            echo '<script>
+                    location.replace("blood_request.php");
+                </script>';
         }
 
     }
@@ -453,7 +456,7 @@
                     {
                         echo '<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
                             <input type="hidden" name="donor_id" value="'.$rr.'">
-                            <button type="submit" name="blood" class="btn mt-3 donate">REQUEST</button>
+                            <button type="submit" name="organ" class="btn mt-3 donate">REQUEST</button>
                             <a target="blank" style="margin-left:auto;margin-right:auto;display:block;width: 35%;border-radius: 4rem;font-weight: bold;" class="btn btn-outline-primary mt-2" href="https://wa.me/+91'.$phone.'">Chat</a>
 
                             </form>

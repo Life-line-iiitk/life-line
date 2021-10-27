@@ -1,5 +1,6 @@
 <?php 
 session_start();
+include('./db_conn.php');
 $id=$_SESSION['user_id'];
 
 ?>
@@ -680,29 +681,32 @@ $id=$_SESSION['user_id'];
         
         </div>
     </div>
-
     <div id="latest">
+    <?php 
+        $q="SELECT u.name,b.*,br.blood_grp FROM users u,blood_donated_users b,blood_requesters br WHERE u.id=b.donor_id AND b.request_id=br.sno ORDER BY date DESC";
+        $res=$conn->query($q);
+        if($res->num_rows>0)
+        {
+            while($row=$res->fetch_assoc())
+            {
+                $blood_grp=$row['blood_grp'];
+                $name=$row['name'];
+                echo '
         <div class="slideshow-container mb-2 ml-2 p-3" id="slideshow-container">
             <u>
                 <h4>Latest Donations</h4>
             </u>
             <div class="mySlides fade">
-                <p> <b>Donor:</b> Bhanu</p>
-                <p> <b>Blood Group:</b> AB+</p>
+                <p> <b>Donor:</b> '.$name.'</p>
+                <p> <b>Blood Group:</b> '.$blood_grp.'</p>
             </div>
-
-            <div class="mySlides fade">
-                <p> <b>Donor:</b> Krishna</p>
-                <p> <b>Blood Group:</b> B+</p>
-            </div>
-
-            <div class="mySlides fade">
-                <p><b>Donor:</b> Prasad</p>
-                <p><b>Blood Group:</b> AB-</p>
-            </div>
-
         </div>
-    </div>
+    </div>';
+            }
+        }
+
+        ?>
+        
     <script>
         var slideIndex = 0;
         showSlides();

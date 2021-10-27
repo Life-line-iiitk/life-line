@@ -77,9 +77,9 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLongTitle" style="color:var(--red)">You are just one step
                         away!!</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+
+                    <a href="./index.php"><span aria-hidden="true" class="btn-danger btn" style="font-weight:bold;font-size:1.3rem">&times;</span></a>
+
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
