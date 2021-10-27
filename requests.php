@@ -25,7 +25,7 @@
         }
         else
         {
-        echo "<script>alert('Please Login before responding!!');</script>";
+        //echo "<script>alert('Please Login before responding!!');</script>";
         echo '<script>
             location.replace("sign_in.php");
             </script>';
@@ -110,7 +110,7 @@
 
 
 <body onload="toggledata()">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
         <a class="navbar-brand ml-4" href="#">
             <h3 class="brand-name">Life Line</h3>
         </a>
@@ -126,10 +126,10 @@
                     <a class="nav-link" href="./index.php">Home</a>
                 </li>
                 <li class="nav-item active mt-1">
-                    <a class="nav-link" href="./requests.php">Requests</a>
+                    <a class="nav-link" href="#">Requests</a>
                 </li>
                 <li class="nav-item mt-1">
-                    <a class="nav-link" href="donors.php">Donors</a>
+                    <a class="nav-link" href="./donors.php">Donors</a>
                 </li>
                 <li class="nav-item dropdown mt-1">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -137,18 +137,58 @@
                         Pages
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Donate Blood</a>
-                        <a class="dropdown-item" href="blood_request.php">Request Blood</a>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Blood</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Blood</a>
+                            <?php
+                        }?>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Donate Organs</a>
+                        <?php
+                        
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_donate.php">Donate Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Organs</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Organs</a>
+                            <?php
+                        }?>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="aboutus.php">About Us</a>
-                        <a class="dropdown-item" href="contactus.php">Contact Us</a>
-                        <a class="dropdown-item" href="faq.php">FAQ</a>
+                        <a class="dropdown-item" href="./aboutus.php">About Us</a>
+                        <a class="dropdown-item" href="./contactus.php">Contact Us</a>
+                        <a class="dropdown-item" href="./faq.php">FAQ</a>
                     </div>
                 </li>
-
                 <?php 
                     if(isset($_SESSION['user_id'])){    
                 ?>
@@ -558,7 +598,8 @@
 
         </div>
     </div>
-    <footer class="text-center mt-5 text-lg-start bg-light text-muted">
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
 
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <div class="me-5 d-none d-lg-block">
@@ -604,14 +645,15 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             <b>QUICK LINKS</b>
                         </h6>
+                        
                         <p>
                             <a href="./index.php" class="text-reset">Home</a>
                         </p>
                         <p>
-                            <a href="aboutus.php" class="text-reset">About Us</a>
+                            <a href="./aboutus.php" class="text-reset">About Us</a>
                         </p>
                         <p>
-                            <a href="contactus.php" class="text-reset">Contact Us</a>
+                            <a href="./contactus.php" class="text-reset">Contact Us</a>
                         </p>
 
                     </div>
@@ -620,18 +662,68 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             <b>Useful links</b>
                         </h6>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
-                            <a href="#!" class="text-reset">Donate Blood</a>
+                            <a href="./blood_donor.php" class="text-reset">Donate Blood</a>
                         </p>
-                        <p>
-                            <a href="blood_request.php" class="text-reset">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Blood</a>
                         </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
-                            <a href="#!" class="text-reset">Donate Organs</a>
+                            <a href="./blood_request.php" class="text-reset">Request Blood</a>
                         </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Blood</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
+                            <a href="./organ_donate.php" class="text-reset">Donate Organs</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                       <p>
                             <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
                         </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        
+                        
                     </div>
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

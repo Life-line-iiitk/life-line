@@ -2,51 +2,35 @@
 session_start();
 include('./db_conn.php');
 $id=$_SESSION['user_id'];
-
 if(isset($_POST['submit']))
 {
-    $type = $_POST['type'];
-    $blood_group = $_POST['blood_group'];
-    $location = $_POST['location'];
-    $purpose = $_POST['purpose'];
-    //$urgent = $_POST['urgent'];
+    $msg=$_POST['purpose'];
+    $blood_grp=$_POST['blood_group'];
     if(isset($_POST['urgent']))
     {
-        $urgent = '1';
+        $urgent=1;
     }
     else
     {
-        $urgent = 'NULL';
+        $urgent=0;
     }
-
-    if(isset($_POST["lat"]) && isset($_POST["lon"])){
-		$lat = $_POST['lat'];
+    $type=$_POST['type'];
+    $location=$_POST['location'];
+    if($_POST['lat']!="0")
+    {
+        $lat=$_POST['lat'];
         $lon=$_POST['lon'];
-
-        $sql = "INSERT INTO organ_requesters (requester_id, msg, blood_grp, urgent, type, location , lat, lon) VALUES ('$id','$purpose',
-        '$blood_grp','$urgent','$location','$lat','$lon')";
-        $res = $conn->query($sql);
-    }
-
-    else
-    {
-        $sql = "INSERT INTO organ_requesters (requester_id, msg, blood_grp, urgent, type, location) VALUES ('$id','$purpose',
-        '$blood_grp','$urgent','$location')";
-        $res = $conn->query($sql);
-    }
-
-
-    if($conn->query($sql) == true )
-    {
-        header("location:dashboard.php");
+        $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`,`lat`,`lon`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location','$lat','$lon');";
     }
     else
     {
-        header("location:blood_request.php?Error = Something Went Wrong");
+        $sql = "INSERT INTO blood_requesters (`requester_id`,`msg`,`blood_grp`,`urgent`,`type`,`location`) VALUES ('$id','$msg','$blood_grp','$urgent','$type','$location')";
     }
+    $conn->query($sql);
+    header("Location: dashboard.php");
 }
-
 ?>
+
 
 
 <html lang="en">
@@ -86,50 +70,103 @@ if(isset($_POST['submit']))
 
 <body>
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
-            <a class="navbar-brand ml-4" href="#">
-                <h3 class="brand-name">Life Line</h3>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="toggle-btn"></div>
-                <div class="toggle-btn"></div>
-                <div class="toggle-btn"></div>
-            </button>
-            <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./index.php">Home</a>
-                    </li>
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./requests.php">Requests</a>
-                    </li>
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./donors.php">Donors</a>
-                    </li>
-                    <li class="nav-item dropdown mt-1 active">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pages
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="blood_donor.php">Donate Blood</a>
-                            <a class="dropdown-item active" href="#">Request Blood</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="organ_donate.php">Donate Organs</a>
-                            <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="aboutus.php">About Us</a>
-                            <a class="dropdown-item" href="contactus.php">Contact Us</a>
-                            <a class="dropdown-item" href="faq.php">FAQ</a>
-                        </div>
-                    </li>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
+        <a class="navbar-brand ml-4" href="#">
+            <h3 class="brand-name">Life Line</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+        </button>
+        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./index.php">Home</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./requests.php">Requests</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./donors.php">Donors</a>
+                </li>
+                <li class="nav-item dropdown active mt-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Blood</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Blood</a>
+                            <?php
+                        }?>
+                        <div class="dropdown-divider"></div>
+                        <?php
+                        
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_donate.php">Donate Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Organs</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Organs</a>
+                            <?php
+                        }?>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="./aboutus.php">About Us</a>
+                        <a class="dropdown-item" href="./contactus.php">Contact Us</a>
+                        <a class="dropdown-item" href="./faq.php">FAQ</a>
+                    </div>
+                </li>
+                <?php 
+                    if(isset($_SESSION['user_id'])){    
+                ?>
+                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
+                <?php 
+                    }
+                    else{
+                ?>
+                <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
+                <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <?php 
+                    }
+                ?>
+            </ul>
+        </div>
+    </nav>
 
-                    <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
-                    <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
-                </ul>
-            </div>
-        </nav>
     </div>
     <br>
     <br>
@@ -163,9 +200,9 @@ if(isset($_POST['submit']))
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" novalidate>
+                <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <div class="form-group">
-                        <label for="type" class="form-label"><b>Type<span
+                        <label for="type" class="form-label" ><b>Type<span
                                     style="color: red; font-size: 1.rem;">*</span></b></label>
                         <select class="form-control ib" name="type" id="type" required>
                             <option selected disabled value="">Choose Required Type...</option>
@@ -219,8 +256,8 @@ if(isset($_POST['submit']))
                                 My Current Coordinates</b>
                         </label>
                     </div>
-                    <input type="hidden" name="lat" id="lat">
-                    <input type="hidden" name="lon" id="lon">
+                    <input type="hidden" value="0" name="lat" id="lat">
+                    <input type="hidden" value="0" name="lon" id="lon">
 
                     <div class="form-group">
 
@@ -238,7 +275,7 @@ if(isset($_POST['submit']))
                             <li>
                                 <div class="form-group form-check">
                                     <label class="form-check-label pl-10 switch">
-                                        <input class="checkbox ib" type="checkbox" name="urgent" id="urgent" required>
+                                        <input class="checkbox ib" type="checkbox" name="urgent" id="urgent">
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -261,7 +298,7 @@ if(isset($_POST['submit']))
                     </div>
 
                     <div class="">
-                        <button type="submit" class="btn mb-4 btn-lg b" name = "submit" id="submit">Submit </button>
+                        <button type="submit" name="submit" id="submit" class="btn mb-4 btn-lg b">Submit </button>
                     </div>
 
                 </form>
@@ -271,124 +308,155 @@ if(isset($_POST['submit']))
 
 
 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+    
 
     <!-- Footer -->
-    <div class="footer">
-        <footer class="text-center text-lg-start bg-light mt-5 text-muted">
+    <footer class="text-center text-lg-start bg-light text-muted">
 
-            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-                <div class="me-5 d-none d-lg-block">
-                    <span>Get connected with us on social networks:</span>
-                </div>
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
 
-                <div>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-twitter"></i>
-                    </a>
+            <div>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-twitter"></i>
+                </a>
 
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </section>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </section>
 
-            <section class="">
-                <div class="container text-center text-md-start mt-5">
-                    <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <h5 class="text-uppercase fw-bold mb-4" style="color:var(--red);font-weight:bold">
-                                LIFE LINE
-                            </h5>
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h5 class="text-uppercase fw-bold mb-4" style="color:var(--red);font-weight:bold">
+                            LIFE LINE
+                        </h5>
+                        <p>
+                            Life-Line is non profit organization committed to help
+                            people who are in need of
+                            blood or organs.
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>QUICK LINKS</b>
+                        </h6>
+                        
+                        <p>
+                            <a href="./index.php" class="text-reset">Home</a>
+                        </p>
+                        <p>
+                            <a href="./aboutus.php" class="text-reset">About Us</a>
+                        </p>
+                        <p>
+                            <a href="./contactus.php" class="text-reset">Contact Us</a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>Useful links</b>
+                        </h6>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <p>
+                            <a href="./blood_donor.php" class="text-reset">Donate Blood</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
                             <p>
-                                Life-Line is non profit organization committed to help
-                                people who are in need of
-                                blood or organs.
-                            </p>
-                        </div>
+                            <a href="./sign_in.php" class="text-reset">Donate Blood</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <p>
+                            <a href="./blood_request.php" class="text-reset">Request Blood</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Blood</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <p>
+                            <a href="./organ_donate.php" class="text-reset">Donate Organs</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                       <p>
+                            <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        
+                        
+                    </div>
 
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <b>QUICK LINKS</b>
-                            </h6>
-                            <p>
-                                <a href="./index.php" class="text-reset">Home</a>
-                            </p>
-                            <p>
-                                <a href="aboutus.php" class="text-reset">About Us</a>
-                            </p>
-                            <p>
-                                <a href="contactus.php" class="text-reset">Contact Us</a>
-                            </p>
-
-                        </div>
-
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <b>Useful links</b>
-                            </h6>
-                            <p>
-                                <a href="#!" class="text-reset">Donate Blood</a>
-                            </p>
-                            <p>
-                                <a href="blood_request.php" class="text-reset">Request Blood</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">Donate Organs</a>
-                            </p>
-                            <p>
-                                <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
-                            </p>
-                        </div>
-
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <b>Contact</b>
-                            </h6>
-                            <p><i class="fas fa-home me-3"></i> IIIT Kottayam</p>
-                            <p>
-                                <i class="fas fa-envelope me-3"></i>
-                                lifelinesupport@gmail.com
-                            </p>
-                            <p><i class="fas fa-phone me-3"></i>+91 9347619384</p>
-                        </div>
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>Contact</b>
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> IIIT Kottayam</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            lifelinesupport@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i>+91 9347619384</p>
                     </div>
                 </div>
-            </section>
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2021 Copyright:Life Line
             </div>
-        </footer>
+        </section>
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:Life Line
+        </div>
+    </footer>
     </div>
 
     <script>
@@ -400,11 +468,16 @@ if(isset($_POST['submit']))
             if (checkbox.checked != false) {
 	            if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
-                } 
+                }
                 else
-                { 
+                {
                     alert("Geolocation is not supported by this browser.");
                 }
+            }
+            else
+            {
+                document.getElementById('lat').value = 0;
+                document.getElementById('lon').value = 0;
             }
         }
 
