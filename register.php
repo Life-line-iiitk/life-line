@@ -265,8 +265,8 @@ if(isset($_POST['signup']))
                     }
                     else{
                 ?>
-                <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
-                <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <a href="register.php" class="btn sign-in mt-1 ml-2">Sign Up</a>
+                <a href="sign_in.php" class="btn sign-up mt-1 ml-2">Sign In</a>
                 <?php 
                     }
                 ?>
