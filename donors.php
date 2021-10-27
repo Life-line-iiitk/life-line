@@ -456,7 +456,7 @@
                     {
                         echo '<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
                             <input type="hidden" name="donor_id" value="'.$rr.'">
-                            <button type="submit" name="blood" class="btn mt-3 donate">REQUEST</button>
+                            <button type="submit" name="organ" class="btn mt-3 donate">REQUEST</button>
                             <a target="blank" style="margin-left:auto;margin-right:auto;display:block;width: 35%;border-radius: 4rem;font-weight: bold;" class="btn btn-outline-primary mt-2" href="https://wa.me/+91'.$phone.'">Chat</a>
 
                             </form>
@@ -489,7 +489,6 @@
     <div class="me-5 d-none d-lg-block">
         <span>Get connected with us on social networks:</span>
     </div>
-<<<<<<< HEAD
 
     <div>
         <a href="" class="me-4 text-reset p-3">
@@ -499,17 +498,6 @@
             <i class="fab fa-twitter"></i>
         </a>
 
-=======
-
-    <div>
-        <a href="" class="me-4 text-reset p-3">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="" class="me-4 text-reset p-3">
-            <i class="fab fa-twitter"></i>
-        </a>
-
->>>>>>> c5a04fb13f651c7882bec855d6aa17e12661fc20
         <a href="" class="me-4 text-reset p-3">
             <i class="fab fa-instagram"></i>
         </a>
