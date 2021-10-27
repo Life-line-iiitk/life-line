@@ -489,6 +489,7 @@
     <div class="me-5 d-none d-lg-block">
         <span>Get connected with us on social networks:</span>
     </div>
+<<<<<<< HEAD
 
     <div>
         <a href="" class="me-4 text-reset p-3">
@@ -498,6 +499,17 @@
             <i class="fab fa-twitter"></i>
         </a>
 
+=======
+
+    <div>
+        <a href="" class="me-4 text-reset p-3">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 text-reset p-3">
+            <i class="fab fa-twitter"></i>
+        </a>
+
+>>>>>>> c5a04fb13f651c7882bec855d6aa17e12661fc20
         <a href="" class="me-4 text-reset p-3">
             <i class="fab fa-instagram"></i>
         </a>
