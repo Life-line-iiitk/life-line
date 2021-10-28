@@ -5,7 +5,7 @@
     {
         $user_id=$_SESSION['user_id'];
     }
-    {
+    else{
         $user_id=0;
     }
     
@@ -303,7 +303,9 @@
         else{
             $q="SELECT o.*,u.* FROM blood_donors o,users u WHERE (u.id=o.donor_id)";}
             $res=$conn->query($q);
-            
+            $lat=array();
+            $lon=array();
+            $blood_grp=array();
             if($res->num_rows>0)
             {
                 while($row=$res->fetch_assoc())
@@ -335,9 +337,6 @@
                     }
                     if($flag==0)
                     {
-                        $lat=array();
-                        $lon=array();
-                        $blood_grp=array();
                         $phone=$row['phone'];
                         if($row['lat'])
                         {
@@ -637,8 +636,9 @@
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
+
         id: 'mapbox/streets-v11',
-        tileSize: 510,
+        tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiYmhhbnVrMTkiLCJhIjoiY2tzZWJxZW4yMHl1bzJ1b2RzOXMxd3hkMiJ9.DjdM6ILIjgddBCoERDT_QA'
     }).addTo(mymap);
