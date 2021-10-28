@@ -156,7 +156,7 @@ if(isset($_POST['organ_accept']))
                 <?php 
                     if(isset($_SESSION['user_id'])){    
                 ?>
-                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
                 <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
                 <?php 
                     }
