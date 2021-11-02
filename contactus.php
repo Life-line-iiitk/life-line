@@ -1,4 +1,19 @@
-<?php session_start();?>
+<?php 
+session_start();
+if(isset($_POST['submit']))
+{
+    $_SESSION['mail_from_email']=$_POST['email'];
+    $name=$_POST['fname']." ".$_POST['sname'];
+    $_SESSION['mail_subject']="Contact Form";
+    $_SESSION['mail_message']="From:".$name."<br>Message::".$_POST['msg'];
+    ?>
+    <script>
+        location.replace("mail_file.php");
+    </script>
+    <?php
+}
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -148,19 +163,19 @@
                     Drop a mesasge below to approach us <br>or to share your concern.
                 </h5>
 
-                <form style="font-family: poppins;">
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" style="font-family: poppins;">
                     <div class="row mt-3">
                         <div class="col">
                             <div class="mb-3">
                                 <label for="firstname" class="form-label">First Name</label>
-                                <input placeholder="First Name" type="text" class="form-control" id="firstname"
+                                <input placeholder="First Name" name="fname" type="text" class="form-control" id="firstname"
                                     aria-describedby="emailHelp">
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-3">
                                 <label for="secondname" class="form-label">Second Name</label>
-                                <input placeholder="Second Name" type="text" class="form-control" id="secondname"
+                                <input placeholder="Second Name" name="sname" type="text" class="form-control" id="secondname"
                                     aria-describedby="emailHelp">
                             </div>
                         </div>
@@ -168,16 +183,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1"
+                        <input type="email" placeholder="Email" name="email" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Message</label>
-                        <input type="text" class="form-control" id="message" placeholder="Enter your message">
+                        <input type="text" class="form-control" name="msg" id="message" placeholder="Enter your message">
                     </div>
 
-                    <button type="submit" class="btn btn-send btn-lg">Send</button>
+                    <button type="submit" name="submit" class="btn btn-send btn-lg">Send</button>
                 </form>
 
             </div>

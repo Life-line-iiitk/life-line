@@ -57,6 +57,16 @@ if(isset($_POST['signup']))
     $phone = $_POST['phone'];
     $name = $_POST['name'];
     $age = $_POST['age'];
+    $_SESSION['password']=$password;
+    $_SESSION['phone']=$phone;
+    $_SESSION['name']=$name;
+    $_SESSION['age']=$age;
+    $_SESSION['mail_to_email']=$email;;
+
+    $_SESSION['mail_subject']="Life Line OTP Verification";
+    $_SESSION['otp']=rand(100000,999999);
+    $_SESSION['mail_message']="Your OTP for registering is ".$_SESSION['otp'];
+
     $flag=1;
     if ($age < 18 && $age != 0)
     {
@@ -108,7 +118,12 @@ if(isset($_POST['signup']))
     
     else
     {
-      $sql = "INSERT INTO `users` (`email`, `password`, `phone`, `name`, `age`) VALUES ('$email', '$password', '$phone', '$name', '$age');";
+     ?>
+    <script>
+        location.replace("otp_mail.php");
+    </script>
+    <?php
+      // $sql = "INSERT INTO `users` (`email`, `password`, `phone`, `name`, `age`) VALUES ('$email', '$password', '$phone', '$name', '$age');";
     }
 
     if($flag==1){
