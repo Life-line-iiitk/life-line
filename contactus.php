@@ -1,3 +1,19 @@
+<?php 
+session_start();
+if(isset($_POST['submit']))
+{
+    $_SESSION['mail_from_email']=$_POST['email'];
+    $name=$_POST['fname']." ".$_POST['sname'];
+    $_SESSION['mail_subject']="Contact Form";
+    $_SESSION['mail_message']="From:".$name."<br>Message::".$_POST['msg'];
+    ?>
+    <script>
+        location.replace("mail_file.php");
+    </script>
+    <?php
+}
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -50,8 +66,8 @@
         </button>
         <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active mt-1">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./index.php">Home</a>
                 </li>
                 <li class="nav-item mt-1">
                     <a class="nav-link" href="./requests.php">Requests</a>
@@ -59,29 +75,82 @@
                 <li class="nav-item mt-1">
                     <a class="nav-link" href="./donors.php">Donors</a>
                 </li>
-                <li class="nav-item dropdown mt-1 active">
+                <li class="nav-item dropdown active mt-1">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Pages
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Donate Blood</a>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Blood</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Blood</a>
+                            <?php
+                        }?>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Donate Organs</a>
+                        <?php
+                        
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_donate.php">Donate Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Organs</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Organs</a>
+                            <?php
+                        }?>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="./aboutus.php">About Us</a>
-                        <a class="dropdown-item active" href="./contactus.php">Contact Us</a>
-                        <a class="dropdown-item" href="faq.php">FAQ</a>
+                        <a class="dropdown-item" href="./contactus.php">Contact Us</a>
+                        <a class="dropdown-item" href="./faq.php">FAQ</a>
                     </div>
                 </li>
-
+                <?php 
+                    if(isset($_SESSION['user_id'])){    
+                ?>
+                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
+                <?php 
+                    }
+                    else{
+                ?>
                 <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
                 <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <?php 
+                    }
+                ?>
             </ul>
         </div>
     </nav>
+
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-6 mt-4 mb-4">
@@ -94,19 +163,19 @@
                     Drop a mesasge below to approach us <br>or to share your concern.
                 </h5>
 
-                <form style="font-family: poppins;">
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" style="font-family: poppins;">
                     <div class="row mt-3">
                         <div class="col">
                             <div class="mb-3">
                                 <label for="firstname" class="form-label">First Name</label>
-                                <input placeholder="First Name" type="text" class="form-control" id="firstname"
+                                <input placeholder="First Name" name="fname" type="text" class="form-control" id="firstname"
                                     aria-describedby="emailHelp">
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-3">
                                 <label for="secondname" class="form-label">Second Name</label>
-                                <input placeholder="Second Name" type="text" class="form-control" id="secondname"
+                                <input placeholder="Second Name" name="sname" type="text" class="form-control" id="secondname"
                                     aria-describedby="emailHelp">
                             </div>
                         </div>
@@ -114,16 +183,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1"
+                        <input type="email" placeholder="Email" name="email" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Message</label>
-                        <input type="text" class="form-control" id="message" placeholder="Enter your message">
+                        <input type="text" class="form-control" name="msg" id="message" placeholder="Enter your message">
                     </div>
 
-                    <button type="submit" class="btn btn-send btn-lg">Send</button>
+                    <button type="submit" name="submit" class="btn btn-send btn-lg">Send</button>
                 </form>
 
             </div>
@@ -157,8 +226,8 @@
         </div>
     </div>
 
-    <!-- footer -->
-    <footer class="mt-5 text-center text-lg-start bg-light text-muted">
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
 
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <div class="me-5 d-none d-lg-block">
@@ -204,14 +273,15 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             <b>QUICK LINKS</b>
                         </h6>
+                        
                         <p>
                             <a href="./index.php" class="text-reset">Home</a>
                         </p>
                         <p>
-                            <a href="./about.php" class="text-reset">About Us</a>
+                            <a href="./aboutus.php" class="text-reset">About Us</a>
                         </p>
                         <p>
-                            <a href="contactus.php" class="text-reset">Contact Us</a>
+                            <a href="./contactus.php" class="text-reset">Contact Us</a>
                         </p>
 
                     </div>
@@ -220,18 +290,68 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             <b>Useful links</b>
                         </h6>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
-                            <a href="#!" class="text-reset">Donate Blood</a>
+                            <a href="./blood_donor.php" class="text-reset">Donate Blood</a>
                         </p>
-                        <p>
-                            <a href="blood_request.php" class="text-reset">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Blood</a>
                         </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
-                            <a href="#!" class="text-reset">Donate Organs</a>
+                            <a href="./blood_request.php" class="text-reset">Request Blood</a>
                         </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Blood</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
                         <p>
+                            <a href="./organ_donate.php" class="text-reset">Donate Organs</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                       <p>
                             <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
                         </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        
+                        
                     </div>
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

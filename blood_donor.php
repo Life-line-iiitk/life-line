@@ -21,6 +21,7 @@ if(isset($_POST['submit-btn']))
         $sql = "INSERT INTO blood_donors (`donor_id`,`blood_grp`,`location`) VALUES ('$id','$blood_grp','$location')";
     }
     $conn->query($sql);
+    header("Location: donors.php");
 }
 ?>
 
@@ -62,50 +63,103 @@ if(isset($_POST['submit-btn']))
 
 <body>
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
-            <a class="navbar-brand ml-4" href="#">
-                <h3 class="brand-name">Life Line</h3>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="toggle-btn"></div>
-                <div class="toggle-btn"></div>
-                <div class="toggle-btn"></div>
-            </button>
-            <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./index.php">Home</a>
-                    </li>
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./requests.php">Requests</a>
-                    </li>
-                    <li class="nav-item mt-1">
-                        <a class="nav-link" href="./donors.php">Donors</a>
-                    </li>
-                    <li class="nav-item dropdown mt-1 active">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pages
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Donate Blood</a>
-                            <a class="dropdown-item active" href="blood_request.php">Request Blood</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="organ_donate.php">Donate Organs</a>
-                            <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="aboutus.php">About Us</a>
-                            <a class="dropdown-item" href="contactus.php">Contact Us</a>
-                            <a class="dropdown-item" href="faq.php">FAQ</a>
-                        </div>
-                    </li>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top pl-5">
+        <a class="navbar-brand ml-4" href="#">
+            <h3 class="brand-name">Life Line</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+            <div class="toggle-btn"></div>
+        </button>
+        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./index.php">Home</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./requests.php">Requests</a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link" href="./donors.php">Donors</a>
+                </li>
+                <li class="nav-item dropdown active mt-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_donor.php">Donate Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Blood</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./blood_request.php">Request Blood</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Blood</a>
+                            <?php
+                        }?>
+                        <div class="dropdown-divider"></div>
+                        <?php
+                        
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_donate.php">Donate Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Donate Organs</a>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <a class="dropdown-item" href="./organ_request_form.php">Request Organs</a>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <a class="dropdown-item" href="./sign_in.php">Request Organs</a>
+                            <?php
+                        }?>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="./aboutus.php">About Us</a>
+                        <a class="dropdown-item" href="./contactus.php">Contact Us</a>
+                        <a class="dropdown-item" href="./faq.php">FAQ</a>
+                    </div>
+                </li>
+                <?php 
+                    if(isset($_SESSION['user_id'])){    
+                ?>
+                <a href="./dashboard.php" class="btn sign-up mt-1 ml-2">Dashboard</a>
+                <a href="./logout.php" class="btn sign-up mt-1 ml-2">Logout</a>
+                <?php 
+                    }
+                    else{
+                ?>
+                <a href="register.php" class="btn sign-up mt-1 ml-2">Sign Up</a>
+                <a href="sign_in.php" class="btn sign-in mt-1 ml-2">Sign In</a>
+                <?php 
+                    }
+                ?>
+            </ul>
+        </div>
+    </nav>
 
-                    <a href="./dashboard.php" class="btn sign-in mt-1 ml-2">Dashboard</a>
-                    <a href="#" class="btn sign-up mt-1 ml-2">Logout</a>
-                </ul>
-            </div>
-        </nav>
     </div>
     <br>
     <br>
@@ -132,7 +186,11 @@ if(isset($_POST['submit-btn']))
     <br>
     <!--form starts-->
 
+<<<<<<< HEAD
     <form class="ml-3 mr-3" method="post" action="blood_donor.php" novalidate >
+=======
+    <form class="ml-3 mr-3" method="post" action="blood_donor.php" >
+>>>>>>> 8e949e4799548b66e3dc1bfc62c1d5fe791641d7
 
 
         <div class="form-row">
@@ -210,105 +268,159 @@ if(isset($_POST['submit-btn']))
 
     </form>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8e949e4799548b66e3dc1bfc62c1d5fe791641d7
 
 
     <!-- Footer -->
-    <div class="footer">
-        <footer class="text-center text-lg-start bg-light mt-5 text-muted">
+    <footer class="text-center text-lg-start bg-light text-muted">
 
-            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-                <div class="me-5 d-none d-lg-block">
-                    <span>Get connected with us on social networks:</span>
-                </div>
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
 
-                <div>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-twitter"></i>
-                    </a>
+            <div>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-twitter"></i>
+                </a>
 
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="" class="me-4 text-reset p-3">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </section>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset p-3">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </section>
 
-            <section class="">
-                <div class="container text-center text-md-start mt-5">
-                    <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <h5 class="text-uppercase fw-bold mb-4" style="color:var(--red);font-weight:bold">
-                                LIFE LINE
-                            </h5>
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h5 class="text-uppercase fw-bold mb-4" style="color:var(--red);font-weight:bold">
+                            LIFE LINE
+                        </h5>
+                        <p>
+                            Life-Line is non profit organization committed to help
+                            people who are in need of
+                            blood or organs.
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>QUICK LINKS</b>
+                        </h6>
+                        
+                        <p>
+                            <a href="./index.php" class="text-reset">Home</a>
+                        </p>
+                        <p>
+                            <a href="./aboutus.php" class="text-reset">About Us</a>
+                        </p>
+                        <p>
+                            <a href="./contactus.php" class="text-reset">Contact Us</a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>Useful links</b>
+                        </h6>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <p>
+                            <a href="./blood_donor.php" class="text-reset">Donate Blood</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
                             <p>
-                                Life-Line is non profit organization committed to help
-                                people who are in need of
-                                blood or organs.
-                            </p>
-                        </div>
+                            <a href="./sign_in.php" class="text-reset">Donate Blood</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <p>
+                            <a href="./blood_request.php" class="text-reset">Request Blood</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Blood</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                        <p>
+                            <a href="./organ_donate.php" class="text-reset">Donate Organs</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Donate Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        <?php
+                        if(isset($_SESSION['user_id'])){
+                            ?>
+                       <p>
+                            <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
+                        </p>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>
+                            <a href="./sign_in.php" class="text-reset">Request Organs</a>
+                        </p>
+                            <?php
+                        }?>
+                        
+                        
+                    </div>
 
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <b>QUICK LINKS</b>
-                            </h6>
-                            <p>
-                                <a href="./index.php" class="text-reset">Home</a>
-                            </p>
-                            <p>
-                                <a href="aboutus.php" class="text-reset">About Us</a>
-                            </p>
-                            <p>
-                                <a href="contactus.php" class="text-reset">Contact Us</a>
-                            </p>
-
-                        </div>
-
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <b>Useful links</b>
-                            </h6>
-                            <p>
-                                <a href="#!" class="text-reset">Donate Blood</a>
-                            </p>
-                            <p>
-                                <a href="blood_request.php" class="text-reset">Request Blood</a>
-                            </p>
-                            <p>
-                                <a href="#!" class="text-reset">Donate Organs</a>
-                            </p>
-                            <p>
-                                <a href="./organ_request_form.php" class="text-reset">Request Organs</a>
-                            </p>
-                        </div>
-
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <b>Contact</b>
-                            </h6>
-                            <p><i class="fas fa-home me-3"></i> IIIT Kottayam</p>
-                            <p>
-                                <i class="fas fa-envelope me-3"></i>
-                                lifelinesupport@gmail.com
-                            </p>
-                            <p><i class="fas fa-phone me-3"></i>+91 9347619384</p>
-                        </div>
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <b>Contact</b>
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> IIIT Kottayam</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            lifelinesupport@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i>+91 9347619384</p>
                     </div>
                 </div>
-            </section>
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-                © 2021 Copyright:Life Line
             </div>
-        </footer>
+        </section>
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:Life Line
+        </div>
+    </footer>
     </div>
 
 </body>
@@ -316,7 +428,8 @@ if(isset($_POST['submit-btn']))
     function getlocation()
         {
             var checkbox = document.getElementById('coordinates');
-            if (checkbox.checked != false) {
+            if (checkbox.checked != false)
+            {
 	            if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
                 }
@@ -324,6 +437,11 @@ if(isset($_POST['submit-btn']))
                 {
                     alert("Geolocation is not supported by this browser.");
                 }
+            }
+            else
+            {
+                document.getElementById('lat').value = 0;
+                document.getElementById('lon').value = 0;
             }
         }
 
