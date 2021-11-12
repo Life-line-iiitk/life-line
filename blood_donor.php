@@ -2,25 +2,23 @@
 session_start();
 include('./db_conn.php');
 $id=$_SESSION['user_id'];
-if(isset($_POST['submit']))
+if(isset($_POST['submit-btn']))
 {
   $blood_grp=$_POST['blood_group'];
   $type=$_POST['type'];
   $location=$_POST['location'];
-  
-
 
     if($_POST['lat']!="0")
     {
-        echo "<script>console.log('$id,$blood_grp,$location,$type');</script>";
-
         $lat=$_POST['lat'];
         $lon=$_POST['lon'];
-        $sql = "INSERT INTO `blood_donors` (`donar_id`,`blood_grp`,`location`,`lat`,`lon`) VALUES ('$id','$blood_grp','$location','$lat','$lon');";
+        $sql = "INSERT INTO `blood_donors` (`donor_id`,`blood_grp`,`location`,`lat`,`lon`) VALUES ('$id','$blood_grp','$location','$lat','$lon');";
     }
     else
     {
-        $sql = "INSERT INTO `blood_donors` (`donar_id`,`blood_grp`,`location`) VALUES ('$id','$blood_grp','$location')";
+        echo "<script>console.log('$blood_grp,$location,$id');</script>";
+
+        $sql = "INSERT INTO blood_donors (`donor_id`,`blood_grp`,`location`) VALUES ('$id','$blood_grp','$location')";
     }
     $conn->query($sql);
 }
@@ -39,7 +37,7 @@ if(isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -134,7 +132,7 @@ if(isset($_POST['submit']))
     <br>
     <!--form starts-->
 
-    <form class="needs-validation ml-3 mr-3" method="post" action="blood_donor.php" novalidate >
+    <form class="ml-3 mr-3" method="post" action="blood_donor.php" novalidate >
 
 
         <div class="form-row">
@@ -207,35 +205,12 @@ if(isset($_POST['submit']))
           </div>
         </div>
           <div class="text-center">
-<<<<<<< HEAD
           <button name="submit-btn" type="submit" class="btn  mb-4 btn-lg  " name="submit" id="submit" style="background-color: crimson; color: white;" >Submit </button>
-=======
-          <button name="submit" type="submit" class="btn  mb-4 btn-lg  " style="background-color: crimson; color: white;">Submit </button>
->>>>>>> eb2d2054dccb242751df6f859b22a327a555310c
           </div>
 
     </form>
 
-      <script>
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-      (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-        }, false);
-      })();
-      </script>
+
 
     <!-- Footer -->
     <div class="footer">
@@ -356,7 +331,6 @@ if(isset($_POST['submit']))
             var x,y;
             x=position.coords.latitude ;
             y=position.coords.longitude;
-            console.log(x,y);
             document.getElementById("lat").value=x;
             document.getElementById("lon").value=y;
             }
